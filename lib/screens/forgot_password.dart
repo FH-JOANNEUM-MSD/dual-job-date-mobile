@@ -26,6 +26,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(241, 254, 227, 1),
+                Color.fromRGBO(209, 231, 187, 1),
+              ],
+            ),
+          ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -49,6 +60,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 obscureText: true,
@@ -66,6 +86,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 obscureText: true,
@@ -83,6 +112,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide.none,
                   ),
                 ),
                 obscureText: true,
@@ -100,7 +138,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   backgroundColor: Colors.green,
                   textStyle: const TextStyle(color: Colors.white),
-                  minimumSize: const Size(double.infinity, 50),
+                  minimumSize: const Size(double.infinity, 55),
                 ),
                 child: const Text(
                   'SPEICHERN',
@@ -111,6 +149,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ],
         ),
       ),
+    ),
     );
   }
 }
