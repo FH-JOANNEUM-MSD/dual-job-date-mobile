@@ -12,7 +12,6 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-
       type: BottomNavigationBarType.shifting,
       backgroundColor: StaticColors.shadow,
       currentIndex: currentIndex,
@@ -31,8 +30,6 @@ class BottomNavBar extends StatelessWidget {
   BottomNavigationBarItem buildNavBarItem(String asset) {
     return BottomNavigationBarItem(
         icon: Image.asset(
-          width: 40,
-          height: 40,
           asset,
           color: StaticColors.primary,
         ),
@@ -43,8 +40,6 @@ class BottomNavBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
-              width: 40,
-              height: 40,
               asset,
               color: Colors.black,
             ),
