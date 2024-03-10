@@ -56,15 +56,18 @@ class _SetNewPasswordState extends State<SetNewPassword> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextFormField(_currentPasswordController,CustomTextFormField.currentPasswordText).getWidget(),
+                child: CustomTextFormField(controller:  _currentPasswordController,
+                hintText: CustomTextFormField.currentPasswordText,),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextFormField(_newPasswordController,CustomTextFormField.newPasswordText).getWidget(),
+                child: CustomTextFormField(controller: _newPasswordController,
+                  hintText: CustomTextFormField.newPasswordText),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomTextFormField(_repeatNewPasswordController,CustomTextFormField.repeatNewPasswordText).getWidget(),
+                child:  CustomTextFormField(controller: _repeatNewPasswordController,
+                  hintText: CustomTextFormField.repeatNewPasswordText),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
