@@ -31,16 +31,20 @@ class BottomNavBar extends StatelessWidget {
   BottomNavigationBarItem buildNavBarItem(String asset) {
     return BottomNavigationBarItem(
         icon: Image.asset(
+          width: 40,
+          height: 40,
           asset,
           color: StaticColors.primary,
         ),
         activeIcon: Container(
           decoration: const BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(30))),
+              borderRadius: BorderRadius.all(Radius.circular(50))),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
+              width: 40,
+              height: 40,
               asset,
               color: Colors.black,
             ),
