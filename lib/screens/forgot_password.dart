@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/custom_widgets/CustomTextFormField.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -56,81 +57,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
-                textAlign: TextAlign.center,
-                controller: _currentPasswordController,
-                decoration: InputDecoration(
-                  hintText: 'Aktuelles Passwort',
-                  alignLabelWithHint: true,
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                obscureText: true,
-              ),
+              child: CustomTextFormField(_currentPasswordController,CustomTextFormField.currentPasswordText).getWidget(),
             ),
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
-                textAlign: TextAlign.center,
-                controller: _newPasswordController,
-                decoration: InputDecoration(
-                  hintText: 'Neues Passwort',
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                obscureText: true,
-              ),
+              child: CustomTextFormField(_newPasswordController,CustomTextFormField.newPasswordText).getWidget(),
             ),
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextFormField(
-                textAlign: TextAlign.center,
-                controller: _repeatNewPasswordController,
-                decoration: InputDecoration(
-                  hintText: 'Passwort Wiederholen',
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                obscureText: true,
-              ),
+              child: CustomTextFormField(_repeatNewPasswordController,CustomTextFormField.repeatNewPasswordText).getWidget(),
             ),
             const SizedBox(height: 8),
             Padding(
