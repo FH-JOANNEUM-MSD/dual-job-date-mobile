@@ -16,8 +16,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         duration: 3000,
-        splash: const Splash(),
-        nextScreen: const Login(),
+          splash: Image.asset("assets/images/logo.png"),
+          splashTransition: SplashTransition.slideTransition,
+          backgroundColor: const Color(0xFF5F8923),
+          nextScreen: const Login(),
       ),
     );
   }
