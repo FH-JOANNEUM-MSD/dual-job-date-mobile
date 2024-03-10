@@ -57,17 +57,20 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: CustomTextFormField(_currentPasswordController,CustomTextFormField.currentPasswordText).getWidget(),
+              child: CustomTextFormField(controller:  _currentPasswordController,
+                hintText: CustomTextFormField.currentPasswordText,),
             ),
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: CustomTextFormField(_newPasswordController,CustomTextFormField.newPasswordText).getWidget(),
+              child: CustomTextFormField(controller: _newPasswordController,
+                  hintText: CustomTextFormField.newPasswordText),
             ),
             const SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: CustomTextFormField(_repeatNewPasswordController,CustomTextFormField.repeatNewPasswordText).getWidget(),
+              child: CustomTextFormField(controller: _repeatNewPasswordController,
+                  hintText: CustomTextFormField.repeatNewPasswordText),
             ),
             const SizedBox(height: 8),
             Padding(
@@ -97,7 +100,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 }
 
-// Just for testing will be removed afterwards
+// FIXME: Just for testing will be removed afterwards
 void main() {
   runApp(MaterialApp(home: ForgotPassword()));
 }
