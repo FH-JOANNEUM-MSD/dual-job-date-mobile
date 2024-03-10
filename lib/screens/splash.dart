@@ -6,11 +6,18 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.white),
-      child: const Center(
-        child: DefaultTextStyle(
-            style: TextStyle(color: Colors.black, fontSize: 24),
-            child: Text("Place Holder for Splash")),
+      decoration: const BoxDecoration(
+        color: Color(0xFF5F8923),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 100),
+          Image.asset('assets/images/logo.png'),
+          const DefaultTextStyle(
+              style: TextStyle(color: Colors.white, fontSize: 40),
+              child: Text("DUAL DATING")
+          ),
+        ]
       ),
     );
   }
