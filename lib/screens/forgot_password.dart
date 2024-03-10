@@ -38,8 +38,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
           ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Image.asset(
+              'assets/images/logo.png',
+              height: 200.0,
+              width: 200.0,
+            ),
             const Text(
               'Passwort ändern',
               textAlign: TextAlign.center,
@@ -48,6 +53,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: TextFormField(
