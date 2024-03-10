@@ -1,3 +1,8 @@
+import 'package:dual_job_date_mobile/tabs/appointments.dart';
+import 'package:dual_job_date_mobile/tabs/companies.dart';
+import 'package:dual_job_date_mobile/tabs/matches.dart';
+import 'package:dual_job_date_mobile/tabs/profile.dart';
+import 'package:dual_job_date_mobile/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -8,15 +13,34 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late int currentIndex;
+  List<StatefulWidget> tabs = [
+    const Companies(),
+    const Matches(),
+    const Appointments(),
+    const Profile()
+  ];
+
+  @override
+  void initState() {
+    currentIndex = 0;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(color: Colors.white),
-      child: const Center(
-        child: DefaultTextStyle(
-            style: TextStyle(color: Colors.black, fontSize: 24),
-            child: Text("Place Holder for Home")),
-      ),
-    );
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            body: tabs[currentIndex],
+            bottomNavigationBar:  BottomNavBar(
+              currentIndex: currentIndex,
+              onTabTapped: (x) {
+                setState(() {
+                  currentIndex = x;
+                });
+              },
+            )));
   }
 }
