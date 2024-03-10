@@ -1,5 +1,9 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/custom_widgets/CustomTextFormField.dart';
 import 'package:flutter/material.dart';
+
+import '../custom_widgets/CustomElevatedButton.dart';
 
 class SetNewPassword extends StatefulWidget {
   const SetNewPassword({super.key});
@@ -33,7 +37,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromRGBO(241, 254, 227, 1),
+                  Color.fromRGBO(241, 254, 227, 1), //FIXME: Is this the right color? If so -> move to constant
                   Color.fromRGBO(209, 231, 187, 1),
                 ],
               ),
@@ -42,51 +46,39 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.asset(
-                'assets/images/logo.png',
-                height: 200.0,
-                width: 200.0,
+                StaticStrings.logo,
+                height: Values.logoImageWidthHeight_200,
+                width: Values.logoImageWidthHeight_200,
               ),
               const Text(
-                'Passwort ändern',
+                StaticStrings.changePassword,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: Values.headerTextSize_24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
                 child: CustomTextFormField(controller:  _currentPasswordController,
                 hintText: CustomTextFormField.currentPasswordText,),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
                 child: CustomTextFormField(controller: _newPasswordController,
                   hintText: CustomTextFormField.newPasswordText),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
                 child:  CustomTextFormField(controller: _repeatNewPasswordController,
                   hintText: CustomTextFormField.repeatNewPasswordText),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    backgroundColor: Colors.green,
-                    textStyle: const TextStyle(color: Colors.white),
-                    minimumSize: const Size(double.infinity, 55),
-                  ),
-                  child: const Text(
-                    'SPEICHERN',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
+                child: CustomElevatedButton(text: CustomElevatedButton.saveButtonText,
+                onPressed: (){
+                  //TODO: implement me...
+                },),
               ),
             ],
           ),
@@ -96,7 +88,9 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   }
 }
 
-// Just for testing will be removed afterwards
+
+
+//  FIXME Just for testing will be removed afterwards
 void main() {
   runApp(const MaterialApp(home: SetNewPassword()));
 }
