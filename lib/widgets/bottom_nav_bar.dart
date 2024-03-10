@@ -13,6 +13,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+
       type: BottomNavigationBarType.shifting,
       backgroundColor: StaticColors.shadow,
       currentIndex: currentIndex,
@@ -37,10 +38,13 @@ class BottomNavBar extends StatelessWidget {
         activeIcon: Container(
           decoration: const BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Image.asset(
-            asset,
-            color: Colors.black,
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Image.asset(
+              asset,
+              color: Colors.black,
+            ),
           ),
         ),
         backgroundColor: StaticColors.shadow,

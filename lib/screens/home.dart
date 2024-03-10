@@ -32,7 +32,6 @@ class _HomeState extends State<Home> {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-
             backgroundColor: Colors.white,
             body: tabs[currentIndex],
             bottomNavigationBar:  BottomNavBar(
