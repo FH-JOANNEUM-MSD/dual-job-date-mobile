@@ -1,9 +1,9 @@
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
-import 'package:dual_job_date_mobile/custom_widgets/CustomTextFormField.dart';
+import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/CustomElevatedButton.dart';
+import '../widgets/custom_elevated_button.dart';
 
 class SetNewPassword extends StatefulWidget {
   const SetNewPassword({super.key});
