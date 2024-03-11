@@ -1,15 +1,23 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../static_helpers/colors.dart';
 
 class CompanyCardWidget extends StatelessWidget {
-  const CompanyCardWidget({super.key});
+  const CompanyCardWidget({
+    super.key,
+    required this.imagePath,
+  });
+
+  final String imagePath;
+
   final double borderRadiusCard = 12;
   final double heightCard = 80;
+  final double marginImage = 4;
 
   // todo: fonts done
-  // todo: dynamic image added
   // todo: dynamic text/company details added
   // todo: dynamic likes added
 
@@ -17,8 +25,8 @@ class CompanyCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8.0),
-      color: StaticColors.shadow,
-      elevation: 3,
+      color: Colors.white,
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadiusCard),
       ),
@@ -27,28 +35,35 @@ class CompanyCardWidget extends StatelessWidget {
         onTap: () {
           print('clicked');
         },
-        child: IntrinsicHeight(
+        child: Container(
+          height: heightCard,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadiusCard),
+            border: Border.all(
+              color: StaticColors.primary,
+              width: 1,
+            ),
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Container(
-                    width: heightCard / 1,
-                    height: heightCard,
-                    // child: const FlutterLogo(size: 50.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(borderRadiusCard),
-                        bottomLeft: Radius.circular(borderRadiusCard),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: marginImage,
+                          horizontal: marginImage
                       ),
-                      color: Colors.white,
-                      // image: DecorationImage(
-                      //   fit: BoxFit.fill,
-                      //   image: NetworkImage(
-                      //       'https://www.w3schools.com/w3images/avatar1.png'),
-                      // ),
+                      width: heightCard - 2 * marginImage,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          alignment: Alignment.center,
+                          fit: BoxFit.fill,
+                          image: Image.asset(imagePath).image,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -56,16 +71,19 @@ class CompanyCardWidget extends StatelessWidget {
               const Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text('Firma xy', style: TextStyle(fontSize: 16.0)),
-                        Text(
-                          'Softwareentwicklung',
-                          style: TextStyle(fontSize: 14.0),
-                        ),
-                      ]),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Firma xy', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500)),
+                          Text(
+                            'Softwareentwicklung',
+                            style: TextStyle(fontSize: 14.0),
+                          ),
+                        ]),
+                  ),
                 ),
               ),
               const Column(
@@ -76,7 +94,7 @@ class CompanyCardWidget extends StatelessWidget {
                     padding: EdgeInsets.only(right: 8, bottom: 2),
                     child: Text(
                       '5 likes',
-                      style: TextStyle(fontSize: 16.0),
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
                     ),
                   )
                 ],
