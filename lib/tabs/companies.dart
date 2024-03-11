@@ -14,6 +14,42 @@ class Companies extends StatefulWidget {
 }
 
 class _CompaniesState extends State<Companies> {
+  void _openFilterCompaniesModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const Text('Filter Companies'),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Close'),
+                    )
+                  ],
+                ),
+              ),
+              Positioned(
+                  top: 50,
+                  right: 20,
+                  child: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.pop(context),
+                  ))
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +67,7 @@ class _CompaniesState extends State<Companies> {
                     style: TextStyle(fontSize: 30.0),
                   ),
                   InkWell(
-                    onTap: () {
-                      // todo: add bottomsheet
-                      print('filter');
-                    },
+                    onTap: () => _openFilterCompaniesModal(context),
                     borderRadius: BorderRadius.circular(12),
                     child: SvgPicture.asset(
                       CompaniesScreenStrings.filterIconPath,
