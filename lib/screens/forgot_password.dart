@@ -1,4 +1,3 @@
-import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +6,7 @@ import '../static_helpers/values.dart';
 import '../widgets/custom_elevated_button.dart';
 
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
-import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
-import 'package:flutter/material.dart';
 
-import '../static_helpers/strings.dart';
-import '../static_helpers/values.dart';
-import '../widgets/custom_elevated_button.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
