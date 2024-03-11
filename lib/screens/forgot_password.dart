@@ -1,12 +1,11 @@
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../static_helpers/strings.dart';
 import '../static_helpers/values.dart';
 import '../widgets/custom_elevated_button.dart';
-
-import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
-
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -29,6 +28,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     Widget build(BuildContext context) {
       return Scaffold(
         body: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  StaticColors.topBackgroundScreen,
+                  StaticColors.bottomBackgroundScreen,
+                ],
+              ),
+            ),
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -41,14 +52,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   StaticStrings.resetPassword,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: Values.headerTextSize_24,
+                    fontSize: Values.screenTitleTextSize_42,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 CustomFormPadding(
-                  childWidget: CustomTextFormField(controller:  _emailController,
-                  hintText: CustomTextFormField.emailText),
+                  childWidget: CustomTextFormField(
+                    controller:  _emailController,
+                    hintText: CustomTextFormField.emailText,
+                    isHidden: true,
+                  ),
                 ),
                 CustomFormPadding(
                   childWidget: CustomElevatedButton(
@@ -61,7 +74,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           ],
                   ),
                 ),
-    );
+            ),
+          );
   }
 }
 

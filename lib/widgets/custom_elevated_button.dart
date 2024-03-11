@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,8 @@ class CustomElevatedButton extends StatelessWidget {
   final String _text;
 
   // Text constants
+  static const loginButtonText = 'LOGIN';
+  static const forgotLoginButtonText = 'Passwort Vergessen?';
   static const saveButtonText = 'SPEICHERN';
   static const sendButtonText = 'ABSCHICKEN';
 
@@ -31,15 +34,15 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: _onPressed, //Comes from Constructor
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius_30),
+          borderRadius: BorderRadius.circular(Values.fullRoundedBox_100),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: StaticColors.buttonColor,
         textStyle: const TextStyle(color: Colors.white),
         minimumSize: const Size(double.infinity, _minimumSizeHeight),
       ),
       child:  Text(
         _text, //comes from constructor
-        style: const TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize_20),
       ),
     );
   }

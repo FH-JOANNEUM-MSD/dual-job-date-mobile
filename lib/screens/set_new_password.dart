@@ -5,7 +5,6 @@ import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_elevated_button.dart';
-
 import '../widgets/custom_form_padding.dart';
 
 /// Screen for changing your password
@@ -63,27 +62,30 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                   StaticStrings.changePassword,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: Values.headerTextSize_24,
+                    fontSize: Values.screenTitleTextSize_42,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 //Form consisting of 3 Text inputs and one button
                 CustomFormPadding( //Current Password Text Field
                     childWidget: CustomTextFormField(
-                        controller: _currentPasswordController,
-                        hintText: CustomTextFormField.currentPasswordText,
+                      controller: _currentPasswordController,
+                      hintText: CustomTextFormField.currentPasswordText,
+                      isHidden: true,
                     ),
                 ),
             CustomFormPadding( //New Password Text Field
                 childWidget: CustomTextFormField(
                   controller: _newPasswordController,
                   hintText: CustomTextFormField.newPasswordText,
+                  isHidden: true,
                 ),
             ),
             CustomFormPadding( //Repeat new Password Text Field
                 childWidget:CustomTextFormField(
                   controller: _repeatNewPasswordController,
                   hintText: CustomTextFormField.repeatNewPasswordText,
+                  isHidden: true,
                 ),
             ),
                 CustomFormPadding( // Save Button
@@ -102,6 +104,10 @@ class _SetNewPasswordState extends State<SetNewPassword> {
     );
   }
 }
+
+
+
+
 
 //  FIXME Just for testing will be removed afterwards
 void main() {

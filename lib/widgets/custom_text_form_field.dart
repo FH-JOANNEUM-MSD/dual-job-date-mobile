@@ -9,10 +9,13 @@ class CustomTextFormField extends StatelessWidget {
   static const String repeatNewPasswordText = 'Passwort Wiederholen';
   static const String currentPasswordText = 'Aktuelles Passwort';
   static const String emailText = 'E-Mail-Adresse';
+  static const String requiredPassword = 'Passwort';
+
 
   //Customizable members
   final TextEditingController _controller;
   final String _hintText;
+  final bool _hidden;
 
   /// Constructor for the Text form field
   /// * [_controller]: A TextEditingController for the CustomTextFormField
@@ -22,8 +25,9 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required TextEditingController controller,
     required String hintText,
+    required bool isHidden,
   }
-  ) : _hintText = hintText, _controller = controller;
+  ) : _hintText = hintText, _controller = controller, _hidden = isHidden;
 
   ///Build the Widget
   @override
@@ -31,25 +35,19 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       textAlign: TextAlign.center,
       controller: _controller, // this comes from the constructor
+      style: const TextStyle(fontSize: 18.0),
       decoration: InputDecoration(
         hintText: _hintText, //this comes from the constructor
         alignLabelWithHint: true,
         filled: true,
         fillColor: Colors.white,
+        contentPadding: EdgeInsets.zero,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius_30),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius_30),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius_30),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius_14), // Rounded corners
+          borderSide: BorderSide.none, // Remove border
         ),
       ),
-      obscureText: true, //Make the characters in the TextField appear as Dots
+      obscureText: _hidden, //Make the characters in the TextField appear as Dots
     );
   }
 }
