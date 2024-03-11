@@ -1,5 +1,6 @@
-import 'package:dual_job_date_mobile/custom_widgets/CustomTextFormField.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/custom_text_form_field.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
