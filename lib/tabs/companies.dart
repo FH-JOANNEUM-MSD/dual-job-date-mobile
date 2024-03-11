@@ -18,27 +18,31 @@ class _CompaniesState extends State<Companies> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'Unternehmen',
-                  style: TextStyle(fontSize: 24.0),
-                ),
-                InkWell(
-                  onTap: () {
-                    print('filter');
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: SvgPicture.asset(
-                    'assets/images/svg/filter.svg',
-                    color: StaticColors.black,
-                    width: 30,
-                    height: 30,
+          scrolledUnderElevation: 0,
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Unternehmen',
+                    style: TextStyle(fontSize: 30.0),
                   ),
-                ),
-              ]),
+                  InkWell(
+                    onTap: () {
+                      print('filter');
+                    },
+                    borderRadius: BorderRadius.circular(12),
+                    child: SvgPicture.asset(
+                      'assets/images/svg/filter.svg',
+                      color: StaticColors.black,
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                ]),
+          ),
         ),
         body: ListView.builder(
             itemCount: 10,
