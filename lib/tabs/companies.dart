@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +15,6 @@ class Companies extends StatefulWidget {
 }
 
 class _CompaniesState extends State<Companies> {
-  final List<String> demoImages = const [
-    'assets/images/companies/allforone.png',
-    'assets/images/companies/castana.png',
-    'assets/images/companies/cities.png',
-    'assets/images/companies/energiesteiermark.png',
-    'assets/images/companies/voestalpine.png',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +47,10 @@ class _CompaniesState extends State<Companies> {
           ),
         ),
         body: ListView.builder(
-            itemCount: demoImages.length,
+            itemCount: mockCompanies.length,
             itemBuilder: (context, index) {
               return CompanyCardWidget(
-                imagePath: demoImages[index],
+                company: mockCompanies[index],
               );
             }));
   }
