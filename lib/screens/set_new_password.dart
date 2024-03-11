@@ -1,5 +1,6 @@
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -30,59 +31,63 @@ class _SetNewPasswordState extends State<SetNewPassword> {
     @override
     Widget build(BuildContext context) {
       return Scaffold(
+        resizeToAvoidBottomInset: true,
         body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromRGBO(241, 254, 227, 1), //FIXME: Is this the right color? If so -> move to constant
-                  Color.fromRGBO(209, 231, 187, 1),
-                ],
-              ),
-            ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Image.asset(
-                StaticStrings.logo,
-                height: Values.logoImageWidthHeight_200,
-                width: Values.logoImageWidthHeight_200,
-              ),
-              const Text(
-                StaticStrings.changePassword,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: Values.headerTextSize_24,
-                  fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    StaticColors.topBackgroundScreen,
+                    StaticColors.bottomBackgroundScreen,
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
-                child: CustomTextFormField(controller:  _currentPasswordController,
-                hintText: CustomTextFormField.currentPasswordText,),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
-                child: CustomTextFormField(controller: _newPasswordController,
-                  hintText: CustomTextFormField.newPasswordText),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
-                child:  CustomTextFormField(controller: _repeatNewPasswordController,
-                  hintText: CustomTextFormField.repeatNewPasswordText),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(Values.paddingEdgeInset_8),
-                child: CustomElevatedButton(text: CustomElevatedButton.saveButtonText,
-                onPressed: (){
-                  //TODO: implement me...
-                },),
-              ),
-            ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  StaticStrings.logo,
+                  height: Values.logoImageWidthHeight_200,
+                  width: Values.logoImageWidthHeight_200,
+                ),
+                const Text(
+                  StaticStrings.changePassword,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: Values.headerTextSize_24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 8.0),
+                  child: CustomTextFormField(controller:  _currentPasswordController,
+                  hintText: CustomTextFormField.currentPasswordText,),
+                ),
+                Padding(
+                  padding:  const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 8.0),
+                  child: CustomTextFormField(controller: _newPasswordController,
+                    hintText: CustomTextFormField.newPasswordText),
+                ),
+                Padding(
+                  padding:   const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 8.0),
+                  child:  CustomTextFormField(controller: _repeatNewPasswordController,
+                    hintText: CustomTextFormField.repeatNewPasswordText),
+                ),
+                Padding(
+                  padding:  const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+                  child: CustomElevatedButton(text: CustomElevatedButton.saveButtonText,
+                  onPressed: (){
+                    //TODO: implement me...
+                  },),
+                ),
+              ],
+            ),
+                      ),
           ),
-                    ),
       ),
     );
   }
