@@ -14,6 +14,14 @@ class Companies extends StatefulWidget {
 }
 
 class _CompaniesState extends State<Companies> {
+  final List<String> demoImages = const [
+    'assets/images/companies/allforone.png',
+    'assets/images/companies/castana.png',
+    'assets/images/companies/cities.png',
+    'assets/images/companies/energiesteiermark.png',
+    'assets/images/companies/voestalpine.png',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +53,11 @@ class _CompaniesState extends State<Companies> {
           ),
         ),
         body: ListView.builder(
-            itemCount: 10,
+            itemCount: demoImages.length,
             itemBuilder: (context, index) {
-              return const CompanyCardWidget();
+              return CompanyCardWidget(
+                imagePath: demoImages[index],
+              );
             }));
   }
 }
