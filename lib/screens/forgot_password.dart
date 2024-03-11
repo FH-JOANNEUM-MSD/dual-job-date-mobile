@@ -3,6 +3,10 @@ import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+import '../static_helpers/strings.dart';
+import '../static_helpers/values.dart';
+import '../widgets/custom_elevated_button.dart';
+
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
 
@@ -62,18 +66,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     onPressed: (){
                     //TODO: implement me....
                   },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                  backgroundColor: Colors.green,
-                  textStyle: const TextStyle(color: Colors.white),
-                  minimumSize: const Size(double.infinity, 55),
-                ),
-                child: const Text(
-                  'SPEICHERN',
-                  style: TextStyle(color: Colors.white),
-                ),
               ),
             ),
           ],
