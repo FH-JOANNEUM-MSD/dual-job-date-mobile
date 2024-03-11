@@ -5,3 +5,9 @@ class StaticStrings{
   static const String group = "assets/images/group_icon.png";
   static const String profile = "assets/images/profile_icon.png";
 }
+
+class CompaniesScreenStrings {
+  static const String title = "Unternehmen";
+  static const String filterIconPath = "assets/images/svg/filter.svg";
+  static const String likes = "likes";
+}

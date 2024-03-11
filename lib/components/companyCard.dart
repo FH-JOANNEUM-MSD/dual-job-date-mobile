@@ -1,8 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
-
 import '../models/company.dart';
 import '../static_helpers/colors.dart';
 
@@ -24,7 +21,7 @@ class CompanyCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       color: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -93,7 +90,7 @@ class CompanyCardWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 8, bottom: 2),
                     child: Text(
-                      '${company.likes} likes',
+                      '${company.likes} ${CompaniesScreenStrings.likes}',
                       style: const TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.w500),
                     ),

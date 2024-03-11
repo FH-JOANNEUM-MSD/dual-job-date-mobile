@@ -1,8 +1,7 @@
 import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../components/companyCard.dart';
@@ -28,16 +27,17 @@ class _CompaniesState extends State<Companies> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    'Unternehmen',
+                    CompaniesScreenStrings.title,
                     style: TextStyle(fontSize: 30.0),
                   ),
                   InkWell(
                     onTap: () {
+                      // todo: add bottomsheet
                       print('filter');
                     },
                     borderRadius: BorderRadius.circular(12),
                     child: SvgPicture.asset(
-                      'assets/images/svg/filter.svg',
+                      CompaniesScreenStrings.filterIconPath,
                       color: StaticColors.black,
                       width: 30,
                       height: 30,
