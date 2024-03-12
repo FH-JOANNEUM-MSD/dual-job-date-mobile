@@ -1,3 +1,5 @@
+import 'package:dual_job_date_mobile/screens/home.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
@@ -92,7 +94,20 @@ class _LoginState extends State<Login> {
                     childWidget: CustomElevatedButton(
                       text: StaticStrings.loginButtonText,
                       onPressed: () {
-                        //TODO: implement me...
+                        //TODO: check if first login
+                        if (true) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                  const SetNewPassword()));
+                        } else {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                     const Home()));
+                        }
                       },
                     ),
                   ),

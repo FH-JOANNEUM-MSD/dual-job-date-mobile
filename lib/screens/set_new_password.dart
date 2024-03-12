@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
@@ -42,8 +43,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
 
     return Scaffold(
       body: Container(
-        height:
-            MediaQuery.of(context).size.height, //Full size the container
+        height: MediaQuery.of(context).size.height, //Full size the container
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             //Background gradient
@@ -79,43 +79,45 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             ),
             Expanded(
                 child: ListView(
-                  children: [
-                    //Form consisting of 3 Text inputs and one button
-                    CustomFormPadding(
-                      //Current Password Text Field
-                      childWidget: CustomTextFormField(
-                        controller: _currentPasswordController,
-                        hintText: StaticStrings.currentPasswordText,
-                        isHidden: true,
-                      ),
-                    ),
-                    CustomFormPadding(
-                      //New Password Text Field
-                      childWidget: CustomTextFormField(
-                        controller: _newPasswordController,
-                        hintText: StaticStrings.newPasswordText,
-                        isHidden: true,
-                      ),
-                    ),
-                    CustomFormPadding(
-                      //Repeat new Password Text Field
-                      childWidget: CustomTextFormField(
-                        controller: _repeatNewPasswordController,
-                        hintText: StaticStrings.repeatNewPasswordText,
-                        isHidden: true,
-                      ),
-                    ),
-                    CustomFormPadding(
-                      // Save Button
-                      childWidget: CustomElevatedButton(
-                        text: StaticStrings.saveButtonText,
-                        onPressed: () {
-                          //TODO: implement me...
-                        },
-                      ),
-                    ),
-                  ],
-                ))
+              children: [
+                //Form consisting of 3 Text inputs and one button
+                CustomFormPadding(
+                  //Current Password Text Field
+                  childWidget: CustomTextFormField(
+                    controller: _currentPasswordController,
+                    hintText: StaticStrings.currentPasswordText,
+                    isHidden: true,
+                  ),
+                ),
+                CustomFormPadding(
+                  //New Password Text Field
+                  childWidget: CustomTextFormField(
+                    controller: _newPasswordController,
+                    hintText: StaticStrings.newPasswordText,
+                    isHidden: true,
+                  ),
+                ),
+                CustomFormPadding(
+                  //Repeat new Password Text Field
+                  childWidget: CustomTextFormField(
+                    controller: _repeatNewPasswordController,
+                    hintText: StaticStrings.repeatNewPasswordText,
+                    isHidden: true,
+                  ),
+                ),
+                CustomFormPadding(
+                  // Save Button
+                  childWidget: CustomElevatedButton(
+                    text: StaticStrings.saveButtonText,
+                    onPressed: () {
+                      // TODO Validation of new Password
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (BuildContext context) => const Home()));
+                    },
+                  ),
+                ),
+              ],
+            ))
           ],
         ),
       ),
