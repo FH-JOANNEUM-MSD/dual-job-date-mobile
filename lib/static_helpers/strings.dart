@@ -7,4 +7,11 @@ class StaticStrings{
   static const String profile = 'assets/images/profile_icon.png';
   //Text
   static const changePassword = 'Passwort ändern';
+
+}
+
+class CompaniesScreenStrings {
+  static const String title = "Unternehmen";
+  static const String filterIconPath = "assets/images/svg/filter.svg";
+  static const String likes = "likes";
 }
