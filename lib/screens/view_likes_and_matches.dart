@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../models/company.dart';
 import '../widgets/custom_toggle_button.dart';
+import '../static_helpers/values.dart';
 
 ///Class representing the screen that displays Likes and Matches with companies
 class LikesAndMatches extends StatefulWidget {
@@ -17,9 +18,18 @@ class LikesAndMatches extends StatefulWidget {
 
 ///State Class
 class _LikesAndMatchesState extends State<LikesAndMatches> {
+
+  /// This tracks to what the toggle button is set (likes or matches)
   ToggleState toggleState = ToggleState.likes;
-  String titleText = "Deine Likes";
+
+  ///This is the Title Text that is displayed (initially: Likes)
+  String titleText = LikesAndMatchesStrings.titleLikes;
   List<Company> _companyList = mockLikeCompanies;
+
+  /// constants specific to this class (and therefore not in Values.dart)
+  final double _switchHeight = 50;
+  final double _toggleSwitchPadding = 20; //FIXME this one might be useful in Values
+  final int _currentNavBarIndex = 1;
 
 
 
@@ -48,37 +58,43 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   @override
   Widget build(BuildContext context) {
 
-    double switchWidth = MediaQuery.of(context).size.width * 0.8;
-    double switchHeight = 50;
+    // define the width of the toggle switch
+    double switchWidth = MediaQuery.of(context).size.width * 0.8; // TODO: Move to Values.dart?
+
     return Scaffold(
+      //Title (Top)
       appBar: AppBar(
         scrolledUnderElevation: 0,
 
         // Title of the Screen
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: Values.paddingEdgeInsetTop),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
                   titleText,
-                  style: const TextStyle(fontSize: 30.0),
+                  style: const TextStyle(fontSize: Values.screenTitleTextSize),
                 ),
-              ]),
+              ]
+          ),
         ),
       ),
 
+      //Content
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
+
+        //handle user interaction with toggle button, show toggle button
         child: Column(children: [
           GestureDetector(
             onTap: () {
               toggleSwitch();
             },
             child:Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: CustomToggleButton(switchWidth: switchWidth, switchHeight: switchHeight, toggleState: toggleState),
+              padding:  EdgeInsets.symmetric(vertical: _toggleSwitchPadding),
+              child: CustomToggleButton(switchWidth: switchWidth, switchHeight: _switchHeight, toggleState: toggleState),
             ) ,
           ),
 
@@ -90,15 +106,17 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
                 itemBuilder: (context, idx) {
                   return CompanyCardWidget(
                     company: _companyList[idx],
-                  );
-                }),
+                   );
+                  }
+                ),
           ),
-        ]),
+         ]
+        ),
       ),
 
       //Navigation Bar on the Bottom
       bottomNavigationBar: BottomNavBar(
-        currentIndex: 3,
+        currentIndex: _currentNavBarIndex,
         onTabTapped: (index) {
           print("Navbar was tapped: $index"); //TODO: Replace with functionality
         },
