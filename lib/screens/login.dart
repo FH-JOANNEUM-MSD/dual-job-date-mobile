@@ -1,3 +1,6 @@
+import 'package:dual_job_date_mobile/screens/forgot_password.dart';
+import 'package:dual_job_date_mobile/screens/home.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
@@ -34,10 +37,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-
-    final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(
-        screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
 
     return Scaffold(
       body: Container(
@@ -96,9 +95,9 @@ class _LoginState extends State<Login> {
                       childWidget: CustomElevatedButton(
                         text: StaticStrings.loginButtonText,
                         onPressed: () {
+                          // TODO right validation
                           if (_formKey.currentState!.validate()) {
-                            // TODO: Navigation
-
+                            login(context);
                           }
                         },
                       ),
@@ -110,7 +109,7 @@ class _LoginState extends State<Login> {
                         style: TextStyle(color: Colors.grey.shade700),
                       ),
                       onPressed: () {
-                        // TODO: Navigation
+                        navigateToForgotPassword(context);
                       },
                     ))
                   ],
@@ -121,6 +120,29 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  void navigateToForgotPassword(BuildContext context) {
+              Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) =>
+                const ForgotPassword()));
+  }
+
+  void login(BuildContext context) {
+    // TODO check if first login
+    if (0 == 0) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const SetNewPassword()));
+    }
+    // if not first login
+    else {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => const Home()));
+    }
   }
 }
 

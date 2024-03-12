@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
@@ -38,14 +39,9 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
-    final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(
-        screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
-
     return Scaffold(
       body: Container(
-        height:
-            MediaQuery.of(context).size.height, //Full size the container
+        height: MediaQuery.of(context).size.height, //Full size the container
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             //Background gradient
@@ -81,56 +77,57 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             ),
             Expanded(
                 child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      //Form consisting of 3 Text inputs and one button
-                      CustomFormPadding(
-                        //Current Password Text Field
-                        childWidget: CustomTextFormField(
-                          controller: _currentPasswordController,
-                          hintText: StaticStrings.currentPasswordText,
-                          isHidden: true,
-                        ),
-                      ),
-                      CustomFormPadding(
-                        //New Password Text Field
-                        childWidget: CustomTextFormField(
-                          controller: _newPasswordController,
-                          hintText: StaticStrings.newPasswordText,
-                          isHidden: true,
-                        ),
-                      ),
-                      CustomFormPadding(
-                        //Repeat new Password Text Field
-                        childWidget: CustomTextFormField(
-                          controller: _repeatNewPasswordController,
-                          hintText: StaticStrings.repeatNewPasswordText,
-                          isHidden: true,
-                        ),
-                      ),
-                      CustomFormPadding(
-                        // Save Button
-                        childWidget: CustomElevatedButton(
-                          text: StaticStrings.saveButtonText,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // TODO: Navigation
-
-                            }                          },
-                        ),
-                      ),
-                    ],
+              key: _formKey,
+              child: ListView(
+                children: [
+                  //Form consisting of 3 Text inputs and one button
+                  CustomFormPadding(
+                    //Current Password Text Field
+                    childWidget: CustomTextFormField(
+                      controller: _currentPasswordController,
+                      hintText: StaticStrings.currentPasswordText,
+                      isHidden: true,
+                    ),
                   ),
-                ))
+                  CustomFormPadding(
+                    //New Password Text Field
+                    childWidget: CustomTextFormField(
+                      controller: _newPasswordController,
+                      hintText: StaticStrings.newPasswordText,
+                      isHidden: true,
+                    ),
+                  ),
+                  CustomFormPadding(
+                    //Repeat new Password Text Field
+                    childWidget: CustomTextFormField(
+                      controller: _repeatNewPasswordController,
+                      hintText: StaticStrings.repeatNewPasswordText,
+                      isHidden: true,
+                    ),
+                  ),
+                  CustomFormPadding(
+                    // Save Button
+                    childWidget: CustomElevatedButton(
+                      text: StaticStrings.saveButtonText,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          navigateToHome(context);
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ))
           ],
         ),
       ),
     );
   }
+
+  void navigateToHome(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => const Home()));
+  }
 }
 
-//  FIXME Just for testing will be removed afterwards
-void main() {
-  runApp(const MaterialApp(home: SetNewPassword()));
-}

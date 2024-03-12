@@ -32,10 +32,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
 
-    final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(
-        screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
-
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -103,7 +99,3 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 }
 
-// FIXME: Just for testing will be removed afterwards
-void main() {
-  runApp(const MaterialApp(home: ForgotPassword()));
-}
