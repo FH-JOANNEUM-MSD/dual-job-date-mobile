@@ -11,7 +11,7 @@ class Values {
   // font sizes
   static const screenTitleTextSize_24 = 24.0;
   static const buttonTextSize = 16.0;
-  static const linkTextSize_20 = 20.0;
+  static const linkTextSize_20 = 16.0;
   static const inputTextSize_16 = 16.0;
 
   // paddings
