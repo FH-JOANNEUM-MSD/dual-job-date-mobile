@@ -9,13 +9,13 @@ class Values {
   static const double _logoMultiplicator = 0.25;
 
   // font sizes
-  static const screenTitleTextSize_42 = 42.0;
+  static const screenTitleTextSize_24 = 24.0;
   static const buttonTextSize_20 = 20.0;
   static const linkTextSize_20 = 20.0;
   static const inputTextSize_16 = 16.0;
 
   // paddings
-  static const paddingLogoTop_100 = 100.0;
+  static const paddingLogoTop_50 = 50.0;
   static const paddingTitleTop_40 = 40.0;
   static const paddingEdgeInset_8 = 8.0;
   static const paddingEdgeInsetLeftRight_42 = 42.0;

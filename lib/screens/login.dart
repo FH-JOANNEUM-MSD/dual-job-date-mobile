@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 CustomFormPadding(
-                  topHeaderDistance: Values.paddingLogoTop_100,
+                  topHeaderDistance: Values.paddingLogoTop_50,
                   childWidget: Image.asset(
                     Paths.logo,
                     height: Values.getScaledLogoSize(),
@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
                     style: TextStyle(
                       fontFamily: 'Parka', // FIXME: need approved google font
                       fontSize: Values
-                          .screenTitleTextSize_42, // Adjust the font size as needed
+                          .screenTitleTextSize_24, // Adjust the font size as needed
                     ),
                   ),
                 ),

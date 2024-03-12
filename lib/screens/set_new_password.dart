@@ -42,80 +42,82 @@ class _SetNewPasswordState extends State<SetNewPassword> {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          //Make the app scrollable
-          child: Container(
-            height:
-                MediaQuery.of(context).size.height, //Full size the container
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                //Background gradient
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  StaticColors.topBackgroundScreen,
-                  StaticColors.bottomBackgroundScreen,
-                ],
-              ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CustomFormPadding(
-                  topHeaderDistance: Values.paddingLogoTop_100,
-                  childWidget: Image.asset(
-                    //Logo Image
-                    Paths.logo,
-                    height: Values.getScaledLogoSize(),
-                  ),
-                ),
-                const CustomFormPadding(
-                  topHeaderDistance: Values.paddingTitleTop_40,
-                  childWidget: Text(
-                    //Title of the screen
-                    StaticStrings.changePassword,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: Values.screenTitleTextSize_42,
-                    ),
-                  ),
-                ),
-                //Form consisting of 3 Text inputs and one button
-                CustomFormPadding(
-                  //Current Password Text Field
-                  childWidget: CustomTextFormField(
-                    controller: _currentPasswordController,
-                    hintText: StaticStrings.currentPasswordText,
-                    isHidden: true,
-                  ),
-                ),
-                CustomFormPadding(
-                  //New Password Text Field
-                  childWidget: CustomTextFormField(
-                    controller: _newPasswordController,
-                    hintText: StaticStrings.newPasswordText,
-                    isHidden: true,
-                  ),
-                ),
-                CustomFormPadding(
-                  //Repeat new Password Text Field
-                  childWidget: CustomTextFormField(
-                    controller: _repeatNewPasswordController,
-                    hintText: StaticStrings.repeatNewPasswordText,
-                    isHidden: true,
-                  ),
-                ),
-                CustomFormPadding(
-                  // Save Button
-                  childWidget: CustomElevatedButton(
-                    text: StaticStrings.saveButtonText,
-                    onPressed: () {
-                      //TODO: implement me...
-                    },
-                  ),
-                ),
+        child: Container(
+          height:
+              MediaQuery.of(context).size.height, //Full size the container
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              //Background gradient
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                StaticColors.topBackgroundScreen,
+                StaticColors.bottomBackgroundScreen,
               ],
             ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomFormPadding(
+                topHeaderDistance: Values.paddingLogoTop_50,
+                childWidget: Image.asset(
+                  //Logo Image
+                  Paths.logo,
+                  height: Values.getScaledLogoSize(),
+                ),
+              ),
+              const CustomFormPadding(
+                topHeaderDistance: Values.paddingTitleTop_40,
+                childWidget: Text(
+                  //Title of the screen
+                  StaticStrings.changePassword,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: Values.screenTitleTextSize_24,
+                  ),
+                ),
+              ),
+              Expanded(
+                  child: ListView(
+                    children: [
+                      //Form consisting of 3 Text inputs and one button
+                      CustomFormPadding(
+                        //Current Password Text Field
+                        childWidget: CustomTextFormField(
+                          controller: _currentPasswordController,
+                          hintText: StaticStrings.currentPasswordText,
+                          isHidden: true,
+                        ),
+                      ),
+                      CustomFormPadding(
+                        //New Password Text Field
+                        childWidget: CustomTextFormField(
+                          controller: _newPasswordController,
+                          hintText: StaticStrings.newPasswordText,
+                          isHidden: true,
+                        ),
+                      ),
+                      CustomFormPadding(
+                        //Repeat new Password Text Field
+                        childWidget: CustomTextFormField(
+                          controller: _repeatNewPasswordController,
+                          hintText: StaticStrings.repeatNewPasswordText,
+                          isHidden: true,
+                        ),
+                      ),
+                      CustomFormPadding(
+                        // Save Button
+                        childWidget: CustomElevatedButton(
+                          text: StaticStrings.saveButtonText,
+                          onPressed: () {
+                            //TODO: implement me...
+                          },
+                        ),
+                      ),
+                    ],
+                  ))
+            ],
           ),
         ),
       ),

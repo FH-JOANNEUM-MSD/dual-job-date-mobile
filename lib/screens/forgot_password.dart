@@ -50,7 +50,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CustomFormPadding(
-                topHeaderDistance: Values.paddingLogoTop_100,
+                topHeaderDistance: Values.paddingLogoTop_50,
                 childWidget: Image.asset(
                   Paths.logo,
                   height: Values.getScaledLogoSize(),
@@ -62,7 +62,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   StaticStrings.resetPassword,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: Values.screenTitleTextSize_42,
+                    fontSize: Values.screenTitleTextSize_24,
                   ),
                 ),
               ),
