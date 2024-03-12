@@ -31,7 +31,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(screenWidth); //TODO: Move this to start or splash screen, only needs to be set once!
+    Values.setScreenWidth(screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
 
     return Scaffold(
       body: SafeArea(

@@ -35,9 +35,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     // Get screen size
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    Values.setScreenWidth(screenWidth); //TODO: Move this to start or splash screen, only needs to be set once!
 
     return Scaffold(
       // Set the primary background color
