@@ -30,6 +30,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   ///Actually build the Screen
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
     final screenWidth = MediaQuery.of(context).size.width;
     Values.setScreenWidth(
         screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
@@ -68,24 +70,30 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  CustomFormPadding(
-                    childWidget: CustomTextFormField(
-                      controller: _emailController,
-                      hintText: StaticStrings.emailText,
-                      isHidden: false,
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    CustomFormPadding(
+                      childWidget: CustomTextFormField(
+                        controller: _emailController,
+                        hintText: StaticStrings.emailText,
+                        isHidden: false,
+                      ),
                     ),
-                  ),
-                  CustomFormPadding(
-                    childWidget: CustomElevatedButton(
-                      text: StaticStrings.sendButtonText,
-                      onPressed: () {
-                        //TODO: implement me....
-                      },
+                    CustomFormPadding(
+                      childWidget: CustomElevatedButton(
+                        text: StaticStrings.sendButtonText,
+                        onPressed: () {
+                          //TODO: validation
+                          if (_formKey.currentState!.validate()) {
+                            //TODO: Navigation
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

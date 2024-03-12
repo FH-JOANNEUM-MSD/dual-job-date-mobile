@@ -33,6 +33,8 @@ class _LoginState extends State<Login> {
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
     final screenWidth = MediaQuery.of(context).size.width;
     Values.setScreenWidth(
         screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
@@ -71,32 +73,48 @@ class _LoginState extends State<Login> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  CustomFormPadding(
-                    childWidget: CustomTextFormField(
-                      controller: _emailController,
-                      hintText: StaticStrings.emailText,
-                      isHidden: false,
+              child: Form(
+                key: _formKey,
+                child: ListView(
+                  children: [
+                    CustomFormPadding(
+                      childWidget: CustomTextFormField(
+                        controller: _emailController,
+                        hintText: StaticStrings.emailText,
+                        isHidden: false,
+                      ),
                     ),
-                  ),
-                  CustomFormPadding(
-                    childWidget: CustomTextFormField(
-                      controller: _passwordController,
-                      hintText: StaticStrings.requiredPassword,
-                      isHidden: true,
+                    CustomFormPadding(
+                      childWidget: CustomTextFormField(
+                        controller: _passwordController,
+                        hintText: StaticStrings.requiredPassword,
+                        isHidden: true,
+                      ),
                     ),
-                  ),
-                  CustomFormPadding(
-                    topHeaderDistance: Values.paddingInsetButtonTop,
-                    childWidget: CustomElevatedButton(
-                      text: StaticStrings.loginButtonText,
+                    CustomFormPadding(
+                      topHeaderDistance: Values.paddingInsetButtonTop,
+                      childWidget: CustomElevatedButton(
+                        text: StaticStrings.loginButtonText,
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // TODO: Navigation
+
+                          }
+                        },
+                      ),
+                    ),
+                    CustomFormPadding(
+                        childWidget: TextButton(
+                      child: Text(
+                        StaticStrings.forgotPassword,
+                        style: TextStyle(color: Colors.grey.shade700),
+                      ),
                       onPressed: () {
-                        //TODO: implement me...
+                        // TODO: Navigation
                       },
-                    ),
-                  ),
-                ],
+                    ))
+                  ],
+                ),
               ),
             ),
           ],

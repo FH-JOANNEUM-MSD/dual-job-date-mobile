@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/login.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password.dart';
 import 'package:dual_job_date_mobile/screens/splash.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         duration: 3000,
         splash: const Splash(),
-        nextScreen: const Login(),
+        nextScreen: const ForgotPassword(),
       ),
     );
   }
