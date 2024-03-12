@@ -70,7 +70,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 childWidget: CustomTextFormField(
                   controller: _emailController,
                   hintText: StaticStrings.emailText,
-                  isHidden: true,
+                  isHidden: false,
                 ),
               ),
               CustomFormPadding(
