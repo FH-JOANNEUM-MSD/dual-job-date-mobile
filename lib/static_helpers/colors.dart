@@ -9,4 +9,5 @@ class StaticColors {
   static const Color greenChip = Color(0xffd2ffbc);
   static const Color orangeChip = Color(0xffffe1bc);
   static const Color redChip = Color(0xffefc7c7);
+  static const Color yellowChip = Color(0xfffff3c6);
 }

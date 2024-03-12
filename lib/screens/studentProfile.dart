@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/widgets/student_profile_image.dart';
+import 'package:dual_job_date_mobile/widgets/student_profile_section.dart';
+import 'package:dual_job_date_mobile/widgets/student_profile_skill_chips.dart';
+import 'package:dual_job_date_mobile/widgets/divider.dart';
+import 'package:dual_job_date_mobile/widgets/student_profile_upload.dart';
 
 class StudentProfile extends StatelessWidget {
   final String name;
@@ -24,7 +30,11 @@ class StudentProfile extends StatelessWidget {
         title: const Text('Profil'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit),
+            icon: Image.asset(
+            StaticStrings.edit,
+            width: 40.0,
+            height: 40.0,
+            ),
             onPressed: () {
               showDialog(
                 context: context,
@@ -38,8 +48,8 @@ class StudentProfile extends StatelessWidget {
                             Navigator.pop(context); // Close the dialog
                           },
                           child: const Text(
-                              'Abbrechen',
-                               style: TextStyle(color: StaticColors.primary),
+                            'Abbrechen',
+                            style: TextStyle(color: StaticColors.primary),
                           ),
                         ),
                         TextButton(
@@ -48,12 +58,11 @@ class StudentProfile extends StatelessWidget {
                             print('Edit confirmed');
                           },
                           child: const Text(
-                              'Bearbeiten',
-                               style: TextStyle(color: StaticColors.primary),
+                            'Bearbeiten',
+                            style: TextStyle(color: StaticColors.primary),
                           ),
                         ),
-                      ]
-                  );
+                      ]);
                 },
               );
             },
@@ -63,197 +72,66 @@ class StudentProfile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _buildProfileImage(),
-            _buildProfileHeader(),
-            _buildDivider(),
-            _buildAboutSection(),
-            _buildDivider(),
-            _buildSkillsSection(),
-            _buildDivider(),
-            _buildUploadsSection(),
+            const StudentProfileImage(src: 'assets/images/placeholder.png'),
+            ProfileHeader(),
+            const CustomDivider(color: StaticColors.primary),
+            StudentProfileSection(title: 'Über mich', content: Text(about)),
+            const CustomDivider(color: StaticColors.primary),
+            SkillsSection(),
+            const CustomDivider(color: StaticColors.primary),
+           const StudentProfileSection(title: 'Uploads:', content: StudentProfileUpload(files: ['test'], icon: StaticStrings.document)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProfileImage() {
-    return Stack(
-      children: [
-        Expanded(
-          child: Column(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(90.0),
-                child: SizedBox(
-                  width: 180.0,
-                  height: 180.0,
-                  child: Image.asset(
-                    'assets/images/placeholder.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProfileHeader() {
+  Widget ProfileHeader() {
     return Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 16),
-      child: Text(
-        program,
-        style: const TextStyle(fontSize: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            program,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildAboutSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Über mich',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(about),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDivider() {
-    return const Divider(
-      color: StaticColors.primary,
-      thickness: 2,
-      indent: 16,
-      endIndent: 16,
-    );
-  }
-
-  Widget _buildSkillsSection() {
+  Widget SkillsSection() {
     const chipColors = [
       StaticColors.pinkChip,
       StaticColors.blueChip,
       StaticColors.greenChip,
       StaticColors.orangeChip,
       StaticColors.redChip,
+      StaticColors.yellowChip,
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Kenntnisse',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    return StudentProfileSection(
+        title: 'Kenntnisse',
+        content: Wrap(
+          spacing: 5,
+          runSpacing: 0,
+          children: skills
+              .asMap()
+              .entries
+              .map((entry) =>
+              StudentProfileSkillChips(index: entry.key, skill: entry.value, colors: chipColors))
+              .toList(),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Wrap(
-            spacing: 5,
-            runSpacing: 6,
-            children: skills
-                .asMap()
-                .entries
-                .map((entry) =>
-                    _buildSkillChip(entry.key, entry.value, chipColors))
-                .toList(),
-          ),
-        ),
-      ],
     );
   }
 
-  Widget _buildSkillChip(int index, String skill, List<Color> colors) {
-    Color darken(Color color, double amount) {
-      assert(amount >= 0 && amount <= 1);
-      final hsl = HSLColor.fromColor(color);
-      return hsl
-          .withLightness((hsl.lightness - amount).clamp(0.0, 1.0))
-          .toColor();
-    }
-
-    final chipColor = colors[index % colors.length];
-    final borderColor = darken(chipColor, 0.3);
-    return Chip(
-      label: Text(skill),
-      backgroundColor: colors[index % colors.length],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: borderColor, width: 1),
-      ),
-      padding: const EdgeInsets.symmetric(
-          horizontal: 0.0, vertical: 0.0), // Adjust padding as needed
-    );
-  }
-
-  Widget _buildUploadsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          // Left & right padding
-          child: Column(
-            // Nested Column for "Uploads:" and list
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Uploads',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: uploadItems.length,
-                itemBuilder: (context, index) {
-                  final uploadItem = uploadItems[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 3),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.file_upload_outlined),
-                        const SizedBox(width: 8.0),
-                        Text(uploadItem),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
 }
