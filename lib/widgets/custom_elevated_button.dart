@@ -12,7 +12,7 @@ class CustomElevatedButton extends StatelessWidget {
 
 
   //Other values
-  static const _minimumSizeHeight = 55.0;
+  static const _minimumSizeHeight = 40.0;
 
 
   /// Constructor
@@ -39,7 +39,7 @@ class CustomElevatedButton extends StatelessWidget {
       ),
       child:  Text(
         _text, //comes from constructor
-        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize_20),
+        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize),
       ),
     );
   }
