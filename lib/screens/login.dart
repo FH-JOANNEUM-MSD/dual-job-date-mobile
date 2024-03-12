@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
     // Get screen size
     final screenWidth = MediaQuery.of(context).size.width;
 
-    Values.setScreenWidth(screenWidth); //FIXME: Move this to start or splash screen, only needs to be set once!
+    Values.setScreenWidth(screenWidth); //TODO: Move this to start or splash screen, only needs to be set once!
 
     return Scaffold(
       // Set the primary background color
@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
                   childWidget: Text(
                     StaticStrings.login,
                     style: TextStyle(
-                      fontFamily: 'Parka', // TODO: need approved google font
+                      fontFamily: 'Parka', // FIXME: need approved google font
                       fontSize: Values
                           .screenTitleTextSize_42, // Adjust the font size as needed
                     ),
@@ -81,21 +81,21 @@ class _LoginState extends State<Login> {
                 CustomFormPadding(
                   childWidget: CustomTextFormField(
                     controller: _emailController,
-                    hintText: CustomTextFormField.emailText,
+                    hintText: StaticStrings.emailText,
                     isHidden: false,
                   ),
                 ),
                 CustomFormPadding(
                   childWidget: CustomTextFormField(
                     controller: _passwordController,
-                    hintText: CustomTextFormField.requiredPassword,
+                    hintText: StaticStrings.requiredPassword,
                     isHidden: true,
                   ),
                 ),
                 CustomFormPadding(
                   topHeaderDistance: Values.paddingInsetButtonTop_20,
                   childWidget: CustomElevatedButton(
-                    text: CustomElevatedButton.loginButtonText,
+                    text: StaticStrings.loginButtonText,
                     onPressed: () {
                       //TODO: implement me...
                     },

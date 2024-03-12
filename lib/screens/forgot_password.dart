@@ -31,7 +31,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(screenWidth); //FIXME: Move this to start or splash screen, only needs to be set once!
+    Values.setScreenWidth(screenWidth); //TODO: Move this to start or splash screen, only needs to be set once!
 
     return Scaffold(
       body: SafeArea(
@@ -69,13 +69,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               CustomFormPadding(
                 childWidget: CustomTextFormField(
                   controller: _emailController,
-                  hintText: CustomTextFormField.emailText,
+                  hintText: StaticStrings.emailText,
                   isHidden: true,
                 ),
               ),
               CustomFormPadding(
                 childWidget: CustomElevatedButton(
-                  text: CustomElevatedButton.sendButtonText,
+                  text: StaticStrings.sendButtonText,
                   onPressed: () {
                     //TODO: implement me....
                   },

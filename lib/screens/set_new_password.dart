@@ -38,7 +38,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     Values.setScreenWidth(
-        screenWidth); //FIXME: Move this to start or splash screen, only needs to be set once!
+        screenWidth); //TODO: Move this to start or splash screen, only needs to be set once!
 
     return Scaffold(
       body: SafeArea(
@@ -85,7 +85,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                   //Current Password Text Field
                   childWidget: CustomTextFormField(
                     controller: _currentPasswordController,
-                    hintText: CustomTextFormField.currentPasswordText,
+                    hintText: StaticStrings.currentPasswordText,
                     isHidden: true,
                   ),
                 ),
@@ -93,7 +93,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                   //New Password Text Field
                   childWidget: CustomTextFormField(
                     controller: _newPasswordController,
-                    hintText: CustomTextFormField.newPasswordText,
+                    hintText: StaticStrings.newPasswordText,
                     isHidden: true,
                   ),
                 ),
@@ -101,14 +101,14 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                   //Repeat new Password Text Field
                   childWidget: CustomTextFormField(
                     controller: _repeatNewPasswordController,
-                    hintText: CustomTextFormField.repeatNewPasswordText,
+                    hintText: StaticStrings.repeatNewPasswordText,
                     isHidden: true,
                   ),
                 ),
                 CustomFormPadding(
                   // Save Button
                   childWidget: CustomElevatedButton(
-                    text: CustomElevatedButton.saveButtonText,
+                    text: StaticStrings.saveButtonText,
                     onPressed: () {
                       //TODO: implement me...
                     },

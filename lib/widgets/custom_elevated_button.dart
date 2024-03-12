@@ -9,10 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String _text;
 
   // Text constants
-  static const loginButtonText = 'LOGIN';
-  static const forgotLoginButtonText = 'Passwort Vergessen?';
-  static const saveButtonText = 'SPEICHERN';
-  static const sendButtonText = 'ABSCHICKEN';
+
 
   //Other values
   static const _minimumSizeHeight = 55.0;

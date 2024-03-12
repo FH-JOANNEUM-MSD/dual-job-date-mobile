@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
 
   //Hint Text constants
-  static const String newPasswordText = 'Neues Passwort';
-  static const String repeatNewPasswordText = 'Passwort Wiederholen';
-  static const String currentPasswordText = 'Aktuelles Passwort';
-  static const String emailText = 'E-Mail-Adresse';
-  static const String requiredPassword = 'Passwort';
+
 
 
   //Customizable members
