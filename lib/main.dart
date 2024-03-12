@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
         duration: 1,//3000,
         splash: const Splash(),
-        nextScreen: const StudentProfile(name: 'Elisabeth', program: 'MSD', about: 'test', skills: ['Python', 'SQL', 'Netzwerktechnik', 'Design', 'Java', ' Kotlin']),
+        nextScreen: const StudentProfile(name: 'Lisa', program: 'Mobile Software Development', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', skills: ['Python', 'SQL', 'Netzwerktechnik', 'Design', 'Java', ' Kotlin'], uploadItems: ['Lebenslauf', 'Zertifikate', 'Weitere Dokumente'],),
       ),
     );
   }

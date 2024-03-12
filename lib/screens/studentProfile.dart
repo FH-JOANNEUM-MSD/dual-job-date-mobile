@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 
 class StudentProfile extends StatelessWidget {
   final String name;
   final String program;
   final String about;
   final List<String> skills;
+  final List<String> uploadItems;
 
   const StudentProfile({
     super.key,
@@ -12,6 +14,7 @@ class StudentProfile extends StatelessWidget {
     required this.program,
     required this.about,
     required this.skills,
+    required this.uploadItems,
   });
 
   @override
@@ -19,6 +22,43 @@ class StudentProfile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profil'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                      title: const Text('Profil bearbeiten'),
+                      content: const Text('Profil wirklich bearbeiten?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Close the dialog
+                          },
+                          child: const Text(
+                              'Abbrechen',
+                               style: TextStyle(color: StaticColors.primary),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Close the dialog
+                            print('Edit confirmed');
+                          },
+                          child: const Text(
+                              'Bearbeiten',
+                               style: TextStyle(color: StaticColors.primary),
+                          ),
+                        ),
+                      ]
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,12 +84,12 @@ class StudentProfile extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(100.0),
+                borderRadius: BorderRadius.circular(90.0),
                 child: SizedBox(
-                  width: 200.0,
-                  height: 200.0,
+                  width: 180.0,
+                  height: 180.0,
                   child: Image.asset(
-                    '../../assets/images/placeholder.png',
+                    'assets/images/placeholder.png',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -88,17 +128,22 @@ class StudentProfile extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          // Left & right padding
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Über mich:',
+                'Über mich',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(about),
+                padding: const EdgeInsets.symmetric(vertical: 3),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(about),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -109,7 +154,7 @@ class StudentProfile extends StatelessWidget {
 
   Widget _buildDivider() {
     return const Divider(
-      color: Colors.green,
+      color: StaticColors.primary,
       thickness: 2,
       indent: 16,
       endIndent: 16,
@@ -117,19 +162,19 @@ class StudentProfile extends StatelessWidget {
   }
 
   Widget _buildSkillsSection() {
-    final chipColors = const [
-      Color(0xffffc8ed),
-      Color(0xffd3e9fa),
-      Color(0xffd2ffbc),
-      Color(0xffffe1bc),
-      Color(0xffeac3df),
+    const chipColors = [
+      StaticColors.pinkChip,
+      StaticColors.blueChip,
+      StaticColors.greenChip,
+      StaticColors.orangeChip,
+      StaticColors.redChip,
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Kenntnisse:',
+          'Kenntnisse',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         Padding(
@@ -173,12 +218,6 @@ class StudentProfile extends StatelessWidget {
   }
 
   Widget _buildUploadsSection() {
-    final uploadItems = [
-      'Lebenslauf',
-      'Zertifikate',
-      'Weitere Dokumente'
-    ]; // Sample data
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -190,7 +229,7 @@ class StudentProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Uploads:',
+                'Uploads',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               ListView.builder(
