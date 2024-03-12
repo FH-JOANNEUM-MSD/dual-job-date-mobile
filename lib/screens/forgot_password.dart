@@ -3,10 +3,12 @@ import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+import '../static_helpers/paths.dart';
 import '../static_helpers/strings.dart';
 import '../static_helpers/values.dart';
 import '../widgets/custom_elevated_button.dart';
 
+///Class representing the ForgotPassword Screen
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
 
@@ -14,18 +16,22 @@ class ForgotPassword extends StatefulWidget {
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
+/// Class for Widget State
 class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailController = TextEditingController();
 
+  ///Destructor
   @override
   void dispose() {
     _emailController.dispose();
     super.dispose();
   }
 
+  ///Actually build the Screen
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    Values.setScreenWidth(screenWidth); //FIXME: Move this to start or splash screen, only needs to be set once!
 
     return Scaffold(
       body: SafeArea(
@@ -46,9 +52,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               CustomFormPadding(
                 topHeaderDistance: Values.paddingLogoTop_100,
                 childWidget: Image.asset(
-                  StaticStrings.logo,
-                  height:
-                      screenWidth * 0.25, //TODO: Make a getter for this value
+                  Paths.logo,
+                  height: Values.getScaledLogoSize(),
                 ),
               ),
               const CustomFormPadding(
@@ -58,7 +63,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: Values.screenTitleTextSize_42,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

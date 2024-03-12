@@ -6,6 +6,7 @@ class Values {
 
   // image sizes
   static const logoImageWidthHeight_200 = 200.0;
+  static const double _logoMultiplicator = 0.25;
 
   // font sizes
   static const screenTitleTextSize_42 = 42.0;
@@ -22,5 +23,17 @@ class Values {
   static const paddingInsetButtonTop_20 = 20.0;
   static const paddingEdgeInsetBottom_8 = 8.0;
   static const paddingEdgeInsetBottom_0 = 0.0;
+
+  static double _screenWidth = 0;
+
+  /// Returns a double representing the scaled size of the logo
+  static double getScaledLogoSize(){
+    return _screenWidth * _logoMultiplicator;
+  }
+
+  /// set the width of the screen so scaling calculations can be performed
+  static void setScreenWidth(double screenHeight){
+    _screenWidth = screenHeight;
+  }
 
 }

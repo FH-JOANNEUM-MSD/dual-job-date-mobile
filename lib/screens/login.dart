@@ -1,4 +1,5 @@
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
@@ -20,13 +21,13 @@ class _LoginState extends State<Login> {
 
   /// controller
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   ///Destructor
   @override
   void dispose() {
     _emailController.dispose();
-    _currentPasswordController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -35,6 +36,8 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     // Get screen size
     final screenWidth = MediaQuery.of(context).size.width;
+
+    Values.setScreenWidth(screenWidth); //FIXME: Move this to start or splash screen, only needs to be set once!
 
     return Scaffold(
       // Set the primary background color
@@ -60,8 +63,8 @@ class _LoginState extends State<Login> {
                 CustomFormPadding(
                   topHeaderDistance: Values.paddingLogoTop_100,
                   childWidget: Image.asset(
-                    StaticStrings.logo,
-                    height: screenWidth * 0.25, // TODO: const value missing
+                    Paths.logo,
+                    height: Values.getScaledLogoSize(),
                   ),
                 ),
                 const CustomFormPadding(
@@ -84,7 +87,7 @@ class _LoginState extends State<Login> {
                 ),
                 CustomFormPadding(
                   childWidget: CustomTextFormField(
-                    controller: _currentPasswordController,
+                    controller: _passwordController,
                     hintText: CustomTextFormField.requiredPassword,
                     isHidden: true,
                   ),
