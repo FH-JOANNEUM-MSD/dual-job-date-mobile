@@ -31,58 +31,64 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
+    Values.setScreenWidth(
+        screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
 
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                StaticColors.topBackgroundScreen,
-                StaticColors.bottomBackgroundScreen,
-              ],
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CustomFormPadding(
-                topHeaderDistance: Values.paddingLogoTop_50,
-                childWidget: Image.asset(
-                  Paths.logo,
-                  height: Values.getScaledLogoSize(),
-                ),
-              ),
-              const CustomFormPadding(
-                topHeaderDistance: Values.paddingTitleTop_40,
-                childWidget: Text(
-                  StaticStrings.resetPassword,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: Values.screenTitleTextSize_24,
-                  ),
-                ),
-              ),
-              CustomFormPadding(
-                childWidget: CustomTextFormField(
-                  controller: _emailController,
-                  hintText: StaticStrings.emailText,
-                  isHidden: false,
-                ),
-              ),
-              CustomFormPadding(
-                childWidget: CustomElevatedButton(
-                  text: StaticStrings.sendButtonText,
-                  onPressed: () {
-                    //TODO: implement me....
-                  },
-                ),
-              ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              StaticColors.topBackgroundScreen,
+              StaticColors.bottomBackgroundScreen,
             ],
           ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CustomFormPadding(
+              topHeaderDistance: Values.paddingLogoTop_50,
+              childWidget: Image.asset(
+                Paths.logo,
+                height: Values.getScaledLogoSize(),
+              ),
+            ),
+            const CustomFormPadding(
+              topHeaderDistance: Values.paddingTitleTop_40,
+              childWidget: Text(
+                StaticStrings.resetPassword,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: Values.screenTitleTextSize_24,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  CustomFormPadding(
+                    childWidget: CustomTextFormField(
+                      controller: _emailController,
+                      hintText: StaticStrings.emailText,
+                      isHidden: false,
+                    ),
+                  ),
+                  CustomFormPadding(
+                    childWidget: CustomElevatedButton(
+                      text: StaticStrings.sendButtonText,
+                      onPressed: () {
+                        //TODO: implement me....
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -91,5 +97,5 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
 // FIXME: Just for testing will be removed afterwards
 void main() {
-  runApp(MaterialApp(home: ForgotPassword()));
+  runApp(const MaterialApp(home: ForgotPassword()));
 }
