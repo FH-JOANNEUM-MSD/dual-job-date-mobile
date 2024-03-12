@@ -1,4 +1,5 @@
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {
@@ -11,15 +12,13 @@ class CustomBackButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(
-              Values.screenWidth * 0.06,
-              Values.screenWidth * 0.1,
-              Values.screenWidth * 0.07,
-              Values.screenWidth * 0.07),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.grey),
-            onPressed: () => Navigator.of(context).pop(),
+        SafeArea(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(Values.screenWidth * 0.06, 0, 0, 0),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.grey),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
           ),
         ),
       ],
