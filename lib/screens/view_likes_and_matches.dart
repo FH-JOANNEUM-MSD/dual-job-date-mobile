@@ -4,6 +4,9 @@ import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../models/company.dart';
+import '../widgets/custom_toggle_button.dart';
+
 ///Class representing the screen that displays Likes and Matches with companies
 class LikesAndMatches extends StatefulWidget {
   const LikesAndMatches({super.key});
@@ -16,6 +19,7 @@ class LikesAndMatches extends StatefulWidget {
 class _LikesAndMatchesState extends State<LikesAndMatches> {
   ToggleState toggleState = ToggleState.likes;
   String titleText = "Deine Likes";
+  List<Company> _companyList = mockLikeCompanies;
 
 
 
@@ -32,8 +36,10 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
     setState(() {
       if (toggleState == ToggleState.matches) {
         titleText = LikesAndMatchesStrings.titleMatches;
+        _companyList = mockMatchCompanies;
       } else {
         titleText = LikesAndMatchesStrings.titleLikes;
+        _companyList = mockLikeCompanies;
       }
     });
   }
@@ -42,7 +48,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   @override
   Widget build(BuildContext context) {
 
-    double switchWidth = MediaQuery.of(context).size.width * 0.75;
+    double switchWidth = MediaQuery.of(context).size.width * 0.8;
     double switchHeight = 50;
     return Scaffold(
       appBar: AppBar(
@@ -70,55 +76,20 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
             onTap: () {
               toggleSwitch();
             },
-            child: Container(
-              width: switchWidth,
-              height: switchHeight,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25.0), // Makes it rounded
-                color: toggleState == ToggleState.likes
-                    ? Colors.green
-                    : Colors.red,
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeIn,
-                    left: toggleState == ToggleState.likes ? switchWidth/2 : 0,
-                    right: toggleState == ToggleState.likes ? 0 : switchWidth/2,
-                    child: Container(
-                      height: 50,
-                      width: 150,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                      ),
-                      child: Text(
-                        toggleState == ToggleState.likes ? LikesAndMatchesStrings.likes : LikesAndMatchesStrings.matches,
-                        style: TextStyle(
-                          color: toggleState == ToggleState.likes
-                              ? Colors.green
-                              : Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            child:Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: CustomToggleButton(switchWidth: switchWidth, switchHeight: switchHeight, toggleState: toggleState),
+            ) ,
           ),
 
 
           //List view of all applicable Companies
           Expanded(
             child: ListView.builder(
-                itemCount: mockCompanies.length,
+                itemCount: _companyList.length,
                 itemBuilder: (context, idx) {
                   return CompanyCardWidget(
-                    company: mockCompanies[idx],
+                    company: _companyList[idx],
                   );
                 }),
           ),
@@ -135,6 +106,8 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
     );
   }
 }
+
+
 
 //  FIXME Just for testing will be removed afterwards
 void main() {
