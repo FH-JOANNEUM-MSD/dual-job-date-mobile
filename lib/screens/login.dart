@@ -1,12 +1,12 @@
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import '../static_helpers/values.dart';
-import '../widgets/custom_elevated_button.dart';
 
 /// Screen for login
 class Login extends StatefulWidget {
@@ -18,7 +18,6 @@ class Login extends StatefulWidget {
 
 /// State Class: Needed for stateful widget
 class _LoginState extends State<Login> {
-
   /// controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -34,87 +33,79 @@ class _LoginState extends State<Login> {
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
-    // Get screen size
+    final screenWidth = MediaQuery.of(context).size.width;
+    Values.setScreenWidth(
+        screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
 
     return Scaffold(
-      // Set the primary background color
-      body: Stack(
-        children: [
-          // color gradient for background
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  StaticColors.topBackgroundScreen,
-                  StaticColors.bottomBackgroundScreen,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              StaticColors.topBackgroundScreen,
+              StaticColors.bottomBackgroundScreen,
+            ],
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CustomFormPadding(
+              topHeaderDistance: Values.paddingLogoTop_50,
+              childWidget: Image.asset(
+                //Logo Image
+                Paths.logo,
+                height: Values.getScaledLogoSize(),
               ),
             ),
-          ),
-
-          Center(
-            child: Column(
-              children: [
-                CustomFormPadding(
-                  topHeaderDistance: Values.paddingLogoTop_50,
-                  childWidget: Image.asset(
-                    Paths.logo,
-                    height: Values.getScaledLogoSize(),
-                  ),
+            const CustomFormPadding(
+              topHeaderDistance: Values.paddingTitleTop_40,
+              childWidget: Text(
+                StaticStrings.login,
+                style: TextStyle(
+                  fontSize: Values.screenTitleTextSize_24,
                 ),
-                const CustomFormPadding(
-                  topHeaderDistance: Values.paddingTitleTop_40,
-                  childWidget: Text(
-                    StaticStrings.login,
-                    style: TextStyle(
-                      fontFamily: 'Parka', // FIXME: need approved google font
-                      fontSize: Values
-                          .screenTitleTextSize_24, // Adjust the font size as needed
+              ),
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  CustomFormPadding(
+                    childWidget: CustomTextFormField(
+                      controller: _emailController,
+                      hintText: StaticStrings.emailText,
+                      isHidden: false,
                     ),
                   ),
-                ),
-                CustomFormPadding(
-                  childWidget: CustomTextFormField(
-                    controller: _emailController,
-                    hintText: StaticStrings.emailText,
-                    isHidden: false,
+                  CustomFormPadding(
+                    childWidget: CustomTextFormField(
+                      controller: _passwordController,
+                      hintText: StaticStrings.requiredPassword,
+                      isHidden: true,
+                    ),
                   ),
-                ),
-                CustomFormPadding(
-                  childWidget: CustomTextFormField(
-                    controller: _passwordController,
-                    hintText: StaticStrings.requiredPassword,
-                    isHidden: true,
+                  CustomFormPadding(
+                    topHeaderDistance: Values.paddingInsetButtonTop_20,
+                    childWidget: CustomElevatedButton(
+                      text: StaticStrings.loginButtonText,
+                      onPressed: () {
+                        //TODO: implement me...
+                      },
+                    ),
                   ),
-                ),
-                CustomFormPadding(
-                  topHeaderDistance: Values.paddingInsetButtonTop_20,
-                  childWidget: CustomElevatedButton(
-                    text: StaticStrings.loginButtonText,
-                    onPressed: () {
-                      //TODO: implement me...
-                    },
-                  ),
-                ),
-                CustomFormPadding(
-                  topHeaderDistance: Values.paddingEdgeInsetBottom_0,
-                  childWidget: TextButton(
-                    onPressed: () {
-                      // Action for forgotten password
-                    },
-                    child: Text(StaticStrings.forgotPassword,
-                        style: TextStyle(
-                            color: Colors.grey.shade800,
-                            fontSize: Values.linkTextSize_20)),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(const MaterialApp(home: Login()));
 }
