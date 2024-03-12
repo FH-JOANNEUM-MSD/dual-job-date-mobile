@@ -15,3 +15,10 @@ class CompaniesScreenStrings {
   static const String filterIconPath = "assets/images/svg/filter.svg";
   static const String likes = "likes";
 }
+
+class LikesAndMatchesStrings{
+  static const titleLikes = "Deine Likes";
+  static const titleMatches = "Deine Matches";
+  static const likes = "Likes";
+  static const matches = "Matches";
+}
