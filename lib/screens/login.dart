@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
   /// controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  late GlobalKey<FormState> _formKey;
   ///Destructor
   @override
   void dispose() {
@@ -33,10 +33,15 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    _formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       body: Container(
@@ -51,72 +56,74 @@ class _LoginState extends State<Login> {
             ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            CustomFormPadding(
-              topHeaderDistance: Values.paddingLogoTop,
-              childWidget: Image.asset(
-                //Logo Image
-                Paths.logo,
-                height: Values.getScaledLogoSize(),
-              ),
-            ),
-            const CustomFormPadding(
-              topHeaderDistance: Values.paddingTitleTop,
-              childWidget: Text(
-                StaticStrings.login,
-                style: TextStyle(
-                  fontSize: Values.screenTitleTextSize,
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomFormPadding(
+                topHeaderDistance: Values.paddingLogoTop,
+                childWidget: Image.asset(
+                  //Logo Image
+                  Paths.logo,
+                  height: Values.getScaledLogoSize(),
                 ),
               ),
-            ),
-            Expanded(
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    CustomFormPadding(
-                      childWidget: CustomTextFormField(
-                        controller: _emailController,
-                        hintText: StaticStrings.emailText,
-                        isHidden: false,
+              const CustomFormPadding(
+                topHeaderDistance: Values.paddingTitleTop,
+                childWidget: Text(
+                  StaticStrings.login,
+                  style: TextStyle(
+                    fontSize: Values.screenTitleTextSize,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      CustomFormPadding(
+                        childWidget: CustomTextFormField(
+                          controller: _emailController,
+                          hintText: StaticStrings.emailText,
+                          isHidden: false,
+                        ),
                       ),
-                    ),
-                    CustomFormPadding(
-                      childWidget: CustomTextFormField(
-                        controller: _passwordController,
-                        hintText: StaticStrings.requiredPassword,
-                        isHidden: true,
+                      CustomFormPadding(
+                        childWidget: CustomTextFormField(
+                          controller: _passwordController,
+                          hintText: StaticStrings.requiredPassword,
+                          isHidden: true,
+                        ),
                       ),
-                    ),
-                    CustomFormPadding(
-                      topHeaderDistance: Values.paddingInsetButtonTop,
-                      childWidget: CustomElevatedButton(
-                        text: StaticStrings.loginButtonText,
+                      CustomFormPadding(
+                        topHeaderDistance: Values.paddingInsetButtonTop,
+                        childWidget: CustomElevatedButton(
+                          text: StaticStrings.loginButtonText,
+                          onPressed: () {
+                            // TODO right validation
+                            if (_formKey.currentState!.validate()) {
+                              login(context);
+                            }
+                          },
+                        ),
+                      ),
+                      CustomFormPadding(
+                          childWidget: TextButton(
+                        child: Text(
+                          StaticStrings.forgotPassword,
+                          style: TextStyle(color: Colors.grey.shade700),
+                        ),
                         onPressed: () {
-                          // TODO right validation
-                          if (_formKey.currentState!.validate()) {
-                            login(context);
-                          }
+                          navigateToForgotPassword(context);
                         },
-                      ),
-                    ),
-                    CustomFormPadding(
-                        childWidget: TextButton(
-                      child: Text(
-                        StaticStrings.forgotPassword,
-                        style: TextStyle(color: Colors.grey.shade700),
-                      ),
-                      onPressed: () {
-                        navigateToForgotPassword(context);
-                      },
-                    ))
-                  ],
+                      ))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

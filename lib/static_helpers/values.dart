@@ -24,16 +24,16 @@ class Values {
   static const paddingEdgeInsetBottom = 8.0;
   static const paddingEdgeInsetBottomNoPadding = 0.0;
 
-  static double _screenWidth = 0;
+  static double screenWidth = 0;
 
   /// Returns a double representing the scaled size of the logo
   static double getScaledLogoSize(){
-    return _screenWidth * _logoMultiplicator;
+    return screenWidth * _logoMultiplicator;
   }
 
   /// set the width of the screen so scaling calculations can be performed
   static void setScreenWidth(double screenHeight){
-    _screenWidth = screenHeight;
+    screenWidth = screenHeight;
   }
 
 }
