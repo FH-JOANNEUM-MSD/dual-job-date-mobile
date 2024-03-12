@@ -23,32 +23,37 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     super.dispose();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  StaticColors.topBackgroundScreen,
-                  StaticColors.bottomBackgroundScreen,
-                ],
-              ),
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                StaticColors.topBackgroundScreen,
+                StaticColors.bottomBackgroundScreen,
+              ],
             ),
-
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomFormPadding(
+                topHeaderDistance: Values.paddingLogoTop_100,
+                childWidget: Image.asset(
                   StaticStrings.logo,
-                  height: Values.logoImageWidthHeight_200,
-                  width: Values.logoImageWidthHeight_200,
+                  height:
+                      screenWidth * 0.25, //TODO: Make a getter for this value
                 ),
-                const Text(
+              ),
+              const CustomFormPadding(
+                topHeaderDistance: Values.paddingTitleTop_40,
+                childWidget: Text(
                   StaticStrings.resetPassword,
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -56,26 +61,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                CustomFormPadding(
-                  childWidget: CustomTextFormField(
-                    controller:  _emailController,
-                    hintText: CustomTextFormField.emailText,
-                    isHidden: true,
-                  ),
+              ),
+              CustomFormPadding(
+                childWidget: CustomTextFormField(
+                  controller: _emailController,
+                  hintText: CustomTextFormField.emailText,
+                  isHidden: true,
                 ),
-                CustomFormPadding(
-                  childWidget: CustomElevatedButton(
-                    text: CustomElevatedButton.sendButtonText,
-                    onPressed: (){
+              ),
+              CustomFormPadding(
+                childWidget: CustomElevatedButton(
+                  text: CustomElevatedButton.sendButtonText,
+                  onPressed: () {
                     //TODO: implement me....
                   },
-              ),
-            ),
-          ],
-                  ),
                 ),
-            ),
-          );
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

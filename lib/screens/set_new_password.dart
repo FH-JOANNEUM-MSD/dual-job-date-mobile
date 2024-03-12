@@ -35,6 +35,9 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   ///Actually build the widget
     @override
     Widget build(BuildContext context) {
+
+    final screenWidth = MediaQuery.of(context).size.width;
+
       return Scaffold(
         body: SafeArea(
           child: SingleChildScrollView( //Make the app scrollable
@@ -53,18 +56,23 @@ class _SetNewPasswordState extends State<SetNewPassword> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset( //Logo Image
+                CustomFormPadding(
+                  topHeaderDistance: Values.paddingLogoTop_100,
+                  childWidget: Image.asset( //Logo Image
                   StaticStrings.logo,
-                  height: Values.logoImageWidthHeight_200,
-                  width: Values.logoImageWidthHeight_200,
+                  height: screenWidth * 0.25, //TODO: Make a getter for this value
+                  ),
                 ),
-                const Text( //Title of the screen
+                const CustomFormPadding(
+                  topHeaderDistance: Values.paddingTitleTop_40,
+                  childWidget: Text( //Title of the screen
                   StaticStrings.changePassword,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: Values.screenTitleTextSize_42,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
                 ),
                 //Form consisting of 3 Text inputs and one button
                 CustomFormPadding( //Current Password Text Field
