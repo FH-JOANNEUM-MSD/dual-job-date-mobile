@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomFormPadding(
-              topHeaderDistance: Values.paddingLogoTop_50,
+              topHeaderDistance: Values.paddingLogoTop,
               childWidget: Image.asset(
                 //Logo Image
                 Paths.logo,
@@ -62,11 +62,11 @@ class _LoginState extends State<Login> {
               ),
             ),
             const CustomFormPadding(
-              topHeaderDistance: Values.paddingTitleTop_40,
+              topHeaderDistance: Values.paddingTitleTop,
               childWidget: Text(
                 StaticStrings.login,
                 style: TextStyle(
-                  fontSize: Values.screenTitleTextSize_24,
+                  fontSize: Values.screenTitleTextSize,
                 ),
               ),
             ),
@@ -88,7 +88,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   CustomFormPadding(
-                    topHeaderDistance: Values.paddingInsetButtonTop_20,
+                    topHeaderDistance: Values.paddingInsetButtonTop,
                     childWidget: CustomElevatedButton(
                       text: StaticStrings.loginButtonText,
                       onPressed: () {

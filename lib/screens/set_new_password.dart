@@ -59,7 +59,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomFormPadding(
-              topHeaderDistance: Values.paddingLogoTop_50,
+              topHeaderDistance: Values.paddingLogoTop,
               childWidget: Image.asset(
                 //Logo Image
                 Paths.logo,
@@ -67,13 +67,13 @@ class _SetNewPasswordState extends State<SetNewPassword> {
               ),
             ),
             const CustomFormPadding(
-              topHeaderDistance: Values.paddingTitleTop_40,
+              topHeaderDistance: Values.paddingTitleTop,
               childWidget: Text(
                 //Title of the screen
                 StaticStrings.changePassword,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: Values.screenTitleTextSize_24,
+                  fontSize: Values.screenTitleTextSize,
                 ),
               ),
             ),

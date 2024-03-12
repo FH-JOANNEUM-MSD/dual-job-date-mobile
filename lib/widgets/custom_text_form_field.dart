@@ -39,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: Colors.white,
         contentPadding: EdgeInsets.zero,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius_14), // Rounded corners
+          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius), // Rounded corners
           borderSide: BorderSide.none, // Remove border
         ),
       ),

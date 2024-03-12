@@ -16,7 +16,7 @@ class CustomFormPadding extends StatelessWidget {
   const CustomFormPadding({
     super.key,
     required Widget? childWidget,
-    double topHeaderDistance = Values.paddingEdgeInsetTop_10,
+    double topHeaderDistance = Values.paddingEdgeInsetTop,
   }) : _childWidget = childWidget, _topHeaderDistance = topHeaderDistance;
 
  ///Build the widget
@@ -24,10 +24,10 @@ class CustomFormPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          Values.paddingEdgeInsetLeftRight_42,
+          Values.paddingEdgeInsetLeftRight,
           _topHeaderDistance,
-          Values.paddingEdgeInsetLeftRight_42,
-          Values.paddingEdgeInsetBottom_8),
+          Values.paddingEdgeInsetLeftRight,
+          Values.paddingEdgeInsetBottom),
       child:_childWidget //comes from constructor
     );
   }

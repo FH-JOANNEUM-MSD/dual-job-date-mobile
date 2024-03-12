@@ -51,19 +51,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CustomFormPadding(
-              topHeaderDistance: Values.paddingLogoTop_50,
+              topHeaderDistance: Values.paddingLogoTop,
               childWidget: Image.asset(
                 Paths.logo,
                 height: Values.getScaledLogoSize(),
               ),
             ),
             const CustomFormPadding(
-              topHeaderDistance: Values.paddingTitleTop_40,
+              topHeaderDistance: Values.paddingTitleTop,
               childWidget: Text(
                 StaticStrings.resetPassword,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: Values.screenTitleTextSize_24,
+                  fontSize: Values.screenTitleTextSize,
                 ),
               ),
             ),
