@@ -32,9 +32,13 @@ class Values {
     return _screenWidth * _logoMultiplicator;
   }
 
+  ///Returns the screen width * 0.8 (80%)
+  static double getScreenWidth80(){
+    return _screenWidth * 0.8;
+  }
   /// set the width of the screen so scaling calculations can be performed
-  static void setScreenWidth(double screenHeight){
-    _screenWidth = screenHeight;
+  static void setScreenWidth(double screenWidth){
+    _screenWidth = screenWidth;
   }
 
 }

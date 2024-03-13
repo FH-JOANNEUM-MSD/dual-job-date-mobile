@@ -27,8 +27,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   List<Company> _companyList = mockLikeCompanies;
 
   /// constants specific to this class (and therefore not in Values.dart)
-  final double _switchHeight = 50;
-  final double _toggleSwitchPadding = 20; //FIXME this one might be useful in Values
+  final double _toggleSwitchPadding = 20; //FIXME this one might be useful in Values, align with Elisabeth
   final int _currentNavBarIndex = 1;
 
 
@@ -36,11 +35,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   ///Method handling the toggling between matches and likes
   void toggleSwitch() {
     //flip the state
-    if (toggleState == ToggleState.matches) {
-      toggleState = ToggleState.likes;
-    } else {
-      toggleState = ToggleState.matches;
-    }
+    toggleState = (toggleState == ToggleState.matches)?ToggleState.likes:ToggleState.matches;
 
     //Change the TitleText based on the state
     setState(() {
@@ -58,8 +53,9 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   @override
   Widget build(BuildContext context) {
 
+    Values.setScreenWidth(MediaQuery.of(context).size.width);
     // define the width of the toggle switch
-    double switchWidth = MediaQuery.of(context).size.width * 0.8; // TODO: Move to Values.dart?
+    double switchWidth = Values.getScreenWidth80();
 
     return Scaffold(
       //Title (Top)
@@ -94,7 +90,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
             },
             child:Padding(
               padding:  EdgeInsets.symmetric(vertical: _toggleSwitchPadding),
-              child: CustomToggleButton(switchWidth: switchWidth, switchHeight: _switchHeight, toggleState: toggleState),
+              child: CustomToggleButton(switchWidth: switchWidth, toggleState: toggleState),
             ) ,
           ),
 
