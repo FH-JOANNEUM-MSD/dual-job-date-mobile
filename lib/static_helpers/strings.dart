@@ -1,9 +1,22 @@
 class StaticStrings{
-  static const String logo = "assets/images/logo.png";
-  static const String calendar = "assets/images/calendar_icon.png";
-  static const String flame = "assets/images/flame_icon.png";
-  static const String group = "assets/images/group_icon.png";
-  static const String profile = "assets/images/profile_icon.png";
-  static const String document = "assets/images/document_icon.png";
-  static const String edit = "assets/images/edit_icon.png";
+
+  //Text
+  static const changePassword = 'Passwort ändern';
+  static const resetPassword = 'Passwort zurücksetzen';
+  static const login = 'Login';
+  static const forgotPassword = 'Passwort Vergessen?';
+
+  //UI Elements Text
+  //Buttons
+  static const loginButtonText = 'LOGIN';
+  static const forgotLoginButtonText = 'Passwort Vergessen?';
+  static const saveButtonText = 'SPEICHERN';
+  static const sendButtonText = 'ABSCHICKEN';
+
+  //Text Input Fields
+  static const String newPasswordText = 'Neues Passwort';
+  static const String repeatNewPasswordText = 'Passwort Wiederholen';
+  static const String currentPasswordText = 'Aktuelles Passwort';
+  static const String emailText = 'E-Mail-Adresse';
+  static const String requiredPassword = 'Passwort';
 }

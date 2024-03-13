@@ -1,36 +1,33 @@
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
-import 'package:dual_job_date_mobile/static_helpers/paths.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+import '../static_helpers/paths.dart';
+import '../static_helpers/strings.dart';
 import '../static_helpers/values.dart';
+import '../widgets/custom_elevated_button.dart';
 
-/// Screen for login
-class Login extends StatefulWidget {
-  const Login({super.key});
+///Class representing the ForgotPassword Screen
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-/// State Class: Needed for stateful widget
-class _LoginState extends State<Login> {
-  /// controller
+/// Class for Widget State
+class _ForgotPasswordState extends State<ForgotPassword> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   ///Destructor
   @override
   void dispose() {
     _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
   }
 
-  ///Actually build the widget
+  ///Actually build the Screen
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -56,7 +53,6 @@ class _LoginState extends State<Login> {
             CustomFormPadding(
               topHeaderDistance: Values.paddingLogoTop,
               childWidget: Image.asset(
-                //Logo Image
                 Paths.logo,
                 height: Values.getScaledLogoSize(),
               ),
@@ -64,7 +60,8 @@ class _LoginState extends State<Login> {
             const CustomFormPadding(
               topHeaderDistance: Values.paddingTitleTop,
               childWidget: Text(
-                StaticStrings.login,
+                StaticStrings.resetPassword,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: Values.screenTitleTextSize,
                 ),
@@ -81,18 +78,10 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   CustomFormPadding(
-                    childWidget: CustomTextFormField(
-                      controller: _passwordController,
-                      hintText: StaticStrings.requiredPassword,
-                      isHidden: true,
-                    ),
-                  ),
-                  CustomFormPadding(
-                    topHeaderDistance: Values.paddingInsetButtonTop,
                     childWidget: CustomElevatedButton(
-                      text: StaticStrings.loginButtonText,
+                      text: StaticStrings.sendButtonText,
                       onPressed: () {
-                        //TODO: implement me...
+                        //TODO: implement me....
                       },
                     ),
                   ),
@@ -106,6 +95,7 @@ class _LoginState extends State<Login> {
   }
 }
 
+// FIXME: Just for testing will be removed afterwards
 void main() {
-  runApp(const MaterialApp(home: Login()));
+  runApp(const MaterialApp(home: ForgotPassword()));
 }

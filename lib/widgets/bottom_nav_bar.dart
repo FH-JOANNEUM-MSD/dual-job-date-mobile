@@ -1,6 +1,7 @@
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
+
+import '../static_helpers/paths.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar(
@@ -19,10 +20,10 @@ class BottomNavBar extends StatelessWidget {
         onTabTapped(index);
       },
       items: [
-        buildNavBarItem(StaticStrings.group),
-        buildNavBarItem(StaticStrings.flame),
-        buildNavBarItem(StaticStrings.calendar),
-        buildNavBarItem(StaticStrings.profile),
+        buildNavBarItem(Paths.group),
+        buildNavBarItem(Paths.flame),
+        buildNavBarItem(Paths.calendar),
+        buildNavBarItem(Paths.profile),
       ],
     );
   }

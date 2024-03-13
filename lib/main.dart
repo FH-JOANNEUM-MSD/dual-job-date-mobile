@@ -1,7 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dual_job_date_mobile/screens/login.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password.dart';
 import 'package:dual_job_date_mobile/screens/splash.dart';
-import 'package:dual_job_date_mobile/screens/studentProfile.dart';
+import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Values.setScreenWidth(MediaQuery.of(context).size.width);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
