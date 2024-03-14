@@ -41,6 +41,6 @@ class _HomeState extends State<Home> {
                   currentIndex = x;
                 });
               },
-            )));
+    )));
   }
 }

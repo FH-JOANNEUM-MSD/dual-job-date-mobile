@@ -13,12 +13,10 @@ class CustomToggleButton extends StatelessWidget {
   ///Constructor
   const CustomToggleButton({
     super.key,
-    required this.switchWidth,
     required this.toggleState,
   });
 
   // Values from the constructor
-  final double switchWidth;
   final ToggleState toggleState;
 
   // Constants (only applicable in this class, so not in values.dart
@@ -46,6 +44,9 @@ class CustomToggleButton extends StatelessWidget {
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
+
+    // define the width of the toggle switch
+    double switchWidth = Values.getScreenWidth80();
     //Surrounding Container, green outline
     return Container(
       width: switchWidth,
@@ -131,7 +132,6 @@ class CustomToggleButton extends StatelessWidget {
                     color: StaticColors.primary,
                   )
               ),
-
             ),
           ),
         ],
