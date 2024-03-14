@@ -109,24 +109,10 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
          ]
         ),
       ),
-
-      //Navigation Bar on the Bottom
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: _currentNavBarIndex,
-        onTabTapped: (index) {
-          print("Navbar was tapped: $index"); //TODO: Replace with functionality
-        },
-      ),
     );
   }
 }
 
-
-
-//  FIXME Just for testing will be removed afterwards
-void main() {
-  runApp(const MaterialApp(home: LikesAndMatches()));
-}
 
 /// Enum for toggle states
 enum ToggleState { likes, matches }
