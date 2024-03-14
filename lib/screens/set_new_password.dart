@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
