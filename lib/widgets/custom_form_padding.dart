@@ -5,10 +5,9 @@ import '../static_helpers/values.dart';
 ///Class used to pad forms (like set_new_password Screen) as required by UI/UX
 class CustomFormPadding extends StatelessWidget {
 
-  final Widget? _childWidget;
-
   //Customizable members
   final double _topHeaderDistance;
+  final Widget? _childWidget;
 
   ///Constructor
   ///* [_childWidget]: Any widget inside the padding (Button, Text, etc...)

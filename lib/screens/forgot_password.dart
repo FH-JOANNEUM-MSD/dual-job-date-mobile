@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+import '../widgets/custom_text_form_field.dart';
+
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
@@ -17,6 +21,7 @@ class ForgotPassword extends StatefulWidget {
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
+
 
 /// Class for Widget State
 class _ForgotPasswordState extends State<ForgotPassword> {

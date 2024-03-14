@@ -153,6 +153,3 @@ class _LoginState extends State<Login> {
   }
 }
 
-void main() {
-  runApp(const MaterialApp(home: Login()));
-}

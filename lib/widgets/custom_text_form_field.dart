@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 /// Class Representing a TextFormField as used in the App with all customizations according to UI/UX in place
 class CustomTextFormField extends StatelessWidget {
-  //Hint Text constants
-
   //Customizable members
   final TextEditingController _controller;
   final String _hintText;
