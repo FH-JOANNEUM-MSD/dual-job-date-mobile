@@ -17,6 +17,6 @@ class StaticStrings{
   static const String newPasswordText = 'Neues Passwort';
   static const String repeatNewPasswordText = 'Passwort Wiederholen';
   static const String currentPasswordText = 'Aktuelles Passwort';
-  static const String emailText = 'E-Mail-Adresse';
+  static const String emailText = 'E-Mail';
   static const String requiredPassword = 'Passwort';
 }
