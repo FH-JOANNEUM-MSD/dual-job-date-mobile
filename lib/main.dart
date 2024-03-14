@@ -12,15 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AnimatedSplashScreen(
-        duration: 3000,
-          splash: Image.asset("assets/images/logo.png"),
-          splashTransition: SplashTransition.slideTransition,
-          backgroundColor: const Color(0xFF5F8923),
-          nextScreen: const Login(),
-      ),
+      home: Splash()
     );
   }
 }
