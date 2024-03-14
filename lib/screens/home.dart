@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
         child: Scaffold(
             backgroundColor: Colors.white,
             body: tabs[currentIndex],
-            bottomNavigationBar:  BottomNavBar(
+            bottomNavigationBar: BottomNavBar(
               currentIndex: currentIndex,
               onTabTapped: (x) {
                 setState(() {

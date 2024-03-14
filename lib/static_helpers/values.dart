@@ -1,5 +1,4 @@
 /// Holds radii, font sizes, etc.
-
 class Values {
   // rounded corners
   static const roundBorderlineRadius = 14.0;
@@ -25,20 +24,20 @@ class Values {
   static const paddingEdgeInsetBottom = 8.0;
   static const paddingEdgeInsetBottomNoPadding = 0.0;
 
-  static double _screenWidth = 0;
+  static double screenWidth = 0;
 
   /// Returns a double representing the scaled size of the logo
   static double getScaledLogoSize(){
-    return _screenWidth * _logoMultiplicator;
+    return screenWidth * _logoMultiplicator;
   }
 
   ///Returns the screen width * 0.8 (80%)
   static double getScreenWidth80(){
-    return _screenWidth * 0.8;
+    return screenWidth * 0.8;
   }
+
   /// set the width of the screen so scaling calculations can be performed
   static void setScreenWidth(double screenWidth){
-    _screenWidth = screenWidth;
-  }
+    screenWidth = screenWidth;
 
 }

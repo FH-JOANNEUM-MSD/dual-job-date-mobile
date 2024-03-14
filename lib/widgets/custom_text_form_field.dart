@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 /// Class Representing a TextFormField as used in the App with all customizations according to UI/UX in place
 class CustomTextFormField extends StatelessWidget {
-
   //Customizable members
   final TextEditingController _controller;
   final String _hintText;
@@ -18,28 +17,38 @@ class CustomTextFormField extends StatelessWidget {
     required TextEditingController controller,
     required String hintText,
     required bool isHidden,
-  }
-  ) : _hintText = hintText, _controller = controller, _hidden = isHidden;
+  })  : _hintText = hintText,
+        _controller = controller,
+        _hidden = isHidden;
 
   ///Build the Widget
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       textAlign: TextAlign.center,
-      controller: _controller, // this comes from the constructor
+      controller: _controller,
+      // this comes from the constructor
       style: const TextStyle(fontSize: 16.0),
       decoration: InputDecoration(
-        hintText: _hintText, //this comes from the constructor
+        hintText: _hintText,
+        //this comes from the constructor
         alignLabelWithHint: true,
         filled: true,
         fillColor: Colors.white,
         contentPadding: EdgeInsets.zero,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius), // Rounded corners
+          borderRadius: BorderRadius.circular(Values.roundBorderlineRadius),
+          // Rounded corners
           borderSide: BorderSide.none, // Remove border
         ),
       ),
-      obscureText: _hidden, //Make the characters in the TextField appear as Dots
+      obscureText: _hidden,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your $_hintText';
+        }
+        return null;
+      }, //Make the characters in the TextField appear as Dots
     );
   }
 }
