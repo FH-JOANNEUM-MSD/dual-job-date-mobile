@@ -10,11 +10,22 @@ class Appointments extends StatefulWidget {
 class _AppointmentsState extends State<Appointments> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: DefaultTextStyle(
-        style: TextStyle(color: Colors.black),
-        child: Text("Appointments"),
-      ),
+    return Scaffold(
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    "Terminvereinbarung",
+                    style: TextStyle(fontSize: 30.0),
+                  ),
+                ]),
+          ),
+        ),
     );
   }
 }
