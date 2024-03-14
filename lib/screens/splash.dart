@@ -6,11 +6,21 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.white),
-      child: const Center(
-        child: DefaultTextStyle(
-            style: TextStyle(color: Colors.black, fontSize: 24),
-            child: Text("Place Holder for Splash")),
+      height: MediaQuery.of(context).size.height,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color> [
+            Color(0xFFF2FFE4),
+            Color(0xFF73B72A)
+          ]
+        ),
+      ),
+      child: Center(
+        child: Image.asset(
+          'assets/images/logo.png',
+        ),
       ),
     );
   }

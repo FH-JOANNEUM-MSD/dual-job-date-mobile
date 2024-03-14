@@ -16,12 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Values.setScreenWidth(MediaQuery.of(context).size.width);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AnimatedSplashScreen(
-        duration: 3000,
-        splash: const Splash(),
-        nextScreen: const Login(),
-      ),
-    );
+        debugShowCheckedModeBanner: false,
+        home: AnimatedSplashScreen(
+          splashIconSize: MediaQuery.of(context).size.height,
+          splash: const Splash(),
+          nextScreen: const Login(),
+        ));
   }
 }
