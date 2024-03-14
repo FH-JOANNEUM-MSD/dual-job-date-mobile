@@ -61,6 +61,7 @@ flutter:
   uses-material-design: true
 
   assets:
+     - assets/images/appointments/arrow_down_icon.png
      - assets/images/calendar_icon.png
      - assets/images/flame_icon.png
      - assets/images/group_icon.png

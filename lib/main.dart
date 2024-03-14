@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dual_job_date_mobile/screens/login.dart';
 import 'package:dual_job_date_mobile/screens/splash.dart';
+import 'package:dual_job_date_mobile/tabs/appointments.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,13 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AnimatedSplashScreen(
-        duration: 3000,
-        splash: const Splash(),
-        nextScreen: const Login(),
-      ),
+      home:Appointments(),
     );
   }
 }
