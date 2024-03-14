@@ -12,9 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Splash()
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: AnimatedSplashScreen(
+          splashIconSize: MediaQuery.of(context).size.height,
+          splash: const Splash(),
+          nextScreen: const Login(),
+        ));
   }
 }
