@@ -1,6 +1,7 @@
+import 'package:dual_job_date_mobile/screens/studentProfileUpdate.dart';
 import 'package:flutter/material.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_image.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_section.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_skill_chips.dart';
@@ -25,18 +26,48 @@ class StudentProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const chipColors = [
+      StaticColors.pinkChip,
+      StaticColors.blueChip,
+      StaticColors.greenChip,
+      StaticColors.orangeChip,
+      StaticColors.redChip,
+      StaticColors.yellowChip,
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profil'),
         actions: [
           IconButton(
             icon: Image.asset(
-            StaticStrings.edit,
-            width: 40.0,
-            height: 40.0,
+              Paths.edit,
+              width: 40.0,
+              height: 40.0,
             ),
             onPressed: () {
-              showDialog(
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => StudentProfileUpdate(
+                            name: 'Lisa',
+                            program: 'Mobile Software Development',
+                            about:
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                            skills: [
+                              'Python',
+                              'SQL',
+                              'Netzwerktechnik',
+                              'Design',
+                              'Java',
+                              ' Kotlin'
+                            ],
+                            uploadItems: [
+                              'Lebenslauf',
+                              'Zertifikate',
+                              'Weitere Dokumente'
+                            ])),
+              );
+              /*showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
@@ -62,9 +93,7 @@ class StudentProfile extends StatelessWidget {
                             style: TextStyle(color: StaticColors.primary),
                           ),
                         ),
-                      ]);
-                },
-              );
+                      ]);*/
             },
           ),
         ],
@@ -75,11 +104,22 @@ class StudentProfile extends StatelessWidget {
             const StudentProfileImage(src: 'assets/images/placeholder.png'),
             ProfileHeader(),
             const CustomDivider(color: StaticColors.primary),
-            StudentProfileSection(title: 'Über mich', content: Text(about)),
+            StudentProfileSection(
+                title: 'Über mich',
+                content: Text(
+                  about,
+                  style: const TextStyle(fontSize: 16),
+                )),
             const CustomDivider(color: StaticColors.primary),
-            SkillsSection(),
+            StudentProfileSection(
+                title: 'Kenntnisse',
+                content: StudentProfileSkillChips(
+                    colors: chipColors, skills: skills)),
             const CustomDivider(color: StaticColors.primary),
-           const StudentProfileSection(title: 'Uploads:', content: StudentProfileUpload(files: ['test'], icon: StaticStrings.document)),
+            StudentProfileSection(
+                title: 'Uploads:',
+                content: StudentProfileUpload(
+                    files: uploadItems, icon: Paths.document)),
           ],
         ),
       ),
@@ -102,36 +142,11 @@ class StudentProfile extends StatelessWidget {
           ),
           Text(
             program,
-            style: const TextStyle(fontSize: 16),
+            style: const TextStyle(
+                fontSize: 16, color: StaticColors.darkGreyTextBoxText),
           ),
         ],
       ),
     );
   }
-
-  Widget SkillsSection() {
-    const chipColors = [
-      StaticColors.pinkChip,
-      StaticColors.blueChip,
-      StaticColors.greenChip,
-      StaticColors.orangeChip,
-      StaticColors.redChip,
-      StaticColors.yellowChip,
-    ];
-
-    return StudentProfileSection(
-        title: 'Kenntnisse',
-        content: Wrap(
-          spacing: 5,
-          runSpacing: 0,
-          children: skills
-              .asMap()
-              .entries
-              .map((entry) =>
-              StudentProfileSkillChips(index: entry.key, skill: entry.value, colors: chipColors))
-              .toList(),
-        ),
-    );
-  }
-
 }

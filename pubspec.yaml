@@ -69,7 +69,10 @@ flutter:
      - assets/images/edit_icon.png
      - assets/images/placeholder.png
      - assets/images/logo.png
-
+     - assets/images/arrow_down_icon.png
+     - assets/images/trash_light_icon.png
+     - assets/images/archive_icon.png
+     - assets/images/close_icon.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
