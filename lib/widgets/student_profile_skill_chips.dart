@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///contains static skill chips as well as selectable skill chips
 class StudentProfileSkillChips extends StatelessWidget {
   final List<Color> colors;
   final List<String> skills;
@@ -9,45 +10,35 @@ class StudentProfileSkillChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color darken(Color color, double amount) {
-      assert(amount >= 0 && amount <= 1);
-      final hsl = HSLColor.fromColor(color);
-      return hsl
-          .withLightness((hsl.lightness - amount).clamp(0.0, 1.0))
-          .toColor();
-    }
-
-    // Function to create a Chip widget with color and border logic
-    Widget createChip(int index, String skill, List<Color> colors) {
-      final chipColor = colors[index % colors.length];
-      final borderColor = darken(chipColor, 0.3);
-      return Chip(
-        label: Text(skill,  style: const TextStyle(fontSize: 16),),
-        backgroundColor: colors[index % colors.length],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: borderColor, width: 1),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-      );
-    }
-
-    // Build method with Wrap widget
     return Wrap(
       spacing: 5,
       runSpacing: 0,
-      children: skills
-          .asMap()
-          .entries
-          .map((entry) => createChip(entry.key, entry.value, colors))
-          .toList(),
+      children: skills.asMap().entries.map((entry) {
+        final color = colors[entry.key % colors.length];
+        return Chip(
+          label: Text(entry.value),
+          backgroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            side: BorderSide(color: darken(color, 0.3), width: 1.0),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        );
+      }).toList(),
     );
+  }
+  Color darken(Color color, double amount) {
+    assert(amount >= 0 && amount <= 1);
+    final hsl = HSLColor.fromColor(color);
+    return hsl
+        .withLightness((hsl.lightness - amount).clamp(0.0, 1.0))
+        .toColor();
   }
 }
 
 class StudentProfileSkillChipsUpdate extends StatefulWidget {
   final List<String> skills;
-  final Color chipColor; // Define a single color for all chips
+  final Color chipColor;
 
   const StudentProfileSkillChipsUpdate({
     super.key,
@@ -60,9 +51,7 @@ class StudentProfileSkillChipsUpdate extends StatefulWidget {
       _StudentProfileSkillChipsState();
 }
 
-class _StudentProfileSkillChipsState
-    extends State<StudentProfileSkillChipsUpdate> {
-  int selectedIndex = -1; // Removed, replaced with selectedIndices
+class _StudentProfileSkillChipsState extends State<StudentProfileSkillChipsUpdate> {
   final Set<int> selectedIndices = {}; // Track selected chip indices
 
   // Function to handle chip selection
@@ -78,37 +67,27 @@ class _StudentProfileSkillChipsState
 
   @override
   Widget build(BuildContext context) {
-    // Function to create a Chip widget with color and border logic
-    Widget createChip(int index, String skill) {
-      final isSelected = selectedIndices
-          .contains(index); // Check if index is in selectedIndices
-      final borderColor = widget.chipColor;
-
-      return ChoiceChip(
-        label: Text(skill, style: const TextStyle(fontSize: 16)),
-        backgroundColor: Colors.transparent,
-        selectedColor: widget.chipColor.withOpacity(0.13),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-          side: BorderSide(color: borderColor, width: 2),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        selected: isSelected, // Use selectedIndices for selection state
-        onSelected: (bool selected) =>
-            onChipSelected(index), // Handle selection with callback
-      );
-    }
-
-    // Build method with Wrap widget
     return Wrap(
       spacing: 5,
       runSpacing: 0,
       children: widget.skills
           .asMap()
           .entries
-          .map((entry) => createChip(entry.key, entry.value))
-          .toList(),
+          .map((entry) {
+        final isSelected = selectedIndices.contains(entry.key);
+        return ChoiceChip(
+          label: Text(entry.value, style: const TextStyle(fontSize: 16.0)),
+          backgroundColor: Colors.transparent,
+          selectedColor: widget.chipColor.withOpacity(0.13),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            side: BorderSide(color: widget.chipColor, width: 2.0),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          selected: isSelected,
+          onSelected: (bool selected) => onChipSelected(entry.key),
+        );
+      }).toList(),
     );
   }
 }
-

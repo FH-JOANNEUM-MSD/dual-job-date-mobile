@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:flutter/material.dart';
 
 class CustomDivider extends StatelessWidget {
@@ -10,8 +11,8 @@ class CustomDivider extends StatelessWidget {
     return Divider(
       color: color,
       thickness: 2,
-      indent: 16,
-      endIndent: 16,
+      indent: Values.paddingVerticalProfileScreen,
+      endIndent: Values.paddingVerticalProfileScreen,
     );
   }
 }

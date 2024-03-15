@@ -31,7 +31,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       textAlign: TextAlign.center,
       controller: _controller, // this comes from the constructor
-      style: const TextStyle(fontSize: 16.0),
+      style: const TextStyle(fontSize: Values.inputTextSize),
       decoration: InputDecoration(
         hintText: _hintText, //this comes from the constructor
         alignLabelWithHint: true,

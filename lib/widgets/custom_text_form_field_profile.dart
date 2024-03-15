@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:dual_job_date_mobile/static_helpers/values.dart'; // Assuming path to Values class
+import 'package:dual_job_date_mobile/static_helpers/values.dart';
 
-/// Class Representing a TextFormField as used in the App with all customizations according to UI/UX in place
+/// Class Representing a TextFormField as used in Update Profile Screen with all customizations according to UI/UX in place
 class CustomTextFormFieldProfile extends StatefulWidget {
-  // Hint Text constants
-
-  // Customizable members
-  final TextEditingController controller;
   final String hintText;
   final Color fillColor;
   final Color textColor;
   final int? maxLength;
   final int? maxLines;
+  final String? initialValue;
 
   const CustomTextFormFieldProfile({
     super.key,
-    required this.controller,
     required this.hintText,
     this.fillColor = Colors.white,
     this.textColor = Colors.black,
     this.maxLength,
     this.maxLines,
+    this.initialValue = '',
   });
 
   @override
@@ -32,29 +29,26 @@ class _CustomTextFormFieldProfileState
     extends State<CustomTextFormFieldProfile> {
   @override
   Widget build(BuildContext context) {
+    const EdgeInsets padding = EdgeInsets.symmetric(
+      horizontal: Values.paddingHorizontalProfileScreen,
+      vertical: 5.0,
+    );
     return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        16,
-        5,
-        16,
-        5,
-      ),
+      padding: padding,
       child: TextFormField(
-        textAlign: TextAlign.left,
-        controller: widget.controller,
-        style: TextStyle(fontSize: 18.0, color: widget.textColor),
+        initialValue: widget.initialValue,
+        style: TextStyle(fontSize: Values.inputTextSize, color: widget.textColor),
         decoration: InputDecoration(
           hintText: widget.hintText,
           filled: true,
           fillColor: widget.fillColor,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          contentPadding: padding,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(Values.roundBorderlineRadius),
             borderSide: BorderSide.none,
           ),
         ),
-        maxLines: widget.maxLines,
+        maxLines: widget.maxLines ?? 1,
         maxLength: widget.maxLength,
       ),
     );

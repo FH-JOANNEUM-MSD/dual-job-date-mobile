@@ -12,6 +12,7 @@ class StaticStrings{
   static const forgotLoginButtonText = 'Passwort Vergessen?';
   static const saveButtonText = 'SPEICHERN';
   static const sendButtonText = 'ABSCHICKEN';
+  static const cancelButtonText = 'ABBRECHEN';
 
   //Text Input Fields
   static const String newPasswordText = 'Neues Passwort';
@@ -19,4 +20,15 @@ class StaticStrings{
   static const String currentPasswordText = 'Aktuelles Passwort';
   static const String emailText = 'E-Mail-Adresse';
   static const String requiredPassword = 'Passwort';
+}
+
+class StaticProfileStrings{
+  static const String profileTitle= 'Profil';
+  static const String aboutMe= 'Über mich';
+  static const String skills= 'Kenntnisse';
+  static const String documents= 'Uploads';
+  static const String updateNameHint= 'Vorname Nachname';
+  static const String updateProgramHint= 'Studiengang';
+  static const String confirmCancel= 'Bearbeiten wirklich abbrechen?';
+  static const String aboutMeHint= 'Schreibe Etwas Über Dich ...';
 }

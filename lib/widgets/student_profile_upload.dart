@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../static_helpers/paths.dart';
+import '../static_helpers/values.dart';
 
 class StudentProfileUpload extends StatelessWidget {
   final List<String> files;
   final String icon;
   final bool updateable;
+  final VoidCallback? onDelete; // Optional callback for delete action
 
-  const StudentProfileUpload(
-      {super.key, required this.files, required this.icon, this.updateable = false});
+  const StudentProfileUpload({
+    super.key,
+    required this.files,
+    required this.icon,
+    this.updateable = false,
+    this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,29 +27,30 @@ class StudentProfileUpload extends StatelessWidget {
       itemBuilder: (context, index) {
         final uploadItem = files[index];
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 3),
+          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0),
           child: Row(
-            // Use Expanded to fill remaining space
             children: [
-              Image.asset(
+              SvgPicture.asset(
                 icon,
-                width: 24.0,
-                height: 24.0,
+                width: Values.profileIconSize,
+                height: Values.profileIconSize,
               ),
               const SizedBox(width: 8.0),
               Expanded(
                 child: Text(
                   uploadItem,
-                  style: const TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: Values.inputTextSize), // Defined font size
                 ),
               ),
-              updateable
-                  ?
-              Image.asset(
-                Paths.trash,
-                width: 24.0, // Adjust width and height as needed
-                height: 24.0, // Adjust width and height as needed
-              ) : const SizedBox.shrink(),
+              if (updateable) // Check if updateable and onDelete provided
+                IconButton(
+                  icon: SvgPicture.asset(
+                    Paths.trash,
+                    width: Values.profileIconSize,
+                    height: Values.profileIconSize,
+                  ),
+                  onPressed: onDelete,
+                ),
             ],
           ),
         );

@@ -1,69 +1,71 @@
+import 'package:dual_job_date_mobile/widgets/custom_dropdown_profile.dart';
 import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
-import 'package:dual_job_date_mobile/widgets/student_profile_image.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/values.dart';
+import 'package:dual_job_date_mobile/widgets/profile_image.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_section.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_skill_chips.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_upload.dart';
 
-import '../static_helpers/values.dart';
+import '../models/student.dart';
+import '../tabs/profile.dart';
 import '../widgets/custom_form_padding.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class StudentProfileUpdate extends StatelessWidget {
-  final String name;
-  final String program;
-  final String about;
-  final List<String> skills;
-  final List<String> uploadItems;
+  final Student mockStudent;
 
-  const StudentProfileUpdate({
-    super.key,
-    required this.name,
-    required this.program,
-    required this.about,
-    required this.skills,
-    required this.uploadItems,
-  });
+  const StudentProfileUpdate({super.key, required this.mockStudent});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profil'),
+        title: const Text(StaticProfileStrings.profileTitle),
         actions: [
           IconButton(
-            icon: Image.asset(
+            icon: SvgPicture.asset(
               Paths.close,
-              width: 40.0,
-              height: 40.0,
+              width: Values.profileIconSize,
+              height: Values.profileIconSize,
             ),
             onPressed: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                      title: const Text('Abbrechen'),
-                      content: const Text('Profil wirklich abbrechen?'),
+                      title: const Text(StaticStrings.cancelButtonText),
+                      content: const Text(StaticProfileStrings.confirmCancel),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context); // Close the dialog
                           },
                           child: const Text(
-                            'Abbrechen',
+                            'Nein',
                             style: TextStyle(color: StaticColors.primary),
                           ),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context); // Close the dialog
-                            print('Edit confirmed');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Profile(),
+                              ),
+                            );
                           },
                           child: const Text(
-                            'Bearbeiten',
-                            style: TextStyle(color: StaticColors.primary),
+                            'Ja',
+                            style: TextStyle(
+                              color: StaticColors.primary,
+                              fontSize: Values.inputTextSize,
+                            ),
                           ),
                         ),
                       ]);
@@ -76,47 +78,50 @@ class StudentProfileUpdate extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const StudentProfileImage(
-              src: 'assets/images/placeholder.png',
+            ProfileImage(
+              src: mockStudent.image,
               updateable: true,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 16),
+              padding: const EdgeInsets.only(
+                  top: Values.paddingHorizontalProfileScreen,
+                  bottom: Values.paddingVerticalProfileScreen),
               child: Column(
                 children: [
                   CustomTextFormFieldProfile(
-                    controller: TextEditingController(),
-                    hintText: 'Vorname Nachname',
+                    //controller: TextEditingController(),
+                    hintText: StaticProfileStrings.updateNameHint,
+                    initialValue: mockStudent.name,
                     fillColor: StaticColors.lightGreyTextBox,
                     textColor: StaticColors.darkGreyTextBoxText,
                   ),
+                  CustomDropdownProfile(hintText: StaticProfileStrings.updateProgramHint, items: ['Mobile Software Development','Wirtschaftsinformatik'], fillColor: StaticColors.lightGreyTextBox,
+                    textColor: StaticColors.darkGreyTextBoxText, initialValue: mockStudent.program,),
                   CustomTextFormFieldProfile(
-                    controller: TextEditingController(),
-                    hintText: 'Studiengang',
-                    fillColor: StaticColors.lightGreyTextBox,
-                    textColor: StaticColors.darkGreyTextBoxText,
-                  ),
-                  CustomTextFormFieldProfile(
-                    controller: TextEditingController(),
-                    hintText: 'Schreibe Etwas Über Dich ...',
+                    hintText: StaticProfileStrings.aboutMeHint,
+                    initialValue: mockStudent.aboutMe,
                     fillColor: StaticColors.lightGreyTextBox,
                     textColor: StaticColors.darkGreyTextBoxText,
                     maxLines: 7,
                     maxLength: 500,
                   ),
                   StudentProfileSection(
-                      title: 'Kenntnisse',
+                      title: StaticProfileStrings.skills,
                       content: StudentProfileSkillChipsUpdate(
-                          chipColor: StaticColors.buttonColor, skills: skills)),
+                          chipColor: StaticColors.buttonColor,
+                          skills: mockStudent.skills)),
                   StudentProfileSection(
-                      title: 'Uploads:',
+                      title: StaticProfileStrings.documents,
                       icon: Paths.archive,
                       content: StudentProfileUpload(
-                          files: uploadItems, icon: Paths.document, updateable: true, )),
+                        files: mockStudent.uploads,
+                        icon: Paths.document,
+                        updateable: true,
+                      )),
                   CustomFormPadding(
                     topHeaderDistance: Values.paddingInsetButtonTop,
                     childWidget: CustomElevatedButton(
-                      text: 'SPEICHERN',
+                      text: StaticStrings.saveButtonText,
                       onPressed: () {
                         //TODO: implement me...
                       },
@@ -131,4 +136,3 @@ class StudentProfileUpdate extends StatelessWidget {
     );
   }
 }
-
