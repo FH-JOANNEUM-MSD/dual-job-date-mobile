@@ -28,35 +28,13 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
 
   /// constants specific to this class (and therefore not in Values.dart)
   final double _toggleSwitchPadding = 20; //FIXME this one might be useful in Values, align with Elisabeth
-  final int _currentNavBarIndex = 1;
 
 
 
-  ///Method handling the toggling between matches and likes
-  void toggleSwitch() {
-    //flip the state
-    toggleState = (toggleState == ToggleState.matches)?ToggleState.likes:ToggleState.matches;
-
-    //Change the TitleText based on the state
-    setState(() {
-      if (toggleState == ToggleState.matches) {
-        titleText = LikesAndMatchesStrings.titleMatches;
-        _companyList = mockMatchCompanies;
-      } else {
-        titleText = LikesAndMatchesStrings.titleLikes;
-        _companyList = mockLikeCompanies;
-      }
-    });
-  }
 
   /// Actually build the Screen
   @override
   Widget build(BuildContext context) {
-
-    Values.setScreenWidth(MediaQuery.of(context).size.width);
-    // define the width of the toggle switch
-    double switchWidth = Values.getScreenWidth80();
-
     return Scaffold(
       //Title (Top)
       appBar: AppBar(
@@ -90,7 +68,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
             },
             child:Padding(
               padding:  EdgeInsets.symmetric(vertical: _toggleSwitchPadding),
-              child: CustomToggleButton(switchWidth: switchWidth, toggleState: toggleState),
+              child: CustomToggleButton( toggleState: toggleState),
             ) ,
           ),
 
@@ -110,23 +88,30 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
         ),
       ),
 
-      //Navigation Bar on the Bottom
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: _currentNavBarIndex,
-        onTabTapped: (index) {
-          print("Navbar was tapped: $index"); //TODO: Replace with functionality
-        },
-      ),
     );
+  }
+
+
+  ///Method handling the toggling between matches and likes
+  void toggleSwitch() {
+    //flip the state
+    toggleState = (toggleState == ToggleState.matches)?ToggleState.likes:ToggleState.matches;
+
+    //Change the TitleText based on the state
+    setState(() {
+      if (toggleState == ToggleState.matches) {
+        titleText = LikesAndMatchesStrings.titleMatches;
+        _companyList = mockMatchCompanies;
+      } else {
+        titleText = LikesAndMatchesStrings.titleLikes;
+        _companyList = mockLikeCompanies;
+      }
+    });
   }
 }
 
 
 
-//  FIXME Just for testing will be removed afterwards
-void main() {
-  runApp(const MaterialApp(home: LikesAndMatches()));
-}
 
 /// Enum for toggle states
 enum ToggleState { likes, matches }

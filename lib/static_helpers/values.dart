@@ -33,8 +33,8 @@ class Values {
   }
 
   ///Returns the screen width * 0.8 (80%)
-  static double getScreenWidth80(){
-    return _screenWidth * 0.8;
+  static double getScreenWidth(){
+    return _screenWidth ;
   }
   /// set the width of the screen so scaling calculations can be performed
   static void setScreenWidth(double screenWidth){
