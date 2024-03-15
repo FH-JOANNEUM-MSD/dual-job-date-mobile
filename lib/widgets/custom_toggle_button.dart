@@ -1,9 +1,9 @@
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
+import 'package:dual_job_date_mobile/tabs/view_likes_and_matches.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../screens/view_likes_and_matches.dart';
 import '../static_helpers/colors.dart';
 import '../static_helpers/strings.dart';
 
@@ -48,6 +48,7 @@ class CustomToggleButton extends StatelessWidget {
 
     ///Define the width of the switch
     double switchWidth = Values.getScreenWidth() * 0.8;
+
 
     //Surrounding Container, green outline
     return Container(
@@ -134,7 +135,6 @@ class CustomToggleButton extends StatelessWidget {
                     color: StaticColors.primary,
                   )
               ),
-
             ),
           ),
         ],

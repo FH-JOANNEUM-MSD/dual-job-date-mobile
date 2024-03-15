@@ -18,7 +18,6 @@ class LikesAndMatches extends StatefulWidget {
 
 ///State Class
 class _LikesAndMatchesState extends State<LikesAndMatches> {
-
   /// This tracks to what the toggle button is set (likes or matches)
   ToggleState toggleState = ToggleState.likes;
 
@@ -27,9 +26,10 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   List<Company> _companyList = mockLikeCompanies;
 
   /// constants specific to this class (and therefore not in Values.dart)
-  final double _toggleSwitchPadding = 20; //FIXME this one might be useful in Values, align with Elisabeth
 
-
+  final double _toggleSwitchPadding =
+      20; //FIXME this one might be useful in Values, align with Elisabeth
+  final int _currentNavBarIndex = 1;
 
 
   /// Actually build the Screen
@@ -42,7 +42,8 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
 
         // Title of the Screen
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Values.paddingEdgeInsetTop),
+          padding: const EdgeInsets.symmetric(
+              horizontal: Values.paddingEdgeInsetTop),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,8 +52,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
                   titleText,
                   style: const TextStyle(fontSize: Values.screenTitleTextSize),
                 ),
-              ]
-          ),
+              ]),
         ),
       ),
 
@@ -70,8 +70,8 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
               padding:  EdgeInsets.symmetric(vertical: _toggleSwitchPadding),
               child: CustomToggleButton( toggleState: toggleState),
             ) ,
-          ),
 
+          ),
 
           //List view of all applicable Companies
           Expanded(
@@ -80,14 +80,12 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
                 itemBuilder: (context, idx) {
                   return CompanyCardWidget(
                     company: _companyList[idx],
-                   );
-                  }
-                ),
+                  );
+                }),
           ),
          ]
         ),
       ),
-
     );
   }
 
@@ -109,9 +107,6 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
     });
   }
 }
-
-
-
 
 /// Enum for toggle states
 enum ToggleState { likes, matches }
