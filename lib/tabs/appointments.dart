@@ -1,16 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
+import '../components/appointmentCard.dart';
+import '../data/mockAppointments.dart';
 import '../static_helpers/colors.dart';
-import '../static_helpers/strings.dart';
-
 import '../static_helpers/values.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_form_padding.dart';
+import '../models/appointment.dart';
 
 class Appointments extends StatefulWidget {
-  const Appointments({super.key});
+  const Appointments({Key? key}) : super(key: key);
 
   @override
   State<Appointments> createState() => _AppointmentsState();
@@ -21,6 +19,9 @@ final double heightCard = 65;
 final double marginImage = 100;
 
 class _AppointmentsState extends State<Appointments> {
+  List<Appointment> appointmentsToShow =
+      mockAppointments; // Change this based on your requirements
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +120,7 @@ class _AppointmentsState extends State<Appointments> {
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: GridView.builder(
                 shrinkWrap: true,
-                itemCount: 6,
+                itemCount: appointmentsToShow.length,
                 physics:
                     const NeverScrollableScrollPhysics(), // disable scrolling
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -129,23 +130,8 @@ class _AppointmentsState extends State<Appointments> {
                   mainAxisSpacing: 24.0,
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 10,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(borderRadiusCard),
-                      border: Border.all(
-                        color: StaticColors.primary,
-                        width: 1,
-                      ),
-                    ),
-                    child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("01.01.2025", style: TextStyle(fontSize: 20),),
-                          Text("18:00", style: TextStyle(fontSize: 20),),
-                        ]),
-                  );
+                  return AppointmentCard(
+                      appointment: appointmentsToShow[index]);
                 },
               ),
             ),
