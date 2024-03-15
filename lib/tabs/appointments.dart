@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../static_helpers/colors.dart';
 import '../static_helpers/strings.dart';
 
-import 'package:flutter/material.dart';
+import '../static_helpers/values.dart';
+import '../widgets/custom_elevated_button.dart';
+import '../widgets/custom_form_padding.dart';
 
 class Appointments extends StatefulWidget {
   const Appointments({super.key});
@@ -56,31 +59,27 @@ class _AppointmentsState extends State<Appointments> {
                   children: <Widget>[
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              const Text(
-                                "Firma xy",
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 19), //  need to have responsive values
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            const Text(
+                              "Firma xy",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w500,
                               ),
-                              InkWell(
-                                borderRadius: BorderRadius.circular(12),
-                                child: SvgPicture.asset(
-                                  CompaniesScreenStrings.filterIconPath,
-                                  color: StaticColors.black,
-                                  width: 30,
-                                  height: 30,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                            Image.asset(
+                              "assets/images/appointments/arrow_down_icon.png",
+                              color: StaticColors.primary,
+                              width: 22,
+                              height: 22,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -89,84 +88,74 @@ class _AppointmentsState extends State<Appointments> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              decoration: BoxDecoration(
+              margin: const EdgeInsets.only(
+                top: 50.0,
+                bottom: 8.0,
+                left: 20,
+                right: 20,
+              ),
+              decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     color: StaticColors.primary,
-                    width: 1,
+                    width: 2.5,
                   ),
                 ),
               ),
-              child: Align(
+              child: const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
+                  padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    "FOO",
+                    "Freie Termine",
                     style: TextStyle(
                       fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 5, // Example number of items
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          height: heightCard,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(borderRadiusCard),
-                            border: Border.all(
-                              color: StaticColors.primary,
-                              width: 1,
-                            ),
-                          ),
-                          // Placeholder for item content
-                          child: Center(
-                            child: Text("Item $index"),
-                          ),
-                        ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: 6,
+                physics:
+                    const NeverScrollableScrollPhysics(), // disable scrolling
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2.4,
+                  crossAxisSpacing: 24.0,
+                  mainAxisSpacing: 24.0,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    height: 10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(borderRadiusCard),
+                      border: Border.all(
+                        color: StaticColors.primary,
+                        width: 1,
                       ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: Container(
-                          height: heightCard,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(borderRadiusCard),
-                            border: Border.all(
-                              color: StaticColors.primary,
-                              width: 1,
-                            ),
-                          ),
-                          // Placeholder for item content
-                          child: Center(
-                            child: Text("Item ${index + 1}"),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                    ),
+                    child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("01.01.2025", style: TextStyle(fontSize: 20),),
+                          Text("18:00", style: TextStyle(fontSize: 20),),
+                        ]),
+                  );
+                },
+              ),
             ),
-            /*CustomFormPadding(
+            CustomFormPadding(
               topHeaderDistance: Values.paddingInsetButtonTop,
               childWidget: CustomElevatedButton(
                 text: "SPEICHERN",
-                onPressed: () {
-
-                },
+                onPressed: () {},
               ),
-            ),*/
+            ),
           ],
         ),
       ),

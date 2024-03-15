@@ -23,8 +23,8 @@ class CustomFormPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          Values.paddingEdgeInsetLeftRight,
-          _topHeaderDistance,
+        Values.paddingEdgeInsetLeftRight,
+        _topHeaderDistance,
           Values.paddingEdgeInsetLeftRight,
           Values.paddingEdgeInsetBottom),
       child:_childWidget //comes from constructor
