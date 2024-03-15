@@ -6,7 +6,7 @@ class Values {
 
   // image sizes
   static const logoImageWidthHeight = 200.0;
-  static const double _logoMultiplicator = 0.25;
+  static const double _logoMultiplicator = 0.3;
   static const double profileIconSize = 32.0;
 
   // font sizes
@@ -28,16 +28,20 @@ class Values {
   static const paddingVerticalProfileScreen = 16.0;
   static const paddingHorizontalProfileScreen = 16.0;
 
-  static double _screenWidth = 0;
+  static double screenWidth = 0;
 
   /// Returns a double representing the scaled size of the logo
-  static double getScaledLogoSize(){
-    return _screenWidth * _logoMultiplicator;
+  static double getScaledLogoSize() {
+    return screenWidth * _logoMultiplicator;
+  }
+
+  ///Returns the screen width * 0.8 (80%)
+  static double getScreenWidth(){
+    return screenWidth ;
   }
 
   /// set the width of the screen so scaling calculations can be performed
-  static void setScreenWidth(double screenHeight){
-    _screenWidth = screenHeight;
+  static void setScreenWidth(double s) {
+    screenWidth = s;
   }
-
 }

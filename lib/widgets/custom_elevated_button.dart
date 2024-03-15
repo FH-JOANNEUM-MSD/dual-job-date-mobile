@@ -8,8 +8,6 @@ class CustomElevatedButton extends StatelessWidget {
   final Function()? _onPressed;
   final String _text;
 
-  // Text constants
-
 
   //Other values
   static const _minimumSizeHeight = 40.0;

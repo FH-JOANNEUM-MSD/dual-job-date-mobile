@@ -1,3 +1,6 @@
+import 'package:dual_job_date_mobile/screens/forgot_password.dart';
+import 'package:dual_job_date_mobile/screens/home.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
@@ -21,7 +24,7 @@ class _LoginState extends State<Login> {
   /// controller
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  late GlobalKey<FormState> _formKey;
   ///Destructor
   @override
   void dispose() {
@@ -30,12 +33,15 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    _formKey = GlobalKey<FormState>();
+    super.initState();
+  }
+
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    Values.setScreenWidth(
-        screenWidth); //FIXME: Remove this once the custom starting class for this screen gets removed
 
     return Scaffold(
       body: Container(
@@ -50,62 +56,100 @@ class _LoginState extends State<Login> {
             ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            CustomFormPadding(
-              topHeaderDistance: Values.paddingLogoTop,
-              childWidget: Image.asset(
-                //Logo Image
-                Paths.logo,
-                height: Values.getScaledLogoSize(),
-              ),
-            ),
-            const CustomFormPadding(
-              topHeaderDistance: Values.paddingTitleTop,
-              childWidget: Text(
-                StaticStrings.login,
-                style: TextStyle(
-                  fontSize: Values.screenTitleTextSize,
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomFormPadding(
+                topHeaderDistance: Values.paddingLogoTop,
+                childWidget: Image.asset(
+                  //Logo Image
+                  Paths.logo,
+                  height: Values.getScaledLogoSize(),
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView(
-                children: [
-                  CustomFormPadding(
-                    childWidget: CustomTextFormField(
-                      controller: _emailController,
-                      hintText: StaticStrings.emailText,
-                      isHidden: false,
-                    ),
+              const CustomFormPadding(
+                topHeaderDistance: Values.paddingTitleTop,
+                childWidget: Text(
+                  StaticStrings.login,
+                  style: TextStyle(
+                    fontSize: Values.screenTitleTextSize,
                   ),
-                  CustomFormPadding(
-                    childWidget: CustomTextFormField(
-                      controller: _passwordController,
-                      hintText: StaticStrings.requiredPassword,
-                      isHidden: true,
-                    ),
-                  ),
-                  CustomFormPadding(
-                    topHeaderDistance: Values.paddingInsetButtonTop,
-                    childWidget: CustomElevatedButton(
-                      text: StaticStrings.loginButtonText,
-                      onPressed: () {
-                        //TODO: implement me...
-                      },
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      CustomFormPadding(
+                        childWidget: CustomTextFormField(
+                          controller: _emailController,
+                          hintText: StaticStrings.emailText,
+                          isHidden: false,
+                        ),
+                      ),
+                      CustomFormPadding(
+                        childWidget: CustomTextFormField(
+                          controller: _passwordController,
+                          hintText: StaticStrings.requiredPassword,
+                          isHidden: true,
+                        ),
+                      ),
+                      CustomFormPadding(
+                        topHeaderDistance: Values.paddingInsetButtonTop,
+                        childWidget: CustomElevatedButton(
+                          text: StaticStrings.loginButtonText,
+                          onPressed: () {
+                            // TODO right validation
+                            if (_formKey.currentState!.validate()) {
+                              login(context);
+                            }
+                          },
+                        ),
+                      ),
+                      CustomFormPadding(
+                          childWidget: TextButton(
+                        child: Text(
+                          StaticStrings.forgotPassword,
+                          style: TextStyle(color: Colors.grey.shade700),
+                        ),
+                        onPressed: () {
+                          navigateToForgotPassword(context);
+                        },
+                      ))
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
+
+  void navigateToForgotPassword(BuildContext context) {
+              Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) =>
+                const ForgotPassword()));
+  }
+
+  void login(BuildContext context) {
+    // TODO check if first login
+    if (0 == 0) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => const SetNewPassword()));
+    }
+    // if not first login
+    else {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => const Home()));
+    }
+  }
 }
 
-void main() {
-  runApp(const MaterialApp(home: Login()));
-}
