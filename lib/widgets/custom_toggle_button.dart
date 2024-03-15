@@ -41,12 +41,15 @@ class CustomToggleButton extends StatelessWidget {
   ///Define the height of the switch
   final double _switchHeight = 50;
 
+
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
 
-    // define the width of the toggle switch
-    double switchWidth = Values.getScreenWidth80();
+    ///Define the width of the switch
+    double switchWidth = Values.getScreenWidth() * 0.8;
+
+
     //Surrounding Container, green outline
     return Container(
       width: switchWidth,

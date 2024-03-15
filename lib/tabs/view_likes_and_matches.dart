@@ -1,7 +1,6 @@
 import 'package:dual_job_date_mobile/components/companyCard.dart';
 import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:dual_job_date_mobile/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../models/company.dart';
@@ -26,28 +25,10 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
   List<Company> _companyList = mockLikeCompanies;
 
   /// constants specific to this class (and therefore not in Values.dart)
+
   final double _toggleSwitchPadding =
       20; //FIXME this one might be useful in Values, align with Elisabeth
-  final int _currentNavBarIndex = 1;
 
-  ///Method handling the toggling between matches and likes
-  void toggleSwitch() {
-    //flip the state
-    toggleState = (toggleState == ToggleState.matches)
-        ? ToggleState.likes
-        : ToggleState.matches;
-
-    //Change the TitleText based on the state
-    setState(() {
-      if (toggleState == ToggleState.matches) {
-        titleText = LikesAndMatchesStrings.titleMatches;
-        _companyList = mockMatchCompanies;
-      } else {
-        titleText = LikesAndMatchesStrings.titleLikes;
-        _companyList = mockLikeCompanies;
-      }
-    });
-  }
 
   /// Actually build the Screen
   @override
@@ -83,10 +64,11 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
             onTap: () {
               toggleSwitch();
             },
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: _toggleSwitchPadding),
-              child: CustomToggleButton(toggleState: toggleState),
-            ),
+            child:Padding(
+              padding:  EdgeInsets.symmetric(vertical: _toggleSwitchPadding),
+              child: CustomToggleButton( toggleState: toggleState),
+            ) ,
+
           ),
 
           //List view of all applicable Companies
@@ -99,9 +81,29 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
                   );
                 }),
           ),
-        ]),
+         ]
+        ),
       ),
     );
+  }
+
+
+  ///Method handling the toggling between matches and likes
+  void toggleSwitch() {
+    //flip the state
+    toggleState = (toggleState == ToggleState.matches) ? ToggleState.likes :
+                                                          ToggleState.matches;
+
+    //Change the TitleText based on the state
+    setState(() {
+      if (toggleState == ToggleState.matches) {
+        titleText = LikesAndMatchesStrings.titleMatches;
+        _companyList = mockMatchCompanies;
+      } else {
+        titleText = LikesAndMatchesStrings.titleLikes;
+        _companyList = mockLikeCompanies;
+      }
+    });
   }
 }
 
