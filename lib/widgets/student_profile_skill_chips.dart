@@ -78,6 +78,7 @@ class _StudentProfileSkillChipsState extends State<StudentProfileSkillChipsUpdat
         return ChoiceChip(
           label: Text(entry.value, style: const TextStyle(fontSize: 16.0)),
           backgroundColor: Colors.transparent,
+          showCheckmark: false,
           selectedColor: widget.chipColor.withOpacity(0.13),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
