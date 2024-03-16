@@ -53,12 +53,8 @@ class StudentProfileUpdate extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context); // Close the dialog
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Profile(),
-                              ),
-                            );
+                            Navigator.pop(context);
+
                           },
                           child: const Text(
                             'Ja',

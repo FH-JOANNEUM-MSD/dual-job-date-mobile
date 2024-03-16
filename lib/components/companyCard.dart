@@ -66,21 +66,18 @@ class CompanyCardWidget extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(company.name,
-                              style: const TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.w500)),
-                          Text(
-                            company.field,
-                            style: const TextStyle(fontSize: 14.0),
-                          ),
-                        ]),
-                  ),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(company.name,
+                            style: const TextStyle(
+                                fontSize: 16.0, fontWeight: FontWeight.w500)),
+                        Text(
+                          company.field,
+                          style: const TextStyle(fontSize: 14.0),
+                        ),
+                      ]),
                 ),
               ),
               Column(

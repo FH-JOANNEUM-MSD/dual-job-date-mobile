@@ -1,8 +1,11 @@
 import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/widgets/swipe_ui/card_provider.dart';
+import 'package:dual_job_date_mobile/widgets/swipe_ui/custom_card_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../components/companyCard.dart';
 
@@ -51,6 +54,9 @@ class _CompaniesState extends State<Companies> {
     );
   }
 
+  //Consumer<CardProvider>(
+ // builder: (BuildContext context, CardProvider value, Widget? child) {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,12 +86,19 @@ class _CompaniesState extends State<Companies> {
                 ]),
           ),
         ),
-        body: ListView.builder(
-            itemCount: mockCompanies.length,
-            itemBuilder: (context, index) {
-              return CompanyCardWidget(
-                company: mockCompanies[index],
-              );
-            }));
+        body: Consumer<CardProvider>(
+            builder: (BuildContext context, CardProvider value, Widget? child) {
+          if (value.companies.isNotEmpty) {
+            return const CustomCardStack();
+          } else {
+            return ListView.builder(
+                itemCount: mockCompanies.length,
+                itemBuilder: (context, index) {
+                  return CompanyCardWidget(
+                    company: mockCompanies[index],
+                  );
+                });
+          }
+        }));
   }
 }
