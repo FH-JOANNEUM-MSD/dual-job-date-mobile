@@ -43,7 +43,6 @@ class _ProfileState extends State<Profile> {
               height: Values.profileIconSize,
             ),
             onPressed: () {
-              Navigator.pop(context); // Close the dialog
               Navigator.push(
                 context,
                 MaterialPageRoute(
