@@ -7,11 +7,13 @@ class Values {
   // image sizes
   static const logoImageWidthHeight = 200.0;
   static const double _logoMultiplicator = 0.3;
+  static const double profileIconSize = 32.0;
 
   // font sizes
   static const screenTitleTextSize = 24.0;
   static const buttonTextSize = 16.0;
   static const linkTextSize = 16.0;
+  static const headingTextSize = 20.0;
   static const inputTextSize = 16.0;
 
   // paddings
@@ -23,6 +25,8 @@ class Values {
   static const paddingInsetButtonTop = 20.0;
   static const paddingEdgeInsetBottom = 8.0;
   static const paddingEdgeInsetBottomNoPadding = 0.0;
+  static const paddingVerticalProfileScreen = 16.0;
+  static const paddingHorizontalProfileScreen = 16.0;
 
   static double screenWidth = 0;
 
@@ -32,8 +36,8 @@ class Values {
   }
 
   ///Returns the screen width * 0.8 (80%)
-  static double getScreenWidth80() {
-    return screenWidth * 0.8;
+  static double getScreenWidth(){
+    return screenWidth ;
   }
 
   /// set the width of the screen so scaling calculations can be performed
