@@ -36,7 +36,7 @@ class _LikesAndMatchesState extends State<LikesAndMatches> {
       //Title (Top)
       appBar: AppBar(
         scrolledUnderElevation: 0,
-
+        automaticallyImplyLeading: false,
         // Title of the Screen
         title: Padding(
           padding: const EdgeInsets.symmetric(

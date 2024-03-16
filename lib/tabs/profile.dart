@@ -33,6 +33,7 @@ class _ProfileState extends State<Profile> {
     ];
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(StaticProfileStrings.profileTitle),
         actions: [
           IconButton(
