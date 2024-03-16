@@ -7,12 +7,14 @@ import '../tabs/appointments.dart';
 
 class AppointmentCard extends StatelessWidget {
   const AppointmentCard({
-    Key? key,
+    super.key,
     required this.appointment,
-  }) : super(key: key);
+  });
 
   final Appointment appointment;
 
+
+  // TODO widget should react to user interaction
   @override
   Widget build(BuildContext context) {
     final formattedDate = DateFormat('dd.MM.yyyy').format(appointment.date); // Format date

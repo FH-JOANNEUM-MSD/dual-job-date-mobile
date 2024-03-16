@@ -1,7 +1,7 @@
 import 'package:dual_job_date_mobile/components/companyCard.dart';
 import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:dual_job_date_mobile/widgets/bottom_nav_bar.dart';
+import 'package:dual_job_date_mobile/widgets/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../models/company.dart';

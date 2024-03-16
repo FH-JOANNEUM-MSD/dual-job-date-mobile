@@ -1,3 +1,6 @@
+import 'package:dual_job_date_mobile/data/mockCompanies.dart';
+import 'package:dual_job_date_mobile/models/company.dart';
+import 'package:dual_job_date_mobile/widgets/companies_dropdown.dart';
 import 'package:flutter/material.dart';
 import '../components/appointmentCard.dart';
 import '../data/mockAppointments.dart';
@@ -8,93 +11,78 @@ import '../widgets/custom_form_padding.dart';
 import '../models/appointment.dart';
 
 class Appointments extends StatefulWidget {
-  const Appointments({Key? key}) : super(key: key);
+  const Appointments({super.key});
 
   @override
   State<Appointments> createState() => _AppointmentsState();
 }
 
-final double borderRadiusCard = 12;
-final double heightCard = 65;
-final double marginImage = 100;
+const double borderRadiusCard = 12;
+const double heightCard = 65;
+const double marginImage = 100;
 
 class _AppointmentsState extends State<Appointments> {
   List<Appointment> appointmentsToShow =
       mockAppointments; // Change this based on your requirements
 
+  final List<Company> _companies = mockCompanies;
+
+  Company? selectedCompany;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        title: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
-          child: Text(
-            "Terminvereinbarung",
-            style: TextStyle(fontSize: 30.0),
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+    return Material(
+      child: SafeArea(
+        bottom: false,
+        child: ListView(
           children: [
-            Card(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              color: Colors.white,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadiusCard),
-              ),
-              child: Container(
-                height: heightCard,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(borderRadiusCard),
-                  border: Border.all(
-                    color: StaticColors.primary,
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 19), //  need to have responsive values
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            const Text(
-                              "Firma xy",
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Image.asset(
-                              "assets/images/appointments/arrow_down_icon.png",
-                              color: StaticColors.primary,
-                              width: 22,
-                              height: 22,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+            buildScreenTitle(),
+            CompaniesDropDown(
+              companies: _companies,
+              onChanged: (value) {
+                setState(() {
+                  selectedCompany = value as Company?;
+                });
+              },
+            ),
+            buildSectionTitle(context),
+            selectedCompany == null
+                ? buildPlaceHolder()
+                : buildAppointments(),
+            Visibility(
+              visible: selectedCompany != null,
+              child: CustomFormPadding(
+                topHeaderDistance: Values.paddingInsetButtonTop,
+                childWidget: CustomElevatedButton(
+                  text: "SPEICHERN",
+                  onPressed: () {
+                    // TODO Logic implenmentieren
+                  },
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(
-                top: 50.0,
-                bottom: 8.0,
-                left: 20,
-                right: 20,
-              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding buildScreenTitle() {
+    return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10.0),
+            child: Text(
+              textAlign: TextAlign.left,
+              "Terminvereinbarung",
+              style: TextStyle(fontSize: 30.0),
+            ),
+          );
+  }
+
+  Padding buildSectionTitle(BuildContext context) {
+    return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -103,47 +91,47 @@ class _AppointmentsState extends State<Appointments> {
                   ),
                 ),
               ),
-              child: const Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "Freie Termine",
-                    style: TextStyle(
-                      fontSize: 20.0,
+              child: const Text(
+                "Freie Termine",
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+          );
+  }
+
+  Padding buildPlaceHolder() {
+    return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Center(
+                    child: Text(
+                      "Wählen Sie ein Unternehmen aus, "
+                      "um freie Termine zu sehen",
+                      style: TextStyle(fontSize: 24, color: Colors.grey),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: GridView.builder(
-                shrinkWrap: true,
-                itemCount: appointmentsToShow.length,
-                physics:
-                    const NeverScrollableScrollPhysics(), // disable scrolling
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 2.4,
-                  crossAxisSpacing: 24.0,
-                  mainAxisSpacing: 24.0,
-                ),
-                itemBuilder: (BuildContext context, int index) {
-                  return AppointmentCard(
-                      appointment: appointmentsToShow[index]);
-                },
-              ),
-            ),
-            CustomFormPadding(
-              topHeaderDistance: Values.paddingInsetButtonTop,
-              childWidget: CustomElevatedButton(
-                text: "SPEICHERN",
-                onPressed: () {},
-              ),
-            ),
-          ],
+                );
+  }
+
+  Padding buildAppointments() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      child: GridView.builder(
+        shrinkWrap: true,
+        itemCount: appointmentsToShow.length,
+        physics: const NeverScrollableScrollPhysics(),
+        // disable scrolling
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 2.4,
+          crossAxisSpacing: 24.0,
+          mainAxisSpacing: 24.0,
         ),
+        itemBuilder: (BuildContext context, int index) {
+          return AppointmentCard(appointment: appointmentsToShow[index]);
+        },
       ),
     );
   }

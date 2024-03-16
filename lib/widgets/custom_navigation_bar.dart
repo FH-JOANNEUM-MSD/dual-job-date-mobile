@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../static_helpers/paths.dart';
 
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar(
+class CustomNavigationBar extends StatelessWidget {
+  const CustomNavigationBar(
       {super.key, required this.currentIndex, required this.onTabTapped});
 
   final int currentIndex;
