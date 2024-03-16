@@ -2,7 +2,6 @@ import 'package:dual_job_date_mobile/components/companyCard.dart';
 import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
-
 import '../models/company.dart';
 import '../widgets/custom_toggle_button.dart';
 import '../static_helpers/values.dart';
