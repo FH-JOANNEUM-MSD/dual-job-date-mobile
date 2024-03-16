@@ -55,6 +55,7 @@ class _CompaniesState extends State<Companies> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           scrolledUnderElevation: 0,
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
