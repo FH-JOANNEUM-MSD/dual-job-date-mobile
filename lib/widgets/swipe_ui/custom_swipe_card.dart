@@ -27,12 +27,7 @@ class CustomSwipeCard extends StatelessWidget {
             _buildSectionTitle("Tätigkeitsbereich"),
             _buildFieldOfActivity("Backend"),
             _buildFieldOfActivity("Frontend"),
-            _buildFieldOfActivity("Datenbanken"),
-            _buildDivider(),
-            _buildSectionTitle("Techstack"),
-            _buildTech("Flutter"),
-            _buildTech("Dart"),
-            _buildTech("Firebase"),
+            _buildFieldOfActivity("Datenbanken")
           ],
         ),
       ),

@@ -54,6 +54,9 @@ class _CompaniesState extends State<Companies> {
     );
   }
 
+  //Consumer<CardProvider>(
+ // builder: (BuildContext context, CardProvider value, Widget? child) {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
