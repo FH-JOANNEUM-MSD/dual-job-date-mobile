@@ -9,6 +9,8 @@ class CustomNavigationBar extends StatelessWidget {
 
   final int currentIndex;
   final Function(int) onTabTapped;
+  final iconSizeInactive = 40.0;
+  final iconSizeActive = 40.0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class CustomNavigationBar extends StatelessWidget {
         buildNavBarItem(Paths.flame),
         buildNavBarItem(Paths.calendar),
         buildNavBarItem(Paths.profile),
+        buildNavBarItem(Paths.more),
       ],
     );
   }
@@ -33,6 +36,8 @@ class CustomNavigationBar extends StatelessWidget {
         icon: Image.asset(
           asset,
           color: StaticColors.primary,
+          width: iconSizeInactive,
+          height: iconSizeInactive
         ),
         activeIcon: Container(
           decoration: const BoxDecoration(
@@ -42,7 +47,9 @@ class CustomNavigationBar extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
               asset,
-              color: Colors.black,
+              color: StaticColors.primary,
+              width: iconSizeActive,
+              height: iconSizeActive,
             ),
           ),
         ),
