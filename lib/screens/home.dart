@@ -1,6 +1,7 @@
 import 'package:dual_job_date_mobile/tabs/appointments.dart';
 import 'package:dual_job_date_mobile/tabs/companies.dart';
 import 'package:dual_job_date_mobile/tabs/profile.dart';
+import 'package:dual_job_date_mobile/tabs/more.dart';
 import 'package:dual_job_date_mobile/tabs/view_likes_and_matches.dart';
 import 'package:dual_job_date_mobile/widgets/custom_navigation_bar.dart';
 import 'package:dual_job_date_mobile/widgets/swipe_ui/card_provider.dart';
@@ -21,7 +22,8 @@ class _HomeState extends State<Home> {
         create: (context) => CardProvider(), child: const Companies()),
     const LikesAndMatches(),
     const Appointments(),
-    const Profile()
+    const Profile(),
+    const More()
   ];
 
   @override
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: tabs.length,
         child: Scaffold(
             backgroundColor: Colors.white,
             body: tabs[currentIndex],

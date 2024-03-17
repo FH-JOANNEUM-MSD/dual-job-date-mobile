@@ -5,6 +5,8 @@ class Paths{
   static const String flame = 'assets/images/flame_icon.png';
   static const String group = 'assets/images/group_icon.png';
   static const String profile = 'assets/images/profile_icon.png';
+  static const String more = "assets/images/more.png";
+
   static const String document = "assets/images/svg/document_icon.svg";
   static const String edit = "assets/images/svg/edit_icon.svg";
   static const String arrowDown = "assets/images/svg/arrow_down_icon.svg";
