@@ -12,6 +12,7 @@ class CustomNavigationBar extends StatelessWidget {
   final iconSizeInactive = 40.0;
   final iconSizeActive = 40.0;
 
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -27,6 +28,7 @@ class CustomNavigationBar extends StatelessWidget {
         buildNavBarItem(Paths.calendar),
         buildNavBarItem(Paths.profile),
         buildNavBarItem(Paths.more),
+
       ],
     );
   }
@@ -50,6 +52,7 @@ class CustomNavigationBar extends StatelessWidget {
               color: StaticColors.primary,
               width: iconSizeActive,
               height: iconSizeActive,
+              color: Colors.black,
             ),
           ),
         ),
