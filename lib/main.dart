@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
     Values.setScreenWidth(MediaQuery.of(context).size.width);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
