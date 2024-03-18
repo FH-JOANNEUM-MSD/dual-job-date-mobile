@@ -49,7 +49,6 @@ class CustomNavigationBar extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Image.asset(
               asset,
-              color: StaticColors.primary,
               width: iconSizeActive,
               height: iconSizeActive,
               color: Colors.black,
