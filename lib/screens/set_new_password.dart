@@ -47,6 +47,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
+    Values.setScreenWidth(MediaQuery.of(context).size.height); //Please comment if necessary
     return Scaffold(
       body: Stack(
         children: [
@@ -88,49 +89,52 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                     ),
                   ),
                   Expanded(
-                      child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      children: [
-                        //Form consisting of 3 Text inputs and one button
-                        CustomFormPadding(
-                          //Current Password Text Field
-                          childWidget: CustomTextFormField(
-                            controller: _currentPasswordController,
-                            hintText: StaticStrings.currentPasswordText,
-                            isHidden: true,
+                      child: SingleChildScrollView(
+                        child: Form(
+                        key: _formKey,
+                        child: Column(
+                        children: [
+                          //Form consisting of 3 Text inputs and one button
+                          CustomFormPadding(
+                            //Current Password Text Field
+                            childWidget: CustomTextFormField(
+                              controller: _currentPasswordController,
+                              hintText: StaticStrings.currentPasswordText,
+                              isHidden: true,
+                            ),
                           ),
-                        ),
-                        CustomFormPadding(
-                          //New Password Text Field
-                          childWidget: CustomTextFormField(
-                            controller: _newPasswordController,
-                            hintText: StaticStrings.newPasswordText,
-                            isHidden: true,
+                          CustomFormPadding(
+                            //New Password Text Field
+                            childWidget: CustomTextFormField(
+                              controller: _newPasswordController,
+                              hintText: StaticStrings.newPasswordText,
+                              isHidden: true,
+                            ),
                           ),
-                        ),
-                        CustomFormPadding(
-                          //Repeat new Password Text Field
-                          childWidget: CustomTextFormField(
-                            controller: _repeatNewPasswordController,
-                            hintText: StaticStrings.repeatNewPasswordText,
-                            isHidden: true,
+                          CustomFormPadding(
+                            //Repeat new Password Text Field
+                            childWidget: CustomTextFormField(
+                              controller: _repeatNewPasswordController,
+                              hintText: StaticStrings.repeatNewPasswordText,
+                              isHidden: true,
+                            ),
                           ),
-                        ),
-                        CustomFormPadding(
-                          // Save Button
-                          childWidget: CustomElevatedButton(
-                            text: StaticStrings.saveButtonText,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                navigateToHome(context);
-                              }
-                            },
+                          CustomFormPadding(
+                            // Save Button
+                            childWidget: CustomElevatedButton(
+                              text: StaticStrings.saveButtonText,
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  navigateToHome(context);
+                                }
+                              },
+                            ),
                           ),
+                        ],
                         ),
-                      ],
-                    ),
-                  ))
+                        ),
+                      )
+                      )
                 ],
               ),
             ),
