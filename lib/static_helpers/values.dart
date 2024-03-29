@@ -6,7 +6,7 @@ class Values {
 
   // image sizes
   static const logoImageWidthHeight = 200.0;
-  static const double _logoMultiplicator = 0.3;
+  static const double _logoMultiplicator = 0.25;
   static const double profileIconSize = 32.0;
 
   // font sizes
@@ -17,7 +17,7 @@ class Values {
   static const inputTextSize = 16.0;
 
   // paddings
-  static const paddingLogoTop = 50.0;
+  static const paddingLogoTop = 0.0;
   static const paddingTitleTop = 40.0;
   static const paddingEdgeInset = 8.0;
   static const paddingEdgeInsetLeftRight = 42.0;
