@@ -19,7 +19,15 @@ class _HomeState extends State<Home> {
   late int currentIndex;
   List<Widget> tabs = [
     ChangeNotifierProvider(
-        create: (context) => CardProvider(), child: const Companies()),
+      create: (context) => CardProvider(),
+      child: Navigator(
+        onGenerateRoute: (RouteSettings settings) {
+          return MaterialPageRoute(
+            builder: (BuildContext context) => const Companies(),
+          );
+        },
+      ),
+    ),
     const LikesAndMatches(),
     const Appointments(),
     const Profile(),
@@ -38,7 +46,10 @@ class _HomeState extends State<Home> {
         length: tabs.length,
         child: Scaffold(
             backgroundColor: Colors.white,
-            body: tabs[currentIndex],
+            body: IndexedStack(
+              index: currentIndex,
+              children: tabs,
+            ),
             bottomNavigationBar: CustomNavigationBar(
               currentIndex: currentIndex,
               onTabTapped: (x) {

@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/screens/details_company.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 import '../models/company.dart';
@@ -30,7 +31,13 @@ class CompanyCardWidget extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(borderRadiusCard),
         onTap: () {
-          print('clicked');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  DetailsCompany(),
+            )
+          );
         },
         child: Container(
           height: heightCard,
