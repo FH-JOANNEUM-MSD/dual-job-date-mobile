@@ -5,6 +5,8 @@ import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button_circle.dart';
 import 'package:flutter/material.dart';
 
+import '../static_helpers/strings.dart';
+
 class DetailsCompany extends StatelessWidget {
   const DetailsCompany({super.key, required this.company});
 
@@ -46,7 +48,7 @@ class DetailsCompany extends StatelessWidget {
                             Text('${company.field}',
                                 style: AppTextStyles.title),
                             SizedBox(height: gapText),
-                            Text('${company.likes} likes',
+                            Text('${company.likes} ${DetailsCompanyStrings.likes}',
                                 style: AppTextStyles.title)
                           ],
                         ),
@@ -60,7 +62,7 @@ class DetailsCompany extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            const Text('Beschreibung:',
+                            const Text('${DetailsCompanyStrings.description}:',
                                 style: AppTextStyles.heading),
                             SizedBox(
                               height: gapText - 6,

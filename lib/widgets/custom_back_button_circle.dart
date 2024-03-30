@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../static_helpers/colors.dart';
+import '../static_helpers/paths.dart';
 import '../static_helpers/strings.dart';
 import '../static_helpers/values.dart';
 
@@ -30,7 +31,7 @@ class CustomBackButtonCircle extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           onTap: () => Navigator.of(context).pop(),
           child: SvgPicture.asset(
-            "assets/images/svg/arrow_left_light.svg",
+            Paths.arrowLeft,
             width: 30,
             height: 30,
           ),
