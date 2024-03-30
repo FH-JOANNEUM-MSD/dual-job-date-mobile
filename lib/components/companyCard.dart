@@ -32,12 +32,10 @@ class CompanyCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadiusCard),
         onTap: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  DetailsCompany(),
-            )
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsCompany(company: company),
+              ));
         },
         child: Container(
           height: heightCard,
