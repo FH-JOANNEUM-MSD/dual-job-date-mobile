@@ -28,7 +28,13 @@ class _HomeState extends State<Home> {
         },
       ),
     ),
-    const LikesAndMatches(),
+    Navigator(
+      onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+          builder: (BuildContext context) => const LikesAndMatches(),
+        );
+      },
+    ),
     const Appointments(),
     const Profile(),
     const More()
