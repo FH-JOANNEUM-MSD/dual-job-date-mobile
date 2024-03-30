@@ -5,6 +5,7 @@ class Company {
   final int likes;
   final String description;
   final String location;
+  final String titleImage;
 
   Company({
     required this.logo,
@@ -13,5 +14,6 @@ class Company {
     required this.likes,
     required this.description,
     required this.location,
+    required this.titleImage,
   });
 }
