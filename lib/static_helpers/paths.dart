@@ -12,4 +12,5 @@ class Paths{
   static const String trash = "assets/images/svg/trash_light_icon.svg";
   static const String archive = "assets/images/svg/archive_icon.svg";
   static const String close = "assets/images/svg/close_icon.svg";
+  static const String arrowLeft = "assets/images/svg/arrow_left_light.svg";
 }
