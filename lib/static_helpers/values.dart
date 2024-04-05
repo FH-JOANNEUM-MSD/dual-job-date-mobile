@@ -27,6 +27,8 @@ class Values {
   static const paddingEdgeInsetBottomNoPadding = 0.0;
   static const paddingVerticalProfileScreen = 16.0;
   static const paddingHorizontalProfileScreen = 16.0;
+  static const paddingHorizontalScreen = 16.0;
+  static const paddingVerticalScreen = 12.0;
 
   static double screenWidth = 0;
 
@@ -36,8 +38,8 @@ class Values {
   }
 
   ///Returns the screen width * 0.8 (80%)
-  static double getScreenWidth(){
-    return screenWidth ;
+  static double getScreenWidth() {
+    return screenWidth;
   }
 
   /// set the width of the screen so scaling calculations can be performed
