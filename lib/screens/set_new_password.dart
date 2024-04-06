@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/components/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
@@ -5,7 +6,6 @@ import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../static_helpers/paths.dart';
@@ -131,7 +131,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                               if(isValid == null){
                                 navigateToHome(context);
                               }else{
-                                //TODO: Tell user something went wrong
+                                Toast().showToast(context, isValid);
                               }
                             }
                           },

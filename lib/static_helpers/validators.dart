@@ -31,10 +31,8 @@ class EmailValidator{
 class PasswordValidator{
 
 
+  ///Fully validate all Fields together for a valid password change
   String? validateChange(String oldPW, String newPW, String newPasswordRepeat){
-
-
-
     if(newPW.isEmpty || oldPW.isEmpty || newPasswordRepeat.isEmpty){ //all password fields must have an input
       return StaticStrings.bothPasswordEmpty;
     }
@@ -42,18 +40,22 @@ class PasswordValidator{
       return StaticStrings.samePasswords;
     }
 
-    if(newPW != newPasswordRepeat){
+    if(newPW != newPasswordRepeat){ //repeated Password must match new password
       return StaticStrings.passwordsNotMatching;
     }
+
+    //check on the new Password again, make sure the complexity is right
     return validateNewPassword(newPW);
   }
 
+  ///Simplest validator, only looks at if the password field has an input and is longer than 8 chars
    String? validatePassword(String? password){
     if(password == null||password.isEmpty){ //Check if a password was entered
       return StaticStrings.passwordEmpty;
     }
 
-    if(password.length < 8){ // A password must be at least 8 characters long
+    // A password must be at least 8 characters long (if not, don't even bother sending it to the backend)
+    if(password.length < 8){
       return StaticStrings.passwordWrong;
     }
     return null;
