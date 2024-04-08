@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/rest/APIservice.dart';
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password.dart';
@@ -137,7 +138,7 @@ class _LoginState extends State<Login> {
     // TODO check if first login
     if (0 == 0) {
       final bool isAuthorized =
-          await Service.login(_emailController.text, _passwordController.text);
+          await APIService.login(_emailController.text, _passwordController.text);
       if (isAuthorized) {
         if (!context.mounted) return;
         Navigator.push(
