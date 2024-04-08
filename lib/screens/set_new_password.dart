@@ -7,6 +7,7 @@ import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../rest/APIservice.dart';
 import '../static_helpers/paths.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_form_padding.dart';
@@ -116,9 +117,22 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                         // Save Button
                         childWidget: CustomElevatedButton(
                           text: StaticStrings.saveButtonText,
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              navigateToHome(context);
+                              final bool isSuccess =
+                                  await APIService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
+                              if (isSuccess) {
+                                if (!context.mounted) return;
+                                navigateToHome(context);
+                              } else {
+                                if (!context.mounted) return;
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Passwort konnte nicht geändert werden.'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
                             }
                           },
                         ),
