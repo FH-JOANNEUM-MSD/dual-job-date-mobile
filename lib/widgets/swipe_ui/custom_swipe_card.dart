@@ -75,15 +75,15 @@ class CustomSwipeCard extends StatelessWidget {
                       ),
                     ]),
               ),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 16, 16, 16),
+                    padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
                     //TODO replace true and false with a switch: liked, disliked, neutral
                     child: Icon(
-                        false ? CupertinoIcons.heart_solid : Icons.cancel,
-                        color: false ? StaticColors.primary : Colors.redAccent),
+                        true ? Icons.thumb_up : Icons.thumb_down_outlined,
+                        color: true ? StaticColors.primary : Colors.grey[500]),
                   ),
                 ],
               )
