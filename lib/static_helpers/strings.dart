@@ -24,10 +24,10 @@ static const String emailEmpty = 'Bitte gib eine E-Mail-Adresse ein.';
 static const String emailInvalid = 'Die eigegebene E-Mail-Adresse ist ungültig.';
 static const String bothPasswordEmpty = 'Bitte gib dein altes und ein neues Passwort ein.';
 static const String passwordEmpty = 'Bitte gib dein Passwort ein.';
-static const String passwordInvalid = 'Password zu schwach. Bitte beachte die Passwortregeln.';
+static const String passwordInvalid = 'Passwort zu schwach.';
 static const String passwordWrong = 'Das eingegebene Passwort ist falsch.';
 static const String samePasswords = 'Das neue Passwort muss vom Alten abweichen.';
-static const String passwordsNotMatching = "Die eingegebenen Passwörter stimmen nicht überein.";
+static const String passwordsNotMatching = "Passwörter stimmen nicht überein.";
 
 }
 
