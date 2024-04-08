@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController _controller;
   final String _hintText;
   final bool _hidden;
+  final String? Function(String?)? _validator;
 
   /// Constructor for the Text form field
   /// * [_controller]: A TextEditingController for the CustomTextFormField
@@ -17,9 +18,13 @@ class CustomTextFormField extends StatelessWidget {
     required TextEditingController controller,
     required String hintText,
     required bool isHidden,
+    String? Function(String?)? validator
   })  : _hintText = hintText,
         _controller = controller,
-        _hidden = isHidden;
+        _hidden = isHidden,
+        _validator = validator;
+
+
 
   ///Build the Widget
   @override
@@ -43,12 +48,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
       ),
       obscureText: _hidden,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your $_hintText';
-        }
-        return null;
-      }, //Make the characters in the TextField appear as Dots
+      validator: _validator, //Make the characters in the TextField appear as Dots
     );
   }
 }

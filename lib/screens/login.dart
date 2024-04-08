@@ -4,6 +4,7 @@ import 'package:dual_job_date_mobile/screens/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
@@ -86,6 +87,7 @@ class _LoginState extends State<Login> {
                       controller: _emailController,
                       hintText: StaticStrings.emailText,
                       isHidden: false,
+                      validator: EmailValidator().validate,
                     ),
                   ),
                   CustomFormPadding(
@@ -93,6 +95,7 @@ class _LoginState extends State<Login> {
                       controller: _passwordController,
                       hintText: StaticStrings.requiredPassword,
                       isHidden: true,
+                      validator: PasswordValidator().validatePassword,
                     ),
                   ),
                   CustomFormPadding(

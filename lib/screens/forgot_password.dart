@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_text_form_field.dart';
@@ -5,9 +6,6 @@ import '../widgets/custom_text_form_field.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
-import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import '../static_helpers/paths.dart';
 import '../static_helpers/strings.dart';
@@ -89,13 +87,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               controller: _emailController,
                               hintText: StaticStrings.emailText,
                               isHidden: false,
+                              validator: EmailValidator().validate,
                             ),
                           ),
                           CustomFormPadding(
                             childWidget: CustomElevatedButton(
                               text: StaticStrings.sendButtonText,
                               onPressed: () {
-                                //TODO: validation
                                 if (_formKey.currentState!.validate()) {
                                   //TODO: Navigation
                                 }

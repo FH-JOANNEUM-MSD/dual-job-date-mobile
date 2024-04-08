@@ -1,10 +1,11 @@
+import 'package:dual_job_date_mobile/components/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../static_helpers/paths.dart';
@@ -94,6 +95,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           controller: _currentPasswordController,
                           hintText: StaticStrings.currentPasswordText,
                           isHidden: true,
+                          validator: PasswordValidator().validatePassword,
                         ),
                       ),
                       CustomFormPadding(
@@ -102,6 +104,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           controller: _newPasswordController,
                           hintText: StaticStrings.newPasswordText,
                           isHidden: true,
+                          validator: PasswordValidator().validateNewPassword,
                         ),
                       ),
                       CustomFormPadding(
@@ -110,6 +113,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           controller: _repeatNewPasswordController,
                           hintText: StaticStrings.repeatNewPasswordText,
                           isHidden: true,
+                          validator: PasswordValidator().validatePassword,
                         ),
                       ),
                       CustomFormPadding(
@@ -118,7 +122,18 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           text: StaticStrings.saveButtonText,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              navigateToHome(context);
+                              //Extra Validation if passwords are different etc...
+                              String? isValid = PasswordValidator()
+                                  .validateChange(_currentPasswordController.text,
+                                  _newPasswordController.text,
+                                  _repeatNewPasswordController.text);
+
+                              if(isValid == null){
+                                navigateToHome(context);
+                              }else{
+                                //TODO: This doesn't look too good, review this.
+                                Toast().showToast(context, isValid);
+                              }
                             }
                           },
                         ),
