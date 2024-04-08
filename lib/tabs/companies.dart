@@ -55,7 +55,7 @@ class _CompaniesState extends State<Companies> {
   }
 
   //Consumer<CardProvider>(
- // builder: (BuildContext context, CardProvider value, Widget? child) {
+  // builder: (BuildContext context, CardProvider value, Widget? child) {
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,6 @@ class _CompaniesState extends State<Companies> {
                     borderRadius: BorderRadius.circular(12),
                     child: SvgPicture.asset(
                       CompaniesScreenStrings.filterIconPath,
-                      color: StaticColors.black,
                       width: 30,
                       height: 30,
                     ),
@@ -88,17 +87,13 @@ class _CompaniesState extends State<Companies> {
         ),
         body: Consumer<CardProvider>(
             builder: (BuildContext context, CardProvider value, Widget? child) {
-          if (value.companies.isNotEmpty) {
-            return const CustomCardStack();
-          } else {
-            return ListView.builder(
-                itemCount: mockCompanies.length,
-                itemBuilder: (context, index) {
-                  return CompanyCardWidget(
-                    company: mockCompanies[index],
-                  );
-                });
-          }
+          return ListView.builder(
+              itemCount: mockCompanies.length,
+              itemBuilder: (context, index) {
+                return CompanyCardWidget(
+                  company: mockCompanies[index],
+                );
+              });
         }));
   }
 }
