@@ -1,0 +1,90 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.2' 
+
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+            ./.dart_tool
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml', '**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+      
+  deploy:
+    if: github.event_name == 'release' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Java to compile Android project
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.2'
+      
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+            ./.dart_tool
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml', '**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-
+            
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Create the Keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > $RUNNER_TEMP/msd-upload.jks
+
+      - name: Build Android app
+        run: flutter build appbundle --release
+
+      - name: Sign Android App Bundle
+        run: jarsigner -keystore $RUNNER_TEMP/msd-upload.jks -storepass ${{ secrets.STORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -storetype PKCS12 -sigalg SHA256withRSA -digestalg SHA-256 -signedjar build/app/outputs/bundle/release/app-release-signed.aab build/app/outputs/bundle/release/*.aab msd-upload
+
+      - name: Archive Android app
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-aab-signed
+          path: build/app/outputs/bundle/release/app-release-signed.aab
