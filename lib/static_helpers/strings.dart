@@ -29,6 +29,11 @@ class CompaniesScreenStrings {
   static const String likes = "likes";
 }
 
+class DetailsCompanyStrings {
+  static const String description = "Beschreibung";
+  static const String likes = "likes";
+}
+
 class LikesAndMatchesStrings{
   static const titleLikes = "Deine Likes";
   static const titleMatches = "Deine Matches";
