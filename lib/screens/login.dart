@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/rest/service.dart';
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password.dart';
@@ -25,6 +26,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   late GlobalKey<FormState> _formKey;
+
   ///Destructor
   @override
   void dispose() {
@@ -42,7 +44,6 @@ class _LoginState extends State<Login> {
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -101,7 +102,6 @@ class _LoginState extends State<Login> {
                         childWidget: CustomElevatedButton(
                           text: StaticStrings.loginButtonText,
                           onPressed: () {
-                            // TODO right validation
                             if (_formKey.currentState!.validate()) {
                               login(context);
                             }
@@ -130,20 +130,32 @@ class _LoginState extends State<Login> {
   }
 
   void navigateToForgotPassword(BuildContext context) {
-              Navigator.push(
+    Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) =>
-                const ForgotPassword()));
+            builder: (BuildContext context) => const ForgotPassword()));
   }
 
-  void login(BuildContext context) {
+  Future<void> login(BuildContext context) async {
     // TODO check if first login
     if (0 == 0) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const SetNewPassword()));
+      final bool isAuthorized =
+          await Service.login(_emailController.text, _passwordController.text);
+      if (isAuthorized) {
+        if (!context.mounted) return;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const SetNewPassword()));
+      } else {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login war nicht erfolgreich.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
     // if not first login
     else {
@@ -152,4 +164,3 @@ class _LoginState extends State<Login> {
     }
   }
 }
-
