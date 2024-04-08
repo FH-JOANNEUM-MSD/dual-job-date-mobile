@@ -4,8 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 ///Test the Email address validation
 void main(){
-  ///Tests that should receive true from the email validator
+  ///Tests that should receive null from the email validator
   group("Good Case Tests", () {
+    //Example Student E-Mail address
    test('FH Student mail', (){
      String testmail = "student.msd@edu.fh-jonneum.at";
      String? result = EmailValidator().validate(testmail);
@@ -14,6 +15,7 @@ void main(){
 
    });
 
+   //E-Mail address formatted like a common company mail address
    test("Company Email Address", (){
 
      String testmail = "first.second@company.com";
@@ -23,6 +25,7 @@ void main(){
 
    });
 
+   //E-Mail address consisting of three parts
    test("Basic Three Part Email Address", (){
 
      String testmail = "first.second.third@gmail.de";
@@ -32,6 +35,7 @@ void main(){
 
    });
 
+   //Most basic possible e-mail address
    test("Simplest possible E-Mail Address", (){
 
      String testmail = "first@gmail.de";
@@ -59,15 +63,16 @@ void main(){
    });
   });
 
-  ///Tests that should receive false from the Email validator
+  ///Tests that should receive some error message from the Email validator
 group("Bad Case Tests", () {
+  //No Email-Address was entered
   test("Empty E-Mail", (){
     String testmail = "";
     String? result = EmailValidator().validate(testmail);
     print("No E-Mail passed to validator: $result");
     expect(result, StaticStrings.emailEmpty);
   });
-
+//Only the first part of an e-mail address was entered
   test("missing second half", (){
     String testmail = "student.msd";
     String? result = EmailValidator().validate(testmail);
@@ -75,6 +80,7 @@ group("Bad Case Tests", () {
     expect(result, StaticStrings.emailInvalid);
   });
 
+  //Only the second half of an e-mail address was entered
   test("Missing first half", (){
     String testmail = "@fh-jonneum.at";
     String? result = EmailValidator().validate(testmail);
@@ -82,6 +88,7 @@ group("Bad Case Tests", () {
     expect(result, StaticStrings.emailInvalid);
   });
 
+  //the .countrycode is missing (like .at, .com, etc)
   test("Missing .com", (){
     String testmail = "student.msd@fh-jonneum";
     String? result = EmailValidator().validate(testmail);
@@ -89,6 +96,7 @@ group("Bad Case Tests", () {
     expect(result, StaticStrings.emailInvalid);
   });
 
+  //the . is present but the country code is missing (like at, com, etc)
   test("Missing com", (){
     String testmail = "student.msd@fh-jonneum.";
     String? result = EmailValidator().validate(testmail);
