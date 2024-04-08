@@ -131,6 +131,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                               if(isValid == null){
                                 navigateToHome(context);
                               }else{
+                                //TODO: This doesn't look too good, review this.
                                 Toast().showToast(context, isValid);
                               }
                             }

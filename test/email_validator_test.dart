@@ -41,6 +41,22 @@ void main(){
 
    });
 
+   //Tests the two example e-mail addresses given by the backend team
+   test("Test Example E-Mails from backend", (){
+     List<String> emails = [
+       'student1@fh-jonneum.at',
+       'student2@fh-joanneum.at'
+     ];
+
+     for(String email in emails){
+       String? result = EmailValidator().validate(email);
+
+       print('$email: $result');
+
+       expect(result, null);
+     }
+
+   });
   });
 
   ///Tests that should receive false from the Email validator

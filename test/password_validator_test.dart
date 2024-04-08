@@ -28,7 +28,8 @@ void main(){
         'Test_1234',
         'MyPassword1!',
         'Super*Safe_1234',
-        r'Q$onkM3kC3$SFX'
+        r'Q$onkM3kC3$SFX',
+        'Student!1'
       ];
 
       for(String password in passwords){
