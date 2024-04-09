@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
@@ -44,7 +45,7 @@ class _CustomDropdownProfileState extends State<CustomDropdownProfile> {
         value: _selectedValue,
         hint: Text(widget.hintText,
             style: TextStyle(
-                fontSize: Values.inputTextSize, color: widget.textColor)),
+                fontSize: Values.inputTextSize, color: widget.textColor, fontFamily: StaticStrings.font,)),
         decoration: InputDecoration(
           filled: true,
           fillColor: widget.fillColor,
@@ -64,7 +65,7 @@ class _CustomDropdownProfileState extends State<CustomDropdownProfile> {
             value: item,
             child: Text(item,
                 style: TextStyle(
-                    fontSize: Values.inputTextSize, color: widget.textColor)),
+                    fontSize: Values.inputTextSize, color: widget.textColor, fontFamily: StaticStrings.font,)),
           );
         }).toList(),
         onChanged: (String? value) {

@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 
@@ -37,7 +38,7 @@ class _CustomTextFormFieldProfileState
       padding: padding,
       child: TextFormField(
         initialValue: widget.initialValue,
-        style: TextStyle(fontSize: Values.inputTextSize, color: widget.textColor),
+        style: TextStyle(fontSize: Values.inputTextSize, color: widget.textColor, fontFamily: StaticStrings.font,),
         decoration: InputDecoration(
           hintText: widget.hintText,
           filled: true,

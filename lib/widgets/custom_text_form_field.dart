@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class CustomTextFormField extends StatelessWidget {
       textAlign: TextAlign.center,
       controller: _controller,
       // this comes from the constructor
-      style: const TextStyle(fontSize: 16.0),
+      style: const TextStyle(fontSize: 16.0, fontFamily: StaticStrings.font,),
       decoration: InputDecoration(
         hintText: _hintText,
         //this comes from the constructor

@@ -47,7 +47,7 @@ class StudentProfileUpdate extends StatelessWidget {
                           },
                           child: const Text(
                             'Nein',
-                            style: TextStyle(color: StaticColors.primary),
+                            style: TextStyle(color: StaticColors.primary, fontFamily: StaticStrings.font,),
                           ),
                         ),
                         TextButton(
@@ -59,6 +59,7 @@ class StudentProfileUpdate extends StatelessWidget {
                           child: const Text(
                             'Ja',
                             style: TextStyle(
+                              fontFamily: StaticStrings.font,
                               color: StaticColors.primary,
                               fontSize: Values.inputTextSize,
                             ),

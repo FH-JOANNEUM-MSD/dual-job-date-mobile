@@ -1,4 +1,7 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
+
+import '../static_helpers/values.dart';
 
 ///contains static skill chips as well as selectable skill chips
 class StudentProfileSkillChips extends StatelessWidget {
@@ -76,7 +79,7 @@ class _StudentProfileSkillChipsState extends State<StudentProfileSkillChipsUpdat
           .map((entry) {
         final isSelected = selectedIndices.contains(entry.key);
         return ChoiceChip(
-          label: Text(entry.value, style: const TextStyle(fontSize: 16.0)),
+          label: Text(entry.value, style: const TextStyle(fontSize: 16.0, fontFamily: StaticStrings.font,)),
           backgroundColor: Colors.transparent,
           showCheckmark: false,
           selectedColor: widget.chipColor.withOpacity(0.13),

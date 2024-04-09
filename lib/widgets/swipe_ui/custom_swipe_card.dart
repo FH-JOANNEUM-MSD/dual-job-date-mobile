@@ -1,5 +1,6 @@
 import 'package:dual_job_date_mobile/models/company.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwipeCard extends StatelessWidget {
@@ -49,7 +50,7 @@ class CustomSwipeCard extends StatelessWidget {
             children: [
               Text(
                 company.name,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: StaticStrings.font,),
               )
             ],
           ),
@@ -102,7 +103,7 @@ class CustomSwipeCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: StaticStrings.font,),
       ),
     );
   }

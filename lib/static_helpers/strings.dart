@@ -6,6 +6,9 @@ static const resetPassword = 'Passwort zurücksetzen';
 static const login = 'Login';
 static const forgotPassword = 'Passwort Vergessen?';
 
+//fonts
+static const font = 'Parka';
+
   //UI Elements Text
   //Buttons
   static const loginButtonText = 'LOGIN';

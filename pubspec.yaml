@@ -116,3 +116,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Parka
+      fonts:
+        - asset: assets/fonts/Parka-Bold.otf
+        - asset: assets/fonts/Parka-Medium.otf
+        - asset: assets/fonts/Parka-Regular.otf

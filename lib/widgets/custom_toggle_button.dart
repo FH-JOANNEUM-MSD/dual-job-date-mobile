@@ -87,6 +87,7 @@ class CustomToggleButton extends StatelessWidget {
                     style: TextStyle(
                         fontSize: Values.buttonTextSize,
                         color: StaticColors.black,
+                        fontFamily: StaticStrings.font,
                     ),
                   ),
                 ),
@@ -101,7 +102,8 @@ class CustomToggleButton extends StatelessWidget {
                     LikesAndMatchesStrings.matches,
                     style: TextStyle(
                         fontSize: Values.buttonTextSize,
-                        color: StaticColors.black
+                        color: StaticColors.black,
+                        fontFamily: StaticStrings.font,
                     ),
                   ),
                 )

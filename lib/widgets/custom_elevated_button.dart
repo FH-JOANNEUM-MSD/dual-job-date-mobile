@@ -1,4 +1,5 @@
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:flutter/material.dart';
 
@@ -32,12 +33,12 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(Values.fullRoundedBox),
         ),
         backgroundColor: StaticColors.buttonColor,
-        textStyle: const TextStyle(color: Colors.white),
+        textStyle: const TextStyle(color: Colors.white, fontFamily: StaticStrings.font,),
         minimumSize: const Size(double.infinity, _minimumSizeHeight),
       ),
       child:  Text(
         _text, //comes from constructor
-        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize),
+        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize, fontFamily: StaticStrings.font,),
       ),
     );
   }

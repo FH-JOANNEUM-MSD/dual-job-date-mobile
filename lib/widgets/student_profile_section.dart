@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -29,7 +30,7 @@ class StudentProfileSection extends StatelessWidget {
               Expanded( // Ensures title takes available space
                 child: Text(
                   title,
-                  style: const TextStyle(fontSize: Values.inputTextSize, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: Values.inputTextSize, fontWeight: FontWeight.bold, fontFamily: StaticStrings.font,),
                 ),
               ),
               if (icon != null)

@@ -78,6 +78,7 @@ class _LoginState extends State<Login> {
                     childWidget: Text(
                       StaticStrings.login,
                       style: TextStyle(
+                        fontFamily: StaticStrings.font,
                         fontSize: Values.screenTitleTextSize,
                       ),
                     ),
@@ -114,7 +115,7 @@ class _LoginState extends State<Login> {
                       childWidget: TextButton(
                     child: Text(
                       StaticStrings.forgotPassword,
-                      style: TextStyle(color: Colors.grey.shade700),
+                      style: TextStyle(color: Colors.grey.shade700, fontFamily: StaticStrings.font,),
                     ),
                     onPressed: () {
                       navigateToForgotPassword(context);
