@@ -1,10 +1,11 @@
+import 'package:dual_job_date_mobile/components/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../rest/APIservice.dart';
@@ -95,6 +96,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           controller: _currentPasswordController,
                           hintText: StaticStrings.currentPasswordText,
                           isHidden: true,
+                          validator: PasswordValidator().validatePassword,
                         ),
                       ),
                       CustomFormPadding(
@@ -103,6 +105,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           controller: _newPasswordController,
                           hintText: StaticStrings.newPasswordText,
                           isHidden: true,
+                          validator: PasswordValidator().validateNewPassword,
                         ),
                       ),
                       CustomFormPadding(
@@ -111,6 +114,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           controller: _repeatNewPasswordController,
                           hintText: StaticStrings.repeatNewPasswordText,
                           isHidden: true,
+                          validator: PasswordValidator().validatePassword,
                         ),
                       ),
                       CustomFormPadding(
@@ -119,19 +123,30 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           text: StaticStrings.saveButtonText,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
-                              final bool isSuccess =
-                                  await APIService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
-                              if (isSuccess) {
-                                if (!context.mounted) return;
-                                navigateToHome(context);
-                              } else {
-                                if (!context.mounted) return;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Passwort konnte nicht geändert werden.'),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
+                              //Extra Validation if passwords are different etc...
+                              String? isValid = PasswordValidator()
+                                  .validateChange(_currentPasswordController.text,
+                                  _newPasswordController.text,
+                                  _repeatNewPasswordController.text);
+
+                              if(isValid == null){
+                                final bool isSuccess =
+                                    await APIService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
+                                if (isSuccess) {
+                                  if (!context.mounted) return;
+                                  navigateToHome(context);
+                                } else {
+                                  if (!context.mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Passwort konnte nicht geändert werden.'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }else{
+                                //TODO: This doesn't look too good, review this.
+                                Toast().showToast(context, isValid);
                               }
                             }
                           },
