@@ -1,5 +1,6 @@
 import 'package:dual_job_date_mobile/components/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
+import 'package:dual_job_date_mobile/services/user_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
@@ -120,7 +121,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                         // Save Button
                         childWidget: CustomElevatedButton(
                           text: StaticStrings.saveButtonText,
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               //Extra Validation if passwords are different etc...
                               String? isValid = PasswordValidator()
@@ -129,7 +130,20 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                                   _repeatNewPasswordController.text);
 
                               if(isValid == null){
-                                navigateToHome(context);
+                                final bool isSuccess =
+                                    await UserService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
+                                if (isSuccess) {
+                                  if (!context.mounted) return;
+                                  navigateToHome(context);
+                                } else {
+                                  if (!context.mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Passwort konnte nicht geändert werden.'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
                               }else{
                                 //TODO: This doesn't look too good, review this.
                                 Toast().showToast(context, isValid);

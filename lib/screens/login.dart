@@ -1,6 +1,7 @@
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password.dart';
+import 'package:dual_job_date_mobile/services/user_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
@@ -136,13 +137,26 @@ class _LoginState extends State<Login> {
             builder: (BuildContext context) => const ForgotPassword()));
   }
 
-  void login(BuildContext context) {
+  Future<void> login(BuildContext context) async {
     // TODO check if first login
     if (0 == 0) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (BuildContext context) => const SetNewPassword()));
+      final bool isAuthorized =
+          await UserService.login(_emailController.text, _passwordController.text);
+      if (isAuthorized) {
+        if (!context.mounted) return;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const SetNewPassword()));
+      } else {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login war nicht erfolgreich.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
     // if not first login
     else {
