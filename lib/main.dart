@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         home: AnimatedSplashScreen(
           splashIconSize: MediaQuery.of(context).size.height,
           splash: const Splash(),
-          nextScreen: const Home(),
+          nextScreen: const Login(),
         ));
   }
 }
