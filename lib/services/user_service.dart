@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class APIService {
-  static const String baseUrl = 'http://10.0.2.2:8000';
+class UserService {
+  static const String baseUrl = 'http://localhost:8000/';
   static final storage = FlutterSecureStorage();
 
   static Future<bool> login(String email, String password) async {
@@ -21,7 +20,7 @@ class APIService {
               'password': password,
             }),
           )
-          .timeout(const Duration(seconds: 2));
+          .timeout(const Duration(seconds: 3600));
 
       if (response.statusCode == 200) {
         Map<String, dynamic> decodedResponse = jsonDecode(response.body);
