@@ -1,6 +1,6 @@
 import 'package:dual_job_date_mobile/components/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
-import 'package:dual_job_date_mobile/services/user_service.dart';
+import 'package:dual_job_date_mobile/services/newPasswordService.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
@@ -131,7 +131,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
 
                               if(isValid == null){
                                 final bool isSuccess =
-                                    await UserService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
+                                    await NewPasswordService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
                                 if (isSuccess) {
                                   if (!context.mounted) return;
                                   navigateToHome(context);
