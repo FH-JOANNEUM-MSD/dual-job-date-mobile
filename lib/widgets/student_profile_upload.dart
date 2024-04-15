@@ -40,7 +40,7 @@ class StudentProfileUpload extends StatelessWidget {
               Expanded(
                 child: Text(
                   uploadItem,
-                  style: const TextStyle(fontSize: Values.inputTextSize, fontFamily: StaticStrings.font,), // Defined font size
+                  style: const TextStyle(fontSize: Values.inputTextSize,), // Defined font size
                 ),
               ),
               if (updateable) // Check if updateable and onDelete provided

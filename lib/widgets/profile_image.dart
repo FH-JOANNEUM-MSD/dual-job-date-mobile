@@ -60,7 +60,6 @@ class ProfileImage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: Values.inputTextSize,
-                          fontFamily: StaticStrings.font,
                         ),
                       ),
                       SizedBox(height: 5.0),
@@ -69,7 +68,6 @@ class ProfileImage extends StatelessWidget {
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: Values.inputTextSize,
-                          fontFamily: StaticStrings.font,
                         ),
                       ),
                     ],

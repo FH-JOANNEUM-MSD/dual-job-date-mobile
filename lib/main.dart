@@ -2,6 +2,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dual_job_date_mobile/screens/login.dart';
 import 'package:dual_job_date_mobile/screens/splash.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
     Values.setScreenWidth(MediaQuery.of(context).size.width);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: StaticStrings.font,
+        ),
         home: AnimatedSplashScreen(
           splashIconSize: MediaQuery.of(context).size.height,
           splash: const Splash(),

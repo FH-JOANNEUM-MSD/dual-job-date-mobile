@@ -30,7 +30,7 @@ class StudentProfileSection extends StatelessWidget {
               Expanded( // Ensures title takes available space
                 child: Text(
                   title,
-                  style: const TextStyle(fontSize: Values.inputTextSize, fontWeight: FontWeight.bold, fontFamily: StaticStrings.font,),
+                  style: const TextStyle(fontSize: Values.inputTextSize, fontWeight: FontWeight.bold,),
                 ),
               ),
               if (icon != null)

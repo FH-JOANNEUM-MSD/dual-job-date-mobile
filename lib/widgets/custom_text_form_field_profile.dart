@@ -38,7 +38,7 @@ class _CustomTextFormFieldProfileState
       padding: padding,
       child: TextFormField(
         initialValue: widget.initialValue,
-        style: TextStyle(fontSize: Values.inputTextSize, color: widget.textColor, fontFamily: StaticStrings.font,),
+        style: TextStyle(fontSize: Values.inputTextSize, color: widget.textColor),
         decoration: InputDecoration(
           hintText: widget.hintText,
           filled: true,

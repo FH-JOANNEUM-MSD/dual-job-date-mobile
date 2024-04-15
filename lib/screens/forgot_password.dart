@@ -73,7 +73,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       StaticStrings.resetPassword,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontFamily: StaticStrings.font,
                         fontSize: Values.screenTitleTextSize,
                       ),
                     ),

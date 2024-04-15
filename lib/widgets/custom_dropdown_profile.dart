@@ -45,7 +45,7 @@ class _CustomDropdownProfileState extends State<CustomDropdownProfile> {
         value: _selectedValue,
         hint: Text(widget.hintText,
             style: TextStyle(
-                fontSize: Values.inputTextSize, color: widget.textColor, fontFamily: StaticStrings.font,)),
+                fontSize: Values.inputTextSize, color: widget.textColor,)),
         decoration: InputDecoration(
           filled: true,
           fillColor: widget.fillColor,
@@ -65,7 +65,7 @@ class _CustomDropdownProfileState extends State<CustomDropdownProfile> {
             value: item,
             child: Text(item,
                 style: TextStyle(
-                    fontSize: Values.inputTextSize, color: widget.textColor, fontFamily: StaticStrings.font,)),
+                    fontSize: Values.inputTextSize, color: widget.textColor,)),
           );
         }).toList(),
         onChanged: (String? value) {

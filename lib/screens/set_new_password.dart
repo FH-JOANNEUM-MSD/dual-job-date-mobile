@@ -85,7 +85,6 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                         StaticStrings.changePassword,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontFamily: StaticStrings.font,
                           fontSize: Values.screenTitleTextSize,
                         ),
                       ),

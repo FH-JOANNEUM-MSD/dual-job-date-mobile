@@ -50,7 +50,7 @@ class CustomSwipeCard extends StatelessWidget {
             children: [
               Text(
                 company.name,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: StaticStrings.font,),
+                style: const TextStyle(fontWeight: FontWeight.bold,),
               )
             ],
           ),
@@ -103,7 +103,7 @@ class CustomSwipeCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: Text(
         title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: StaticStrings.font,),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,),
       ),
     );
   }

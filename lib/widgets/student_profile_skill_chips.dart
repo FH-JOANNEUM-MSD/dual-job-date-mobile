@@ -79,7 +79,7 @@ class _StudentProfileSkillChipsState extends State<StudentProfileSkillChipsUpdat
           .map((entry) {
         final isSelected = selectedIndices.contains(entry.key);
         return ChoiceChip(
-          label: Text(entry.value, style: const TextStyle(fontSize: 16.0, fontFamily: StaticStrings.font,)),
+          label: Text(entry.value, style: const TextStyle(fontSize: 16.0,)),
           backgroundColor: Colors.transparent,
           showCheckmark: false,
           selectedColor: widget.chipColor.withOpacity(0.13),

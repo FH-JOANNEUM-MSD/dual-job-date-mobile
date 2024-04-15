@@ -87,7 +87,6 @@ class CustomToggleButton extends StatelessWidget {
                     style: TextStyle(
                         fontSize: Values.buttonTextSize,
                         color: StaticColors.black,
-                        fontFamily: StaticStrings.font,
                     ),
                   ),
                 ),
@@ -103,7 +102,6 @@ class CustomToggleButton extends StatelessWidget {
                     style: TextStyle(
                         fontSize: Values.buttonTextSize,
                         color: StaticColors.black,
-                        fontFamily: StaticStrings.font,
                     ),
                   ),
                 )
