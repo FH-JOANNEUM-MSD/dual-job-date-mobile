@@ -1,10 +1,10 @@
-import 'package:dual_job_date_mobile/components/customToast.dart';
+import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/services/newPasswordService.dart';
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
-import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -125,28 +125,30 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                             if (_formKey.currentState!.validate()) {
                               //Extra Validation if passwords are different etc...
                               String? isValid = PasswordValidator()
-                                  .validateChange(_currentPasswordController.text,
-                                  _newPasswordController.text,
-                                  _repeatNewPasswordController.text);
+                                  .validateChange(
+                                      _currentPasswordController.text,
+                                      _newPasswordController.text,
+                                      _repeatNewPasswordController.text);
 
-                              if(isValid == null){
+                              if (isValid == null) {
                                 final bool isSuccess =
-                                    await NewPasswordService.setNewPassword(_currentPasswordController.text, _newPasswordController.text);
+                                    await NewPasswordService.setNewPassword(
+                                        _currentPasswordController.text,
+                                        _newPasswordController.text);
                                 if (isSuccess) {
                                   if (!context.mounted) return;
                                   navigateToHome(context);
                                 } else {
                                   if (!context.mounted) return;
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Passwort konnte nicht geändert werden.'),
-                                      backgroundColor: Colors.red,
-                                    ),
+                                    customSnackBarWidget(
+                                        StaticStrings.passwordServerError),
                                   );
                                 }
-                              }else{
-                                //TODO: This doesn't look too good, review this.
-                                Toast().showToast(context, isValid);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  customSnackBarWidget(isValid),
+                                );
                               }
                             }
                           },

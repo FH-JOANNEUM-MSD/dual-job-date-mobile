@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password.dart';
@@ -115,7 +116,9 @@ class _LoginState extends State<Login> {
                       childWidget: TextButton(
                     child: Text(
                       StaticStrings.forgotPassword,
-                      style: TextStyle(color: Colors.grey.shade700,),
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                      ),
                     ),
                     onPressed: () {
                       navigateToForgotPassword(context);
@@ -140,8 +143,8 @@ class _LoginState extends State<Login> {
   Future<void> login(BuildContext context) async {
     // TODO check if first login
     if (0 == 0) {
-      final bool isAuthorized =
-          await LoginService.login(_emailController.text, _passwordController.text);
+      final bool isAuthorized = await LoginService.login(
+          _emailController.text, _passwordController.text);
       if (isAuthorized) {
         if (!context.mounted) return;
         Navigator.push(
@@ -151,10 +154,7 @@ class _LoginState extends State<Login> {
       } else {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login war nicht erfolgreich.'),
-            backgroundColor: Colors.red,
-          ),
+          customSnackBarWidget(StaticStrings.loginPasswordWrong),
         );
       }
     }
