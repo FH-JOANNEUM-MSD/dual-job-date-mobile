@@ -54,105 +54,101 @@ class _LoginState extends State<Login> {
     return Scaffold(
         body: BlocProvider(
       create: (context) => AuthenticationBloc(),
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              StaticColors.topBackgroundScreen,
-              StaticColors.bottomBackgroundScreen,
-            ],
+      child: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          if (state.status == AuthenticationStatus.authenticated) {
+            navigateToSetNewPassword(context);
+          } else if (state.status == AuthenticationStatus.unauthenticated) {
+            // TODO Failure
+          } else {
+            // TODO something went wrong
+          }
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                StaticColors.topBackgroundScreen,
+                StaticColors.bottomBackgroundScreen,
+              ],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CustomFormPadding(
-                topHeaderDistance: Values.paddingLogoTop,
-                childWidget: Image.asset(
-                  //Logo Image
-                  Paths.logo,
-                  height: Values.getScaledLogoSize(),
-                ),
-              ),
-              const CustomFormPadding(
-                topHeaderDistance: Values.paddingTitleTop,
-                childWidget: Text(
-                  StaticStrings.login,
-                  style: TextStyle(
-                    fontSize: Values.screenTitleTextSize,
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CustomFormPadding(
+                  topHeaderDistance: Values.paddingLogoTop,
+                  childWidget: Image.asset(
+                    //Logo Image
+                    Paths.logo,
+                    height: Values.getScaledLogoSize(),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: [
-                      CustomFormPadding(
-                        childWidget: CustomTextFormField(
-                          controller: _emailController,
-                          hintText: StaticStrings.emailText,
-                          isHidden: false,
-                        ),
-                      ),
-                      CustomFormPadding(
-                        childWidget: CustomTextFormField(
-                          controller: _passwordController,
-                          hintText: StaticStrings.requiredPassword,
-                          isHidden: true,
-                        ),
-                      ),
-                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                          builder: (context, state) {
-                            if (state.status ==
-                                AuthenticationStatus.authenticated) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                      const SetNewPassword()));
-                            } else if (state.status ==
-                                AuthenticationStatus.unauthenticated) {
-                              // TODO Failure
-                            } else {
-                              // TODO something went wrong
-                            }
-                        return CustomFormPadding(
-                          topHeaderDistance: Values.paddingInsetButtonTop,
-                          childWidget: CustomElevatedButton(
-                            text: StaticStrings.loginButtonText,
-                            onPressed: () {
-                              // TODO right validation
-                              if (_formKey.currentState!.validate()) {
-                                BlocProvider.of<AuthenticationBloc>(context)
-                                    .add(LoginEvent(_emailController.text,
-                                        _passwordController.text));
-
-
-                              }
-                            },
+                const CustomFormPadding(
+                  topHeaderDistance: Values.paddingTitleTop,
+                  childWidget: Text(
+                    StaticStrings.login,
+                    style: TextStyle(
+                      fontSize: Values.screenTitleTextSize,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      children: [
+                        CustomFormPadding(
+                          childWidget: CustomTextFormField(
+                            controller: _emailController,
+                            hintText: StaticStrings.emailText,
+                            isHidden: false,
                           ),
-                        );
-                      }),
-                      CustomFormPadding(
-                          childWidget: TextButton(
-                        child: Text(
-                          StaticStrings.forgotPassword,
-                          style: TextStyle(color: Colors.grey.shade700),
                         ),
-                        onPressed: () {
-                          navigateToForgotPassword(context);
-                        },
-                      ))
-                    ],
+                        CustomFormPadding(
+                          childWidget: CustomTextFormField(
+                            controller: _passwordController,
+                            hintText: StaticStrings.requiredPassword,
+                            isHidden: true,
+                          ),
+                        ),
+                        BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                            builder: (context, state) {
+                          return CustomFormPadding(
+                            topHeaderDistance: Values.paddingInsetButtonTop,
+                            childWidget: CustomElevatedButton(
+                              text: StaticStrings.loginButtonText,
+                              onPressed: () {
+                                // TODO right validation
+                                if (_formKey.currentState!.validate()) {
+                                  BlocProvider.of<AuthenticationBloc>(context)
+                                      .add(LoginEvent(_emailController.text,
+                                          _passwordController.text));
+                                }
+                              },
+                            ),
+                          );
+                        }),
+                        CustomFormPadding(
+                            childWidget: TextButton(
+                          child: Text(
+                            StaticStrings.forgotPassword,
+                            style: TextStyle(color: Colors.grey.shade700),
+                          ),
+                          onPressed: () {
+                            navigateToForgotPassword(context);
+                          },
+                        ))
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -166,31 +162,10 @@ class _LoginState extends State<Login> {
             builder: (BuildContext context) => const ForgotPassword()));
   }
 
-  Future<void> login(BuildContext context) async {
-    // TODO check if first login
-    if (0 == 0) {
-      final bool isAuthorized = await LoginService.login(
-          _emailController.text, _passwordController.text);
-      if (isAuthorized) {
-        if (!context.mounted) return;
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => const SetNewPassword()));
-      } else {
-        if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login war nicht erfolgreich.'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
-    // if not first login
-    else {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => const Home()));
-    }
+  void navigateToSetNewPassword(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => const SetNewPassword()));
   }
 }
