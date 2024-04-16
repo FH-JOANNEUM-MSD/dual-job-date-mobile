@@ -1,7 +1,7 @@
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
-import 'package:dual_job_date_mobile/screens/login.dart';
+import 'package:dual_job_date_mobile/screens/login/login.dart';
 import 'package:dual_job_date_mobile/screens/splash.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
