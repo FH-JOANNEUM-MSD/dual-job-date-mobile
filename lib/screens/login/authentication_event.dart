@@ -8,10 +8,7 @@ class LoginEvent extends AuthenticationEvent {
 }
 
 class RefreshBearerEvent extends AuthenticationEvent {
-  final String refrehToken;
-
-  RefreshBearerEvent(this.refrehToken);
+  RefreshBearerEvent();
 }
 
-
-class LogoutEvent extends AuthenticationEvent{}
+class LogoutEvent extends AuthenticationEvent {}

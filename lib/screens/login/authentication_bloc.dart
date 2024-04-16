@@ -17,18 +17,6 @@ class AuthenticationBloc
             emit(
                 AuthenticationStateChanged(AuthenticationStatus.AUTHENTICATED));
             break;
-          case 401:
-          // TODO: Refresh token
-            emit(
-                AuthenticationStateChanged(
-                    AuthenticationStatus.UNAUTHENTICATED));
-            break;
-          case 403:
-          // TODO: Refresh
-            emit(
-                AuthenticationStateChanged(
-                    AuthenticationStatus.UNAUTHENTICATED));
-            break;
           default:
             emit(
                 AuthenticationStateChanged(
@@ -38,8 +26,16 @@ class AuthenticationBloc
       });
 
       on<RefreshBearerEvent>((event, emit) async {
-        //TODO communicate with backend: required is refresh token
-
+        var isAuthenticated = await LoginService.isAuthenticated();
+        if(isAuthenticated){
+          emit(
+              AuthenticationStateChanged(
+                  AuthenticationStatus.AUTHENTICATED));
+        }else {
+          emit(
+              AuthenticationStateChanged(
+                  AuthenticationStatus.UNAUTHENTICATED));
+        }
       });
 
       on<LogoutEvent>((event, emit) async {
