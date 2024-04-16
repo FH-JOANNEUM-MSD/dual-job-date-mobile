@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -39,7 +40,7 @@ class StudentProfileUpload extends StatelessWidget {
               Expanded(
                 child: Text(
                   uploadItem,
-                  style: const TextStyle(fontSize: Values.inputTextSize), // Defined font size
+                  style: const TextStyle(fontSize: Values.inputTextSize,), // Defined font size
                 ),
               ),
               if (updateable) // Check if updateable and onDelete provided

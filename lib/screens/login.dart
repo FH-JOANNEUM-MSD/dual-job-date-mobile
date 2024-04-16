@@ -115,7 +115,7 @@ class _LoginState extends State<Login> {
                       childWidget: TextButton(
                     child: Text(
                       StaticStrings.forgotPassword,
-                      style: TextStyle(color: Colors.grey.shade700),
+                      style: TextStyle(color: Colors.grey.shade700,),
                     ),
                     onPressed: () {
                       navigateToForgotPassword(context);

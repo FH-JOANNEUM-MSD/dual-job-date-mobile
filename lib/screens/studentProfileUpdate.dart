@@ -47,7 +47,7 @@ class StudentProfileUpdate extends StatelessWidget {
                           },
                           child: const Text(
                             'Nein',
-                            style: TextStyle(color: StaticColors.primary),
+                            style: TextStyle(color: StaticColors.primary,),
                           ),
                         ),
                         TextButton(
