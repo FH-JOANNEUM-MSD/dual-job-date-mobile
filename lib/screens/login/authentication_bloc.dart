@@ -8,12 +8,32 @@ class AuthenticationBloc
   AuthenticationBloc() : super(AuthenticationStateInitial()) {
     {
       on<LoginEvent>((event, emit) async {
-        var loggendIn = await LoginService.login(event.email, event.password);
-        if (loggendIn) {
-          emit(AuthenticationStateChanged(AuthenticationStatus.authenticated));
-        } else {
-          emit(
-              AuthenticationStateChanged(AuthenticationStatus.unauthenticated));
+        emit(
+            AuthenticationStateChanged(AuthenticationStatus.PENDING));
+
+        var statusCode = await LoginService.login(event.email, event.password);
+        switch (statusCode) {
+          case 200:
+            emit(
+                AuthenticationStateChanged(AuthenticationStatus.AUTHENTICATED));
+            break;
+          case 401:
+          // TODO: Refresh token
+            emit(
+                AuthenticationStateChanged(
+                    AuthenticationStatus.UNAUTHENTICATED));
+            break;
+          case 403:
+          // TODO: Refresh
+            emit(
+                AuthenticationStateChanged(
+                    AuthenticationStatus.UNAUTHENTICATED));
+            break;
+          default:
+            emit(
+                AuthenticationStateChanged(
+                    AuthenticationStatus.UNAUTHENTICATED));
+            break;
         }
       });
 
@@ -24,7 +44,7 @@ class AuthenticationBloc
 
       on<LogoutEvent>((event, emit) async {
         //TODO delete toke from storage
-        emit(AuthenticationStateChanged(AuthenticationStatus.unauthenticated));
+        emit(AuthenticationStateChanged(AuthenticationStatus.UNAUTHENTICATED));
       });
     }
   }
