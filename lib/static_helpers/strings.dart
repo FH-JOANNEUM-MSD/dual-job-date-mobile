@@ -39,6 +39,7 @@ class StaticStrings {
   static const String passwordServerError =
       'Passwort konnte nicht geändert werden';
   static const String loginPasswordWrong = 'Login war nicht erfolgreich.';
+  static const String somethingWentWrong = 'Etwas ist schief gegangen';
 }
 
 class CompaniesScreenStrings {

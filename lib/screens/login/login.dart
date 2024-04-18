@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
@@ -60,8 +61,14 @@ class _LoginState extends State<Login> {
             navigateToSetNewPassword(context);
           } else if (state.status == AuthenticationStatus.unauthenticated) {
             // TODO Failure
+            ScaffoldMessenger.of(context).showSnackBar(
+              customSnackBarWidget(StaticStrings.passwordWrong),
+            );
           } else {
             // TODO something went wrong
+            ScaffoldMessenger.of(context).showSnackBar(
+              customSnackBarWidget(StaticStrings.somethingWentWrong),
+            );
           }
         },
         child: Container(
