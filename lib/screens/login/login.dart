@@ -63,7 +63,9 @@ class _LoginState extends State<Login> {
               navigateToHome(context);
               break;
             case AuthenticationStatus.UNAUTHENTICATED:
-              //TODO show Toast: something went wrong
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Invalid E-mail or Password")),
+              );
               break;
             default:
               break;

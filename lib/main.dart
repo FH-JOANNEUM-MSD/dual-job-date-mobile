@@ -40,8 +40,16 @@ class MyApp extends StatelessWidget {
                   BlocProvider.of<AuthenticationBloc>(context)
                       .add(RefreshBearerEvent());
                   return Container(
-                    decoration:
-                        const BoxDecoration(color: StaticColors.secondary),
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          StaticColors.topBackgroundScreen,
+                          StaticColors.bottomBackgroundScreen,
+                        ],
+                      ),
+                    ),
                     child: const Center(
                       child: CustomLoadingIndicator(),
                     ),
