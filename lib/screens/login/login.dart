@@ -5,13 +5,12 @@ import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_state.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password.dart';
-import 'package:dual_job_date_mobile/services/login_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
+import 'package:dual_job_date_mobile/widgets/custom_loading_indicator.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,16 +56,25 @@ class _LoginState extends State<Login> {
       create: (context) => AuthenticationBloc(),
       child: BlocListener<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
-          if (state.status == AuthenticationStatus.authenticated) {
-            navigateToSetNewPassword(context);
-          } else if (state.status == AuthenticationStatus.unauthenticated) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              customSnackBarWidget(StaticStrings.passwordWrong),
-            );
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              customSnackBarWidget(StaticStrings.somethingWentWrong),
-            );
+          switch (state.status) {
+            case AuthenticationStatus.FIRSTLOGIN:
+              navigateToSetNewPassword(context);
+              clearControllers();
+              break;
+            case AuthenticationStatus.AUTHENTICATED:
+              navigateToHome(context);
+              clearControllers();
+              break;
+            case AuthenticationStatus.UNAUTHENTICATED:
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text(StaticStrings.passwordWrong)),
+              );
+              break;
+            default:
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text(StaticStrings.somethingWentWrong)),
+              );
+              break;
           }
         },
         child: Container(
@@ -125,17 +133,22 @@ class _LoginState extends State<Login> {
                             builder: (context, state) {
                           return CustomFormPadding(
                             topHeaderDistance: Values.paddingInsetButtonTop,
-                            childWidget: CustomElevatedButton(
-                              text: StaticStrings.loginButtonText,
-                              onPressed: () {
-                                // TODO right validation
-                                if (_formKey.currentState!.validate()) {
-                                  BlocProvider.of<AuthenticationBloc>(context)
-                                      .add(LoginEvent(_emailController.text,
-                                          _passwordController.text));
-                                }
-                              },
-                            ),
+                            childWidget: state.status ==
+                                    AuthenticationStatus.PENDING
+                                ? const CustomLoadingIndicator()
+                                : CustomElevatedButton(
+                                    text: StaticStrings.loginButtonText,
+                                    onPressed: () {
+                                      // TODO right validation
+                                      if (_formKey.currentState!.validate()) {
+                                        BlocProvider.of<AuthenticationBloc>(
+                                                context)
+                                            .add(LoginEvent(
+                                                _emailController.text,
+                                                _passwordController.text));
+                                      }
+                                    },
+                                  ),
                           );
                         }),
                         CustomFormPadding(
@@ -172,5 +185,15 @@ class _LoginState extends State<Login> {
         context,
         MaterialPageRoute(
             builder: (BuildContext context) => const SetNewPassword()));
+  }
+
+  void navigateToHome(BuildContext context) {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) => const Home()));
+  }
+
+  void clearControllers() {
+    _emailController.clear();
+    _passwordController.clear();
   }
 }

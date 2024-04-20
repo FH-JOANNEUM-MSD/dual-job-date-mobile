@@ -6,26 +6,25 @@ import 'package:logger/logger.dart';
 class HTTPHelper {
   // static const String baseUrl = 'http://localhost:8000/';
   //static const String baseUrl = 'http://10.0.2.2:8000/'; // 10.0.2.2 is the IP of the host machine a.k.a. localhost
-   static const String baseUrl = 'https://dual-dating-backend.msd-moss-test.fh-joanneum.at/'; // live DB
+  static const String baseUrl =
+      'https://dual-dating-backend.msd-moss-test.fh-joanneum.at/'; // live DB
   static const storage = FlutterSecureStorage();
   static final Logger logger = Logger();
 
   static Future<http.Response?> post(String url, dynamic body) async {
     try {
-      final response = await http.post(
-        Uri.parse(baseUrl + url),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${await storage.read(key: 'token')}',
-        },
-        body: jsonEncode(body),
-      ).timeout(const Duration(seconds: 2));
+      final response = await http
+          .post(
+            Uri.parse(baseUrl + url),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${await storage.read(key: 'token')}',
+            },
+            body: jsonEncode(body)
+          )
+          .timeout(const Duration(seconds: 2));
 
-      if (response.statusCode == 200) {
-        return response;
-      } else {
-        return null;
-      }
+      return response;
     } catch (e) {
       logger.e('http POST failed: $e');
       return null;
