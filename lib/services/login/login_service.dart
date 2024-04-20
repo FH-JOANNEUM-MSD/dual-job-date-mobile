@@ -79,7 +79,7 @@ class LoginService {
     return isExpired;
   }
 
-  // Method to check if user is authenticated
+  // Method to check if user is already authenticated
   static Future<bool> isAuthenticated() async {
     const storage = FlutterSecureStorage();
 

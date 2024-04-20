@@ -58,9 +58,11 @@ class _LoginState extends State<Login> {
           switch (state.status) {
             case AuthenticationStatus.FIRSTLOGIN:
               navigateToSetNewPassword(context);
+              clearControllers();
               break;
             case AuthenticationStatus.AUTHENTICATED:
               navigateToHome(context);
+              clearControllers();
               break;
             case AuthenticationStatus.UNAUTHENTICATED:
               ScaffoldMessenger.of(context).showSnackBar(
@@ -68,6 +70,9 @@ class _LoginState extends State<Login> {
               );
               break;
             default:
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Something went wrong")),
+              );
               break;
           }
         },
@@ -184,5 +189,10 @@ class _LoginState extends State<Login> {
   void navigateToHome(BuildContext context) {
     Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => const Home()));
+  }
+
+  void clearControllers() {
+    _emailController.clear();
+    _passwordController.clear();
   }
 }

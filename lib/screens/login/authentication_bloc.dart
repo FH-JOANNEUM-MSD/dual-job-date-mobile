@@ -14,7 +14,7 @@ class AuthenticationBloc
             await LoginService.login(event.email, event.password);
         switch (loginResponse.statusCode) {
           case 200:
-            if (!loginResponse.isNew) {
+            if (loginResponse.isNew) {
               emit(AuthenticationStateChanged(AuthenticationStatus.FIRSTLOGIN));
             } else {
               emit(AuthenticationStateChanged(
