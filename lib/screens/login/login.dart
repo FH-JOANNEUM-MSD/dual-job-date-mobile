@@ -67,13 +67,10 @@ class _LoginState extends State<Login> {
               break;
             case AuthenticationStatus.UNAUTHENTICATED:
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(StaticStrings.passwordWrong)),
+                customSnackBarWidget(StaticStrings.passwordWrong),
               );
               break;
             default:
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text(StaticStrings.somethingWentWrong)),
-              );
               break;
           }
         },
