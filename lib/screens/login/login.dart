@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
@@ -66,12 +67,12 @@ class _LoginState extends State<Login> {
               break;
             case AuthenticationStatus.UNAUTHENTICATED:
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Invalid E-mail or Password")),
+                const SnackBar(content: Text(StaticStrings.passwordWrong)),
               );
               break;
             default:
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Something went wrong")),
+                const SnackBar(content: Text(StaticStrings.somethingWentWrong)),
               );
               break;
           }
