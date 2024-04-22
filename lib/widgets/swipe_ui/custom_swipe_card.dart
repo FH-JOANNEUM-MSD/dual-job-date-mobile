@@ -1,7 +1,10 @@
-import 'package:dual_job_date_mobile/models/company.dart';
+import 'dart:convert';
+
 import 'package:dual_job_date_mobile/screens/details_company.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../services/companies/company.dart';
 
 class CustomSwipeCard extends StatelessWidget {
   const CustomSwipeCard({
@@ -55,7 +58,9 @@ class CustomSwipeCard extends StatelessWidget {
                   image: DecorationImage(
                     alignment: Alignment.center,
                     fit: BoxFit.fill,
-                    image: Image.asset(company.logo).image,
+                    image: Image.memory(
+                      base64Decode(company.logoBase64!),
+                    ).image,
                   ),
                 ),
               ),
@@ -64,11 +69,11 @@ class CustomSwipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(company.name,
+                      Text(company.name ?? '',
                           style: const TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w500)),
                       Text(
-                        company.field,
+                        company.industry ?? '',
                         style: const TextStyle(fontSize: 14.0),
                       ),
                     ]),

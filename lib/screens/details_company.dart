@@ -1,10 +1,10 @@
-import 'package:dual_job_date_mobile/models/company.dart';
 import 'package:dual_job_date_mobile/static_helpers/appstyles.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button_circle.dart';
 import 'package:flutter/material.dart';
 
+import '../services/companies/company.dart';
 import '../static_helpers/strings.dart';
 
 class DetailsCompany extends StatelessWidget {
@@ -43,13 +43,11 @@ class DetailsCompany extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(company.name, style: AppTextStyles.title),
+                            Text(company.name ?? '', style: AppTextStyles.title),
                             SizedBox(height: gapText),
-                            Text('${company.field}',
+                            Text(company.industry ?? '',
                                 style: AppTextStyles.title),
                             SizedBox(height: gapText),
-                            Text('${company.likes} ${DetailsCompanyStrings.likes}',
-                                style: AppTextStyles.title)
                           ],
                         ),
                       ),
@@ -67,7 +65,7 @@ class DetailsCompany extends StatelessWidget {
                             SizedBox(
                               height: gapText - 6,
                             ),
-                            Text(company.description,
+                            Text(company.companyDetails?.shortDescription ?? '',
                                 style: AppTextStyles.description),
                           ]),
                     ],

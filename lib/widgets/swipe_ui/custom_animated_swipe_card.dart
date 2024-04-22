@@ -1,6 +1,7 @@
-import 'package:dual_job_date_mobile/models/company.dart';
 import 'package:dual_job_date_mobile/widgets/swipe_ui/custom_swipe_card.dart';
 import 'package:flutter/material.dart';
+
+import '../../services/companies/company.dart';
 
 class CustomAnimatedSwipeCard extends StatelessWidget {
   const CustomAnimatedSwipeCard({super.key, required this.company});

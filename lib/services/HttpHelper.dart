@@ -47,4 +47,21 @@ class HTTPHelper {
       return null;
     }
   }
+
+  static Future<http.Response?> postRefreshToken(String url, dynamic body) async {
+    try {
+      final response = await http
+          .post(Uri.parse(baseUrl + url),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: jsonEncode(body))
+          .timeout(const Duration(seconds: 2));
+
+      return response;
+    } catch (e) {
+      logger.e('http POST failed: $e');
+      return null;
+    }
+  }
 }
