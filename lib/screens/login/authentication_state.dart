@@ -1,5 +1,5 @@
 enum AuthenticationStatus {
-  UNKNONW,
+  UNKNOWN,
   PENDING,
   FIRSTLOGIN,
   AUTHENTICATED,
@@ -11,7 +11,7 @@ abstract class AuthenticationState {
 }
 
 class AuthenticationStateInitial extends AuthenticationState {
-  get status => AuthenticationStatus.UNKNONW;
+  get status => AuthenticationStatus.UNKNOWN;
 }
 
 class AuthenticationStateChanged extends AuthenticationState {

@@ -139,13 +139,6 @@ class _LoginState extends State<Login> {
                                     onPressed: () async {
                                       // TODO right validation
                                       if (_formKey.currentState!.validate()) {
-
-                                        await const FlutterSecureStorage()
-                                            .write(
-                                                key: AuthenticationTokens
-                                                    .refresh_key,
-                                                value: _emailController.text);
-
                                         BlocProvider.of<AuthenticationBloc>(
                                                 context)
                                             .add(LoginEvent(

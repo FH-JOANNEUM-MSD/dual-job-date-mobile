@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthenticationBloc(),
               child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
-                if (state.status == AuthenticationStatus.UNKNONW) {
+                if (state.status == AuthenticationStatus.UNKNOWN) {
                   BlocProvider.of<AuthenticationBloc>(context)
                       .add(RefreshBearerEvent());
                   return Container(

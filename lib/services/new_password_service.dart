@@ -1,6 +1,3 @@
-import 'package:dual_job_date_mobile/services/login/login_response.dart';
-import 'package:dual_job_date_mobile/services/login/login_service.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../rest/HttpHelper.dart';
@@ -16,21 +13,14 @@ class NewPasswordService {
 
     final response = await HTTPHelper.post('User/ChangePassword', body);
 
-    await _reloginToSaveTokens(response, newPassword);
+    await _deleteTokensOnError(response);
 
     return response!.statusCode == 200;
   }
 
-  static Future<void> _reloginToSaveTokens(Response? response, String newPassword) async {
-       if (response!.statusCode == 200) {
-      LoginResponse loginResponse = await LoginService.login(
-          await FlutterSecureStorage().read(key: AuthenticationTokens.email_key)
-              as String,
-          newPassword);
-
-      if(loginResponse.statusCode == 200){
-        await FlutterSecureStorage().delete(key: AuthenticationTokens.email_key);
-      }
+  static Future<void> _deleteTokensOnError(Response? response) async {
+    if (response!.statusCode != 200) {
+      await FlutterSecureStorage().deleteAll();
     }
   }
 }

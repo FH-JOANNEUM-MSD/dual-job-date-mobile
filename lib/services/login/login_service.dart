@@ -34,9 +34,8 @@ class LoginService {
     Map<String, dynamic> decodedResponse = jsonDecode(response.body.trim());
     LoginResponse loginResponse =
         LoginResponse.fromJson(decodedResponse, response.statusCode);
-    if (!loginResponse.isNew) {
-      _storeTokens(loginResponse); // Store tokens securely
-    }
+    _storeTokens(loginResponse); // Store tokens securely
+
     return loginResponse;
   }
 
@@ -53,8 +52,10 @@ class LoginService {
   // Method to store tokens securely
   static Future<void> _storeTokens(LoginResponse response) async {
     const storage = FlutterSecureStorage();
-    await storage.write(key: AuthenticationTokens.bearer_key, value: response.accessToken);
-    await storage.write(key: AuthenticationTokens.refresh_key, value: response.refreshToken);
+    await storage.write(
+        key: AuthenticationTokens.bearer_key, value: response.accessToken);
+    await storage.write(
+        key: AuthenticationTokens.refresh_key, value: response.refreshToken);
 
     final DateTime now = DateTime.now();
     final int expiresIn = response.expiresIn;
@@ -83,7 +84,8 @@ class LoginService {
   static Future<bool> isAuthenticated() async {
     const storage = FlutterSecureStorage();
 
-    final String? bearer = await storage.read(key:AuthenticationTokens.bearer_key);
+    final String? bearer =
+        await storage.read(key: AuthenticationTokens.bearer_key);
     final bool bearerExpired = await isTokenExpired();
 
     if (bearer != null && !bearerExpired) {
