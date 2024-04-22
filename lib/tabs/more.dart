@@ -47,7 +47,7 @@ class _MoreState extends State<More> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.all(20.0),
           child: CustomElevatedButton(
             text: 'Log out',
             onPressed: () {
