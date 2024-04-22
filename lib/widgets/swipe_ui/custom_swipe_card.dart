@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/companies/company.dart';
 
-class CustomSwipeCard extends StatelessWidget {
+class CustomSwipeCard extends StatefulWidget {
   const CustomSwipeCard({
     super.key,
     required this.company,
@@ -14,9 +14,22 @@ class CustomSwipeCard extends StatelessWidget {
 
   final Company company;
 
+  @override
+  State<CustomSwipeCard> createState() => _CustomSwipeCardState();
+}
+
+class _CustomSwipeCardState extends State<CustomSwipeCard> {
   final double borderRadiusCard = 12;
+
   final double heightCard = 80;
+
   final double marginImage = 4;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +46,7 @@ class CustomSwipeCard extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailsCompany(company: company),
+                builder: (context) => DetailsCompany(company: widget.company),
               ));
         },
         child: Container(
@@ -61,7 +74,7 @@ class CustomSwipeCard extends StatelessWidget {
                     alignment: Alignment.center,
                     fit: BoxFit.contain, // Adjust the fit property here
                     image: MemoryImage(
-                      base64Decode(company.logoBase64!),
+                      base64Decode(widget.company.logoBase64!),
                     ),
                   ),
                 ),
@@ -71,11 +84,11 @@ class CustomSwipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(company.name ?? '',
+                      Text(widget.company.name ?? '',
                           style: const TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w500)),
                       Text(
-                        company.industry ?? '',
+                        widget.company.industry ?? '',
                         style: const TextStyle(fontSize: 14.0),
                       ),
                     ]),
@@ -83,15 +96,15 @@ class CustomSwipeCard extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  checkForOwnReaction(company)
+                  checkForOwnReaction(widget.company)
                       ? Padding(
                           padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
                           //TODO replace true and false with a switch: liked, disliked, neutral
                           child: Icon(
-                              checkForReaction(company)
+                              checkForReaction(widget.company)
                                   ? Icons.thumb_up
                                   : Icons.thumb_down_outlined,
-                              color: checkForReaction(company)
+                              color: checkForReaction(widget.company)
                                   ? StaticColors.primary
                                   : Colors.grey[500]),
                         )
@@ -105,10 +118,7 @@ class CustomSwipeCard extends StatelessWidget {
     );
   }
 
-
-
   //e3d81e98-41ca-4c1f-842d-083f5d541344
-  // TODO replace with ID from SecureStorage
   bool checkForOwnReaction(Company c) {
     if (c.studentCompanies != null && c.studentCompanies!.isNotEmpty) {
       return true;

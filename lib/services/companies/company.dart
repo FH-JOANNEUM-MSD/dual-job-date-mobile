@@ -163,7 +163,7 @@ class StudentCompany {
   final int id;
   final String? studentId;
   final int companyId;
-  final bool like;
+  late final bool like;
 
   StudentCompany({
     required this.id,

@@ -11,6 +11,7 @@ import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/widgets/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthenticationBloc(),
               child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
+                    // FlutterSecureStorage().deleteAll();
                 if (state.status == AuthenticationStatus.UNKNOWN) {
                   BlocProvider.of<AuthenticationBloc>(context)
                       .add(RefreshBearerEvent());

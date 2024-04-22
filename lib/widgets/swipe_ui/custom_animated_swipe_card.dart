@@ -30,6 +30,13 @@ class CustomAnimatedSwipeCard extends StatelessWidget {
         if (direction == DismissDirection.startToEnd) {
           BlocProvider.of<CompaniesBloc>(context)
               .add(CompaniesReactionEvent(company.id, true));
+          BlocProvider.of<CompaniesBloc>(context)
+              .state
+              .companies
+              .firstWhere((element) => element.id == company.id)
+              .studentCompanies
+              ?.firstWhere((element) => element.id == company.id)
+              .like = true;
         } else if (direction == DismissDirection.endToStart) {
           BlocProvider.of<CompaniesBloc>(context)
               .add(CompaniesReactionEvent(company.id, false));
