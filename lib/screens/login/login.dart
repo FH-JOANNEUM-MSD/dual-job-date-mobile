@@ -4,7 +4,7 @@ import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_state.dart';
-import 'package:dual_job_date_mobile/screens/set_new_password.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
@@ -14,6 +14,7 @@ import 'package:dual_job_date_mobile/widgets/custom_loading_indicator.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../static_helpers/values.dart';
 
@@ -135,9 +136,16 @@ class _LoginState extends State<Login> {
                                 ? const CustomLoadingIndicator()
                                 : CustomElevatedButton(
                                     text: StaticStrings.loginButtonText,
-                                    onPressed: () {
+                                    onPressed: () async {
                                       // TODO right validation
                                       if (_formKey.currentState!.validate()) {
+
+                                        await const FlutterSecureStorage()
+                                            .write(
+                                                key: AuthenticationTokens
+                                                    .refresh_key,
+                                                value: _emailController.text);
+
                                         BlocProvider.of<AuthenticationBloc>(
                                                 context)
                                             .add(LoginEvent(
