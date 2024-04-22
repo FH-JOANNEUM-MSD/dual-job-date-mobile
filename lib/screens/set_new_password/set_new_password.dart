@@ -1,4 +1,5 @@
 // import 'package:dual_job_date_mobile/widgets/customToast.dart';
+import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_bloc.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_event.dart';
@@ -28,10 +29,10 @@ class SetNewPassword extends StatefulWidget {
 /// State Class: Needed for stateful widget
 class _SetNewPasswordState extends State<SetNewPassword> {
   final TextEditingController _currentPasswordController =
-      TextEditingController();
+  TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
   final TextEditingController _repeatNewPasswordController =
-      TextEditingController();
+  TextEditingController();
 
   late GlobalKey<FormState> _formKey;
 
@@ -54,13 +55,15 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   @override
   Widget build(BuildContext context) {
     Values.setScreenWidth(
-        MediaQuery.of(context).size.height); //Please comment if necessary
+        MediaQuery
+            .of(context)
+            .size
+            .height); //Please comment if necessary
     return Scaffold(
       body: BlocProvider(
         create: (context) => SetNewPasswordBloc(),
         child: BlocListener<SetNewPasswordBloc, SetNewPasswordState>(
           listener: (context, state) {
-            print(state.status);
             if (state.status == SetNewPasswordStatus.newPasswordSet) {
               navigateToHome(context);
             } else {
@@ -75,7 +78,8 @@ class _SetNewPasswordState extends State<SetNewPassword> {
           child: Stack(
             children: [
               Container(
-                height: MediaQuery.of(context)
+                height: MediaQuery
+                    .of(context)
                     .size
                     .height, //Full size the container
                 decoration: const BoxDecoration(
@@ -127,7 +131,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                               hintText: StaticStrings.newPasswordText,
                               isHidden: true,
                               validator:
-                                  PasswordValidator().validateNewPassword,
+                              PasswordValidator().validateNewPassword,
                             ),
                           ),
                           CustomFormPadding(
@@ -142,26 +146,30 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                           BlocBuilder<SetNewPasswordBloc, SetNewPasswordState>(
                             builder: (context, state) {
                               return CustomFormPadding(
-                                  // Save Button
+                                // Save Button
                                   childWidget: CustomElevatedButton(
                                       text: StaticStrings.saveButtonText,
                                       onPressed: () async {
                                         String? isValid = PasswordValidator()
                                             .validateChange(
-                                                _currentPasswordController.text,
-                                                _newPasswordController.text,
-                                                _repeatNewPasswordController
-                                                    .text);
+                                            _currentPasswordController.text,
+                                            _newPasswordController.text,
+                                            _repeatNewPasswordController
+                                                .text);
 
                                         if (isValid == null) {
                                           BlocProvider.of<SetNewPasswordBloc>(
-                                                  context)
+                                              context)
                                               .add(SetNewPasswordEvent(
-                                                  _currentPasswordController
-                                                      .text,
-                                                  _newPasswordController.text));
+                                              _currentPasswordController
+                                                  .text,
+                                              _newPasswordController.text));
                                         } else {
                                           //TODO: This doesn't look too good, review this.
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                              customSnackBarWidget(isValid)
+                                          );
                                         }
                                       }));
                             },
