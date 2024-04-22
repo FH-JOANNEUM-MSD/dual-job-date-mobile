@@ -1,5 +1,3 @@
-import 'package:dual_job_date_mobile/services/companies/company.dart';
-import 'package:dual_job_date_mobile/services/companies/company_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/tabs/companies/companies_event.dart';
 import 'package:dual_job_date_mobile/widgets/swipe_ui/custom_animated_swipe_card.dart';
@@ -68,17 +66,8 @@ class _CompaniesState extends State<Companies> {
     );
   }
 
-  //Consumer<CardProvider>(
-  // builder: (BuildContext context, CardProvider value, Widget? child) {
-
-  void logToken() async {
-    print(await FlutterSecureStorage()
-        .read(key: AuthenticationTokens.bearer_key));
-  }
-
   @override
   Widget build(BuildContext context) {
-    logToken();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

@@ -24,10 +24,10 @@ class CustomAnimatedSwipeCard extends StatelessWidget {
       confirmDismiss: (direction) {
         // TODO: send a like/dislike to the backend
         // TODO: Update UI
-        if(direction == DismissDirection.startToEnd){
-          print("like");
-        } else if(direction == DismissDirection.endToStart) {
-          print("dislike");
+        if (direction == DismissDirection.startToEnd) {
+          // todo: implement
+        } else if (direction == DismissDirection.endToStart) {
+          // todo: implement
         }
         return Future(() => false);
       },

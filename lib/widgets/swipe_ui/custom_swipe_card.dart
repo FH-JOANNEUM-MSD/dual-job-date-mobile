@@ -52,15 +52,17 @@ class CustomSwipeCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: marginImage, horizontal: marginImage),
+                  vertical: marginImage,
+                  horizontal: marginImage,
+                ),
                 width: heightCard - 2 * marginImage,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     alignment: Alignment.center,
-                    fit: BoxFit.fill,
-                    image: Image.memory(
+                    fit: BoxFit.contain, // Adjust the fit property here
+                    image: MemoryImage(
                       base64Decode(company.logoBase64!),
-                    ).image,
+                    ),
                   ),
                 ),
               ),

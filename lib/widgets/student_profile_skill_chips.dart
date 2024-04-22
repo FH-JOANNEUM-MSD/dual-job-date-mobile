@@ -1,7 +1,5 @@
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 
-import '../static_helpers/values.dart';
 
 ///contains static skill chips as well as selectable skill chips
 class StudentProfileSkillChips extends StatelessWidget {

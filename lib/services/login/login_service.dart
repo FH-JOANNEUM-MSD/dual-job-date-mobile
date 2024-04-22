@@ -109,7 +109,6 @@ class LoginService {
       };
       final response = await HTTPHelper.postRefreshToken('User/Refresh', body);
       if (response != null && response.statusCode == 200) {
-        Map<String, dynamic> decodedResponse = jsonDecode(response.body);
         var refreshResponse =
             LoginResponse('', '', 0, '', false, response.statusCode);
         _storeTokens(refreshResponse); // Store refreshed tokens

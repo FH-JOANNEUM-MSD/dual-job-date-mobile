@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../static_helpers/colors.dart';
 import '../static_helpers/paths.dart';
-import '../static_helpers/strings.dart';
 import '../static_helpers/values.dart';
 
 class CustomBackButtonCircle extends StatelessWidget {

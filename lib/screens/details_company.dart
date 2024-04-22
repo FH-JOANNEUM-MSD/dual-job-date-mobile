@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dual_job_date_mobile/static_helpers/appstyles.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
@@ -24,11 +26,15 @@ class DetailsCompany extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                    width: Values.screenWidth,
-                    child: Image.asset(
-                      'assets/images/companies/title_company.png',
-                      fit: BoxFit.fitWidth,
-                    )),
+                  width: Values.screenWidth,
+                  child: company.companyDetails?.teamPictureBase64 != null
+                      ? Image.memory(
+                          base64Decode(
+                              company.companyDetails!.teamPictureBase64!),
+                          fit: BoxFit.fitWidth,
+                        )
+                      : const SizedBox(height: 70,), // This will render an empty widget
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: Values.paddingHorizontalScreen,
@@ -43,7 +49,8 @@ class DetailsCompany extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(company.name ?? '', style: AppTextStyles.title),
+                            Text(company.name ?? '',
+                                style: AppTextStyles.title),
                             SizedBox(height: gapText),
                             Text(company.industry ?? '',
                                 style: AppTextStyles.title),
