@@ -11,10 +11,14 @@ class CompaniesBloc extends Bloc<CompaniesEvent, CompaniesState> {
 
       var companies = await CompanyService.getActiveCompanies();
       if (companies != null) {
-        emit(CompaniesStateLoaded(companies));
+        emit(CompaniesStateLoaded(companies,[]));
       } else {
         emit(CompaniesStateError());
       }
+    });
+
+    on<CompaniesReactionEvent>((event, emit) async {
+      await CompanyService.reactToCompany(event.companyId, event.reation);
     });
   }
 }

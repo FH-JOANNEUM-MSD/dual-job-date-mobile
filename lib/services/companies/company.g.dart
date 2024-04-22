@@ -17,9 +17,25 @@ Company _$CompanyFromJson(Map<String, dynamic> json) => Company(
           ? null
           : CompanyDetails.fromJson(
               json['companyDetails'] as Map<String, dynamic>),
-      activities: (json['activities'] as List<dynamic>)
-          .map((e) => Activity.fromJson(e as Map<String, dynamic>))
+      activities: (json['activities'] as List<dynamic>?)
+          ?.map((e) => Activity.fromJson(e as Map<String, dynamic>))
           .toList(),
+      addresses: (json['addresses'] as List<dynamic>?)
+          ?.map((e) => Address.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      studentCompanies: (json['studentCompanies'] as List<dynamic>?)
+          ?.map((e) => StudentCompany.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      academicProgram: json['academicProgram'] == null
+          ? null
+          : AcademicProgram.fromJson(
+              json['academicProgram'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      institution: json['institution'] == null
+          ? null
+          : Institution.fromJson(json['institution'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CompanyToJson(Company instance) => <String, dynamic>{
@@ -29,8 +45,13 @@ Map<String, dynamic> _$CompanyToJson(Company instance) => <String, dynamic>{
       'logoBase64': instance.logoBase64,
       'website': instance.website,
       'isActive': instance.isActive,
+      'academicProgram': instance.academicProgram,
+      'user': instance.user,
+      'institution': instance.institution,
       'companyDetails': instance.companyDetails,
       'activities': instance.activities,
+      'addresses': instance.addresses,
+      'studentCompanies': instance.studentCompanies,
     };
 
 AcademicProgram _$AcademicProgramFromJson(Map<String, dynamic> json) =>

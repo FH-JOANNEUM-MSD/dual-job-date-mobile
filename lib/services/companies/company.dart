@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'company.g.dart';
@@ -10,8 +11,13 @@ class Company {
   final String? logoBase64;
   final String? website;
   final bool isActive;
+  final AcademicProgram? academicProgram;
+  final User? user;
+  final Institution? institution;
   final CompanyDetails? companyDetails;
-  final List<Activity> activities;
+  final List<Activity>? activities;
+  final List<Address>? addresses;
+  final List<StudentCompany>? studentCompanies;
 
   Company({
     required this.id,
@@ -21,10 +27,16 @@ class Company {
     this.website,
     required this.isActive,
     this.companyDetails,
-    required this.activities,
+    this.activities,
+    this.addresses,
+    this.studentCompanies,
+    this.academicProgram,
+    this.user,
+    this.institution,
   });
 
-  factory Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
+  factory Company.fromJson(Map<String, dynamic> json) =>
+      _$CompanyFromJson(json);
 
   Map<String, dynamic> toJson() => _$CompanyToJson(this);
 }

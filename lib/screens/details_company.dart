@@ -33,7 +33,7 @@ class DetailsCompany extends StatelessWidget {
                               company.companyDetails!.teamPictureBase64!),
                           fit: BoxFit.fitWidth,
                         )
-                      : const SizedBox(height: 70,), // This will render an empty widget
+                      : const SizedBox(height: 70,),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
