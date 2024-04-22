@@ -83,14 +83,19 @@ class CustomSwipeCard extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-                    //TODO replace true and false with a switch: liked, disliked, neutral
-                    child: Icon(
-                        true ? Icons.thumb_up : Icons.thumb_down_outlined,
-                        color: true ? StaticColors.primary : Colors.grey[500]),
-                  ),
+                  checkForOwnReaction(company)
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                          //TODO replace true and false with a switch: liked, disliked, neutral
+                          child: Icon(
+                              checkForReaction(company)
+                                  ? Icons.thumb_up
+                                  : Icons.thumb_down_outlined,
+                              color: checkForReaction(company)
+                                  ? StaticColors.primary
+                                  : Colors.grey[500]),
+                        )
+                      : const Placeholder(),
                 ],
               )
             ],
@@ -100,7 +105,20 @@ class CustomSwipeCard extends StatelessWidget {
     );
   }
 
+
+
   //e3d81e98-41ca-4c1f-842d-083f5d541344
   // TODO replace with ID from SecureStorage
+  bool checkForOwnReaction(Company c) {
+    if (c.studentCompanies != null && c.studentCompanies!.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
+  bool checkForReaction(Company c) {
+    var studentReaction = c.studentCompanies!.first;
+    return studentReaction.like;
+  }
 }
