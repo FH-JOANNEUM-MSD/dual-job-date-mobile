@@ -17,7 +17,7 @@ class HTTPHelper {
         Uri.parse(baseUrl + url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${await storage.read(key: 'token')}',
+          'Authorization': 'Bearer ${await storage.read(key: 'bearer-token')}',
         },
       ).timeout(const Duration(seconds: 2));
 
@@ -34,7 +34,7 @@ class HTTPHelper {
           .post(Uri.parse(baseUrl + url),
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ${await storage.read(key: 'token')}',
+                'Authorization': 'Bearer ${await storage.read(key: 'bearer-token')}',
               },
               body: jsonEncode(body))
           .timeout(const Duration(seconds: 2));

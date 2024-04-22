@@ -25,9 +25,6 @@ class _MoreState extends State<More> {
       'title': 'Datenschutzerklärung',
       'url': 'https://www.fh-joanneum.at/hochschule/organisation/datenschutz/',
     },
-    {
-      'title': 'Log out',
-    },
   ];
 
   @override
@@ -70,7 +67,6 @@ class _MoreState extends State<More> {
       ],
     );
   }
-
 
   void navigateToLogin(BuildContext context) {
     Navigator.push(
