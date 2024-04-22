@@ -1,4 +1,4 @@
-import 'package:dual_job_date_mobile/components/customToast.dart';
+//import 'package:dual_job_date_mobile/components/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_bloc.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_event.dart';
@@ -160,7 +160,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                                               _newPasswordController.text));
                                     } else {
                                       //TODO: This doesn't look too good, review this.
-                                      Toast().showToast(context, isValid);
+                                      //Toast().showToast(context, isValid);
                                     }
                                   }
                               ));
