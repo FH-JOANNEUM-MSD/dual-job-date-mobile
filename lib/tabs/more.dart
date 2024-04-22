@@ -1,7 +1,9 @@
+import 'package:dual_job_date_mobile/services/logout_service.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../components/web_view_container.dart';
+import '../screens/login/login.dart';
 
 class More extends StatefulWidget {
   const More({super.key});
@@ -20,10 +22,9 @@ class _MoreState extends State<More> {
       'title': 'Datenschutzerklärung',
       'url': 'https://www.fh-joanneum.at/hochschule/organisation/datenschutz/',
     },
-    // {
-    //   'title': 'Über Uns',
-    //   'url': 'https://yourwebsite.com/ueber-uns',
-    // },
+    {
+      'title': 'Log out',
+    },
   ];
 
   @override
@@ -32,9 +33,24 @@ class _MoreState extends State<More> {
       children: _menuItems.map((item) {
         return ListTile(
           title: Text(item['title']!),
-          onTap: () => _openWebView(context, item['title']!, item['url']!),
+          onTap: () {
+            if (item['title'] == 'Log out') {
+              _logout(context); // Call logout method if Log out is pressed
+            } else {
+              _openWebView(context, item['title']!, item['url']!);
+            }
+          },
         );
       }).toList(),
+    );
+  }
+
+  void _logout(BuildContext context) {
+    LogoutService.flushStorage();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()), // Navigate to the login screen
+          (route) => false, // Remove all previous routes from the stack
     );
   }
 
