@@ -25,6 +25,9 @@ class _MoreState extends State<More> {
       'title': 'Datenschutzerklärung',
       'url': 'https://www.fh-joanneum.at/hochschule/organisation/datenschutz/',
     },
+    {
+      'title': 'Log out',
+    },
   ];
 
   @override
@@ -37,11 +40,18 @@ class _MoreState extends State<More> {
             itemCount: _menuItems.length,
             itemBuilder: (context, index) {
               final item = _menuItems[index];
-              return ListTile(
-                title: Text(item['title']!),
-                onTap: () {
-                  _openWebView(context, item['title']!, item['url']!);
-                },
+              return Column(
+                children: [
+                  const Divider(),
+                  ListTile(
+                    title: Text(item['title']!),
+                    onTap: () {
+                      _openWebView(context, item['title']!, item['url']!);
+                    },
+                  ),
+                  // SOLUTION IF WE WANT TO HAVE ONLY A DIVIDER BETWEEN LIST ITEMS
+                  //if (index < _menuItems.length - 1) Divider(), // Add a divider except for the last item
+                ],
               );
             },
           ),
@@ -60,6 +70,7 @@ class _MoreState extends State<More> {
       ],
     );
   }
+
 
   void navigateToLogin(BuildContext context) {
     Navigator.push(
