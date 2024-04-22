@@ -1,4 +1,4 @@
-import 'package:dual_job_date_mobile/components/customToast.dart';
+// import 'package:dual_job_date_mobile/widgets/customToast.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_bloc.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_event.dart';
@@ -144,26 +144,26 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                               return CustomFormPadding(
                                   // Save Button
                                   childWidget: CustomElevatedButton(
-                                text: StaticStrings.saveButtonText,
-                                onPressed: () async {
-                                    String? isValid = PasswordValidator()
-                                        .validateChange(
-                                            _currentPasswordController.text,
-                                            _newPasswordController.text,
-                                            _repeatNewPasswordController.text);
+                                      text: StaticStrings.saveButtonText,
+                                      onPressed: () async {
+                                        String? isValid = PasswordValidator()
+                                            .validateChange(
+                                                _currentPasswordController.text,
+                                                _newPasswordController.text,
+                                                _repeatNewPasswordController
+                                                    .text);
 
-                                    if (isValid == null) {
-                                      BlocProvider.of<SetNewPasswordBloc>(
-                                              context)
-                                          .add(SetNewPasswordEvent(
-                                              _currentPasswordController.text,
-                                              _newPasswordController.text));
-                                    } else {
-                                      //TODO: This doesn't look too good, review this.
-                                      Toast().showToast(context, isValid);
-                                    }
-                                  }
-                              ));
+                                        if (isValid == null) {
+                                          BlocProvider.of<SetNewPasswordBloc>(
+                                                  context)
+                                              .add(SetNewPasswordEvent(
+                                                  _currentPasswordController
+                                                      .text,
+                                                  _newPasswordController.text));
+                                        } else {
+                                          //TODO: This doesn't look too good, review this.
+                                        }
+                                      }));
                             },
                           ),
                         ],
