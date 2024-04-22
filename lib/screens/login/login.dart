@@ -1,14 +1,11 @@
 import 'package:dual_job_date_mobile/screens/forgot_password.dart';
-import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_state.dart';
-import 'package:dual_job_date_mobile/screens/set_new_password.dart';
-import 'package:dual_job_date_mobile/services/login_service.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
@@ -53,106 +50,106 @@ class _LoginState extends State<Login> {
         MediaQuery.of(context).size.height); //Please comment if necessary
     return Scaffold(
         body: BlocProvider(
-      create: (context) => AuthenticationBloc(),
-      child: BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener: (context, state) {
-          if (state.status == AuthenticationStatus.authenticated) {
-            navigateToSetNewPassword(context);
-          } else if (state.status == AuthenticationStatus.unauthenticated) {
-            // TODO Failure
-          } else {
-            // TODO something went wrong
-          }
-        },
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                StaticColors.topBackgroundScreen,
-                StaticColors.bottomBackgroundScreen,
-              ],
-            ),
-          ),
-          child: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                CustomFormPadding(
-                  topHeaderDistance: Values.paddingLogoTop,
-                  childWidget: Image.asset(
-                    //Logo Image
-                    Paths.logo,
-                    height: Values.getScaledLogoSize(),
-                  ),
+          create: (context) => AuthenticationBloc(),
+          child: BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+              if (state.status == AuthenticationStatus.authenticated) {
+                navigateToSetNewPassword(context);
+              } else if (state.status == AuthenticationStatus.unauthenticated) {
+                // TODO Failure
+              } else {
+                // TODO something went wrong
+              }
+            },
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    StaticColors.topBackgroundScreen,
+                    StaticColors.bottomBackgroundScreen,
+                  ],
                 ),
-                const CustomFormPadding(
-                  topHeaderDistance: Values.paddingTitleTop,
-                  childWidget: Text(
-                    StaticStrings.login,
-                    style: TextStyle(
-                      fontSize: Values.screenTitleTextSize,
+              ),
+              child: SafeArea(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomFormPadding(
+                      topHeaderDistance: Values.paddingLogoTop,
+                      childWidget: Image.asset(
+                        //Logo Image
+                        Paths.logo,
+                        height: Values.getScaledLogoSize(),
+                      ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      children: [
-                        CustomFormPadding(
-                          childWidget: CustomTextFormField(
-                            controller: _emailController,
-                            hintText: StaticStrings.emailText,
-                            isHidden: false,
-                          ),
+                    const CustomFormPadding(
+                      topHeaderDistance: Values.paddingTitleTop,
+                      childWidget: Text(
+                        StaticStrings.login,
+                        style: TextStyle(
+                          fontSize: Values.screenTitleTextSize,
                         ),
-                        CustomFormPadding(
-                          childWidget: CustomTextFormField(
-                            controller: _passwordController,
-                            hintText: StaticStrings.requiredPassword,
-                            isHidden: true,
-                          ),
-                        ),
-                        BlocBuilder<AuthenticationBloc, AuthenticationState>(
-                            builder: (context, state) {
-                          return CustomFormPadding(
-                            topHeaderDistance: Values.paddingInsetButtonTop,
-                            childWidget: CustomElevatedButton(
-                              text: StaticStrings.loginButtonText,
-                              onPressed: () {
-                                // TODO right validation
-                                if (_formKey.currentState!.validate()) {
-                                  BlocProvider.of<AuthenticationBloc>(context)
-                                      .add(LoginEvent(_emailController.text,
-                                          _passwordController.text));
-                                }
-                              },
+                      ),
+                    ),
+                    Expanded(
+                      child: Form(
+                        key: _formKey,
+                        child: ListView(
+                          children: [
+                            CustomFormPadding(
+                              childWidget: CustomTextFormField(
+                                controller: _emailController,
+                                hintText: StaticStrings.emailText,
+                                isHidden: false,
+                              ),
                             ),
-                          );
-                        }),
-                        CustomFormPadding(
-                            childWidget: TextButton(
-                          child: Text(
-                            StaticStrings.forgotPassword,
-                            style: TextStyle(color: Colors.grey.shade700),
-                          ),
-                          onPressed: () {
-                            navigateToForgotPassword(context);
-                          },
-                        ))
-                      ],
+                            CustomFormPadding(
+                              childWidget: CustomTextFormField(
+                                controller: _passwordController,
+                                hintText: StaticStrings.requiredPassword,
+                                isHidden: true,
+                              ),
+                            ),
+                            BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                                builder: (context, state) {
+                                  return CustomFormPadding(
+                                    topHeaderDistance: Values.paddingInsetButtonTop,
+                                    childWidget: CustomElevatedButton(
+                                      text: StaticStrings.loginButtonText,
+                                      onPressed: () {
+                                        // TODO right validation
+                                        if (_formKey.currentState!.validate()) {
+                                          BlocProvider.of<AuthenticationBloc>(context)
+                                              .add(LoginEvent(_emailController.text,
+                                              _passwordController.text));
+                                        }
+                                      },
+                                    ),
+                                  );
+                                }),
+                            CustomFormPadding(
+                                childWidget: TextButton(
+                                  child: Text(
+                                    StaticStrings.forgotPassword,
+                                    style: TextStyle(color: Colors.grey.shade700),
+                                  ),
+                                  onPressed: () {
+                                    navigateToForgotPassword(context);
+                                  },
+                                ))
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   void navigateToForgotPassword(BuildContext context) {

@@ -14,7 +14,7 @@ class LoginService {
     if (response != null) {
       Map<String, dynamic> decodedResponse = jsonDecode(response.body);
       await FlutterSecureStorage()
-          .write(key: 'token', value: decodedResponse['accessToken']);
+          .write(key: 'token', value: decodedResponse['accessToken'].toString());
       return true;
     }
     return false;
