@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import '../../services/companies/company.dart';
 
 class CustomSwipeCard extends StatefulWidget {
-  const CustomSwipeCard({
-    super.key,
-    required this.company,
-  });
+  const CustomSwipeCard(
+      {super.key, required this.company, required this.reaction});
 
   final Company company;
+  final bool reaction;
 
   @override
   State<CustomSwipeCard> createState() => _CustomSwipeCardState();
@@ -27,7 +26,6 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -101,10 +99,10 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
                           padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
                           //TODO replace true and false with a switch: liked, disliked, neutral
                           child: Icon(
-                              checkForReaction(widget.company)
+                              widget.reaction
                                   ? Icons.thumb_up
                                   : Icons.thumb_down_outlined,
-                              color: checkForReaction(widget.company)
+                              color: widget.reaction
                                   ? StaticColors.primary
                                   : Colors.grey[500]),
                         )
@@ -118,7 +116,6 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
     );
   }
 
-  //e3d81e98-41ca-4c1f-842d-083f5d541344
   bool checkForOwnReaction(Company c) {
     if (c.studentCompanies != null && c.studentCompanies!.isNotEmpty) {
       return true;
