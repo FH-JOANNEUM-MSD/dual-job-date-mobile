@@ -1,9 +1,10 @@
 import 'package:dual_job_date_mobile/data/mockCompanies.dart';
+import 'package:dual_job_date_mobile/services/companies/company_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/widgets/swipe_ui/custom_animated_swipe_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 
 class Companies extends StatefulWidget {
   const Companies({super.key});
@@ -12,7 +13,20 @@ class Companies extends StatefulWidget {
   State<Companies> createState() => _CompaniesState();
 }
 
+fetchCompanies() async {
+  var r = await CompanyService.getActiveCompanies();
+  r.forEach((element) {
+    print(element.name);
+  });
+}
+
 class _CompaniesState extends State<Companies> {
+  @override
+  void initState() {
+    fetchCompanies();
+    super.initState();
+  }
+
   void _openFilterCompaniesModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -51,8 +65,14 @@ class _CompaniesState extends State<Companies> {
   //Consumer<CardProvider>(
   // builder: (BuildContext context, CardProvider value, Widget? child) {
 
+  void logToken() async {
+    print(await FlutterSecureStorage()
+        .read(key: AuthenticationTokens.bearer_key));
+  }
+
   @override
   Widget build(BuildContext context) {
+    logToken();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

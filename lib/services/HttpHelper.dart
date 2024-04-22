@@ -12,6 +12,23 @@ class HTTPHelper {
   static const storage = FlutterSecureStorage();
   static final Logger logger = Logger();
 
+  static Future<http.Response?> get(String url) async {
+    try {
+      final response = await http.get(
+        Uri.parse(baseUrl + url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${await storage.read(key: AuthenticationTokens.bearer_key)}',
+        },
+      ).timeout(const Duration(seconds: 2));
+
+      return response;
+    } catch (e) {
+      logger.e('http GET failed: $e');
+      return null;
+    }
+  }
+
   static Future<http.Response?> post(String url, dynamic body) async {
     try {
       final response = await http

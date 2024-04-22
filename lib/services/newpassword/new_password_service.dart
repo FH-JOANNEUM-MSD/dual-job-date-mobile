@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../rest/HttpHelper.dart';
+import '../HttpHelper.dart';
 import 'package:http/src/response.dart';
 
 class NewPasswordService {

@@ -2,13 +2,13 @@ import 'package:dual_job_date_mobile/data/mockCompanies.dart';
 import 'package:dual_job_date_mobile/models/company.dart';
 import 'package:dual_job_date_mobile/widgets/companies_dropdown.dart';
 import 'package:flutter/material.dart';
-import '../components/appointmentCard.dart';
-import '../data/mockAppointments.dart';
-import '../static_helpers/colors.dart';
-import '../static_helpers/values.dart';
-import '../widgets/custom_elevated_button.dart';
-import '../widgets/custom_form_padding.dart';
-import '../models/appointment.dart';
+import '../../components/appointmentCard.dart';
+import '../../data/mockAppointments.dart';
+import '../../static_helpers/colors.dart';
+import '../../static_helpers/values.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../../widgets/custom_form_padding.dart';
+import '../../models/appointment.dart';
 
 class Appointments extends StatefulWidget {
   const Appointments({super.key});

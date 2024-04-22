@@ -12,7 +12,7 @@ import 'package:dual_job_date_mobile/widgets/student_profile_skill_chips.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_upload.dart';
 
 import '../models/student.dart';
-import '../tabs/profile.dart';
+import '../tabs/profile/profile.dart';
 import '../widgets/custom_form_padding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

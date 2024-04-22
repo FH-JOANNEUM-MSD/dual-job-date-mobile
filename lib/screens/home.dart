@@ -1,7 +1,7 @@
-import 'package:dual_job_date_mobile/tabs/appointments.dart';
-import 'package:dual_job_date_mobile/tabs/companies.dart';
-import 'package:dual_job_date_mobile/tabs/profile.dart';
-import 'package:dual_job_date_mobile/tabs/more.dart';
+import 'package:dual_job_date_mobile/tabs/appointments/appointments.dart';
+import 'package:dual_job_date_mobile/tabs/companies/companies.dart';
+import 'package:dual_job_date_mobile/tabs/profile/profile.dart';
+import 'package:dual_job_date_mobile/tabs/more/more.dart';
 import 'package:dual_job_date_mobile/widgets/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../components/web_view_container.dart';
+import '../../components/web_view_container.dart';
 
 class More extends StatefulWidget {
   const More({super.key});

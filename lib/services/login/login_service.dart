@@ -4,7 +4,7 @@ import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-import '../../rest/HttpHelper.dart';
+import '../HttpHelper.dart';
 
 class LoginService {
   // Method to handle user login

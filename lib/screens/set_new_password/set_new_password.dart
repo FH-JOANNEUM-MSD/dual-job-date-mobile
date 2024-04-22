@@ -4,7 +4,7 @@ import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_bloc.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_event.dart';
 import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password_state.dart';
-import 'package:dual_job_date_mobile/services/new_password_service.dart';
+import 'package:dual_job_date_mobile/services/newpassword/new_password_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
