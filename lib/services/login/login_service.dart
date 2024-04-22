@@ -32,8 +32,9 @@ class LoginService {
   // Method to handle successful login response
   static LoginResponse _handleSuccessfulLogin(Response response) {
     Map<String, dynamic> decodedResponse = jsonDecode(response.body.trim());
+    decodedResponse['statusCode'] = response.statusCode;
     LoginResponse loginResponse =
-        LoginResponse.fromJson(decodedResponse, response.statusCode);
+        LoginResponse.fromJson(decodedResponse);
     _storeTokens(loginResponse); // Store tokens securely
 
     return loginResponse;

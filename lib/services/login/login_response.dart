@@ -14,8 +14,8 @@ class LoginResponse {
   LoginResponse(this.tokenType, this.accessToken, this.expiresIn,
       this.refreshToken, this.isNew,this.statusCode);
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json, int statusCode) =>
-      _$LoginResponseFromJson(json,statusCode);
+  factory LoginResponse.fromJson(Map<String, dynamic> json) =>
+      _$LoginResponseFromJson(json);
 
   /// Connect the generated [_$PersonToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
