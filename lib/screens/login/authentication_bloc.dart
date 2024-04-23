@@ -39,7 +39,7 @@ class AuthenticationBloc
       });
 
       on<LogoutEvent>((event, emit) async {
-        //TODO delete tokens from storage
+        await LoginService.flushStorage();
         emit(AuthenticationStateChanged(AuthenticationStatus.UNAUTHENTICATED));
       });
     }

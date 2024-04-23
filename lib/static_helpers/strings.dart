@@ -70,3 +70,10 @@ class StaticProfileStrings {
   static const String confirmCancel = 'Bearbeiten wirklich abbrechen?';
   static const String aboutMeHint = 'Schreibe Etwas Über Dich ...';
 }
+
+class AuthenticationTokens {
+  static const String bearer_key = "bearer-token";
+  static const String refresh_key = "refresh-token";
+  static const String expiration_key = "bearer-token-expiration";
+  static const String email_key = "email";
+}

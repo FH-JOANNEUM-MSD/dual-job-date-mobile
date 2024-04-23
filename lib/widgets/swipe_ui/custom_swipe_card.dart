@@ -1,19 +1,36 @@
-import 'package:dual_job_date_mobile/models/company.dart';
+import 'dart:convert';
+
 import 'package:dual_job_date_mobile/screens/details_company.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomSwipeCard extends StatelessWidget {
-  const CustomSwipeCard({
-    super.key,
-    required this.company,
-  });
+import '../../services/companies/company.dart';
+
+//TODO check if reaction is null in parent widget
+// handle reaction correctly in this widget
+
+class CustomSwipeCard extends StatefulWidget {
+  const CustomSwipeCard(
+      {super.key, required this.company, required this.reaction});
 
   final Company company;
+  final bool? reaction;
 
+  @override
+  State<CustomSwipeCard> createState() => _CustomSwipeCardState();
+}
+
+class _CustomSwipeCardState extends State<CustomSwipeCard> {
   final double borderRadiusCard = 12;
+
   final double heightCard = 80;
+
   final double marginImage = 4;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +47,7 @@ class CustomSwipeCard extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailsCompany(company: company),
+                builder: (context) => DetailsCompany(company: widget.company),
               ));
         },
         child: Container(
@@ -49,13 +66,17 @@ class CustomSwipeCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: marginImage, horizontal: marginImage),
+                  vertical: marginImage,
+                  horizontal: marginImage,
+                ),
                 width: heightCard - 2 * marginImage,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     alignment: Alignment.center,
-                    fit: BoxFit.fill,
-                    image: Image.asset(company.logo).image,
+                    fit: BoxFit.contain, // Adjust the fit property here
+                    image: MemoryImage(
+                      base64Decode(widget.company.logoBase64!),
+                    ),
                   ),
                 ),
               ),
@@ -64,11 +85,11 @@ class CustomSwipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(company.name,
+                      Text(widget.company.name ?? '',
                           style: const TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w500)),
                       Text(
-                        company.field,
+                        widget.company.industry ?? '',
                         style: const TextStyle(fontSize: 14.0),
                       ),
                     ]),
@@ -76,13 +97,19 @@ class CustomSwipeCard extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
-                    //TODO replace true and false with a switch: liked, disliked, neutral
-                    child: Icon(
-                        true ? Icons.thumb_up : Icons.thumb_down_outlined,
-                        color: true ? StaticColors.primary : Colors.grey[500]),
-                  ),
+                  checkForOwnReaction(widget.company)
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                          //TODO replace true and false with a switch: liked, disliked, neutral
+                          child: Icon(
+                              widget.reaction!
+                                  ? Icons.thumb_up
+                                  : Icons.thumb_down_outlined,
+                              color: widget.reaction!
+                                  ? StaticColors.primary
+                                  : Colors.grey[500]),
+                        )
+                      : const SizedBox(),
                 ],
               )
             ],
@@ -90,5 +117,18 @@ class CustomSwipeCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool checkForOwnReaction(Company c) {
+    if (widget.reaction != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool checkForReaction(Company c) {
+    var studentReaction = c.studentCompanies!.first;
+    return studentReaction.like;
   }
 }

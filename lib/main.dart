@@ -24,19 +24,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
     Values.setScreenWidth(MediaQuery.of(context).size.width);
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: StaticStrings.font,
-        ),
-        home: AnimatedSplashScreen(
-            splashIconSize: MediaQuery.of(context).size.height,
-            splash: const Splash(),
-            nextScreen: BlocProvider(
-              create: (context) => AuthenticationBloc(),
-              child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+    return BlocProvider(
+      create: (context) => AuthenticationBloc(),
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: StaticStrings.font,
+          ),
+          home: AnimatedSplashScreen(
+              splashIconSize: MediaQuery.of(context).size.height,
+              splash: const Splash(),
+              nextScreen: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
-                if (state.status == AuthenticationStatus.UNKNONW) {
+                   // FlutterSecureStorage().deleteAll();
+                if (state.status == AuthenticationStatus.UNKNOWN) {
                   BlocProvider.of<AuthenticationBloc>(context)
                       .add(RefreshBearerEvent());
                   return Container(
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
                 } else {
                   return const Login();
                 }
-              }),
-            )));
+              }))),
+    );
   }
 }

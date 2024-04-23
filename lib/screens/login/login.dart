@@ -4,7 +4,7 @@ import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_state.dart';
-import 'package:dual_job_date_mobile/screens/set_new_password.dart';
+import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
@@ -135,7 +135,7 @@ class _LoginState extends State<Login> {
                                 ? const CustomLoadingIndicator()
                                 : CustomElevatedButton(
                                     text: StaticStrings.loginButtonText,
-                                    onPressed: () {
+                                    onPressed: () async {
                                       // TODO right validation
                                       if (_formKey.currentState!.validate()) {
                                         BlocProvider.of<AuthenticationBloc>(

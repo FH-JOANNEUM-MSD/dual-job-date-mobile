@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:dual_job_date_mobile/screens/details_company.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
-import '../models/company.dart';
+import '../services/companies/company.dart';
 import '../static_helpers/colors.dart';
 
 class CompanyCardWidget extends StatelessWidget {
@@ -61,7 +62,9 @@ class CompanyCardWidget extends StatelessWidget {
                         image: DecorationImage(
                           alignment: Alignment.center,
                           fit: BoxFit.fill,
-                          image: Image.asset(company.logo).image,
+                          image: Image.memory(
+                            base64Decode(company.logoBase64!),
+                          ).image,
                         ),
                       ),
                     ),
@@ -75,29 +78,15 @@ class CompanyCardWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(company.name,
+                        Text(company.name ?? '',
                             style: const TextStyle(
                                 fontSize: 16.0, fontWeight: FontWeight.w500)),
                         Text(
-                          company.field,
+                          company.industry ?? '',
                           style: const TextStyle(fontSize: 14.0),
                         ),
                       ]),
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8, bottom: 2),
-                    child: Text(
-                      '${company.likes} ${CompaniesScreenStrings.likes}',
-                      style: const TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w500),
-                    ),
-                  )
-                ],
               ),
             ],
           ),

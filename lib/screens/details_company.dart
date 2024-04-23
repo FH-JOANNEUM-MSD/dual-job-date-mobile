@@ -1,10 +1,12 @@
-import 'package:dual_job_date_mobile/models/company.dart';
+import 'dart:convert';
+
 import 'package:dual_job_date_mobile/static_helpers/appstyles.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button_circle.dart';
 import 'package:flutter/material.dart';
 
+import '../services/companies/company.dart';
 import '../static_helpers/strings.dart';
 
 class DetailsCompany extends StatelessWidget {
@@ -24,11 +26,15 @@ class DetailsCompany extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 SizedBox(
-                    width: Values.screenWidth,
-                    child: Image.asset(
-                      'assets/images/companies/title_company.png',
-                      fit: BoxFit.fitWidth,
-                    )),
+                  width: Values.screenWidth,
+                  child: company.companyDetails?.teamPictureBase64 != null
+                      ? Image.memory(
+                          base64Decode(
+                              company.companyDetails!.teamPictureBase64!),
+                          fit: BoxFit.fitWidth,
+                        )
+                      : const SizedBox(height: 70,),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: Values.paddingHorizontalScreen,
@@ -43,13 +49,12 @@ class DetailsCompany extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(company.name, style: AppTextStyles.title),
-                            SizedBox(height: gapText),
-                            Text('${company.field}',
+                            Text(company.name ?? '',
                                 style: AppTextStyles.title),
                             SizedBox(height: gapText),
-                            Text('${company.likes} ${DetailsCompanyStrings.likes}',
-                                style: AppTextStyles.title)
+                            Text(company.industry ?? '',
+                                style: AppTextStyles.title),
+                            SizedBox(height: gapText),
                           ],
                         ),
                       ),
@@ -67,7 +72,7 @@ class DetailsCompany extends StatelessWidget {
                             SizedBox(
                               height: gapText - 6,
                             ),
-                            Text(company.description,
+                            Text(company.companyDetails?.shortDescription ?? '',
                                 style: AppTextStyles.description),
                           ]),
                     ],

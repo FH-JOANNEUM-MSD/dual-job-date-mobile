@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:dual_job_date_mobile/services/login/login_response.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-import '../../rest/HttpHelper.dart';
+import '../HttpHelper.dart';
 
 class LoginService {
   // Method to handle user login
@@ -29,20 +30,19 @@ class LoginService {
   }
 
   // Method to handle successful login response
-  static LoginResponse _handleSuccessfulLogin(Response response) {
-    Map<String, dynamic> decodedResponse = jsonDecode(response.body.trim());
-    LoginResponse loginResponse =
-    LoginResponse.fromJson(decodedResponse, response.statusCode);
-    if(!loginResponse.isNew){
-      _storeTokens(loginResponse); // Store tokens securely
-    }
+  static Future<LoginResponse> _handleSuccessfulLogin(Response response) async {
+    Map<String, dynamic> decodedResponse =
+        await jsonDecode(response.body.trim());
+    decodedResponse['statusCode'] = response.statusCode;
+    LoginResponse loginResponse = LoginResponse.fromJson(decodedResponse);
+    _storeTokens(loginResponse); // Store tokens securely
+
     return loginResponse;
   }
 
   // Method to handle error login response
   static LoginResponse _handleErrorLogin(Response response) {
-    return LoginResponse(
-        "null", "null", 0, "null", false, response.statusCode);
+    return LoginResponse("null", "null", 0, "null", false, response.statusCode);
   }
 
   // Method to handle exceptions during login
@@ -53,14 +53,16 @@ class LoginService {
   // Method to store tokens securely
   static Future<void> _storeTokens(LoginResponse response) async {
     const storage = FlutterSecureStorage();
-    await storage.write(key: 'bearer-token', value: response.accessToken);
-    await storage.write(key: 'refresh-token', value: response.refreshToken);
+    await storage.write(
+        key: AuthenticationTokens.bearer_key, value: response.accessToken);
+    await storage.write(
+        key: AuthenticationTokens.refresh_key, value: response.refreshToken);
 
     final DateTime now = DateTime.now();
     final int expiresIn = response.expiresIn;
     final DateTime expirationDate = now.add(Duration(seconds: expiresIn));
     await storage.write(
-        key: 'bearer-token-expiration',
+        key: AuthenticationTokens.expiration_key,
         value: expirationDate.toIso8601String());
   }
 
@@ -68,7 +70,7 @@ class LoginService {
   static Future<bool> isTokenExpired() async {
     const storage = FlutterSecureStorage();
     final String? expirationDateString =
-    await storage.read(key: "bearer-token-expiration");
+        await storage.read(key: AuthenticationTokens.expiration_key);
 
     if (expirationDateString == null) return true;
 
@@ -83,7 +85,8 @@ class LoginService {
   static Future<bool> isAuthenticated() async {
     const storage = FlutterSecureStorage();
 
-    final String? bearer = await storage.read(key: "bearer-token");
+    final String? bearer =
+        await storage.read(key: AuthenticationTokens.bearer_key);
     final bool bearerExpired = await isTokenExpired();
 
     if (bearer != null && !bearerExpired) {
@@ -95,8 +98,8 @@ class LoginService {
 
   // Method to refresh the token
   static Future<bool> refreshToken() async {
-    final String? refreshToken =
-    await const FlutterSecureStorage().read(key: "refresh-token");
+    final String? refreshToken = await const FlutterSecureStorage()
+        .read(key: AuthenticationTokens.refresh_key);
 
     final Logger logger = Logger();
 
@@ -104,11 +107,11 @@ class LoginService {
       var body = {
         'refreshToken': refreshToken,
       };
-      final response = await HTTPHelper.post('User/Refresh', body);
+      final response = await HTTPHelper.postRefreshToken('User/Refresh', body);
       if (response != null && response.statusCode == 200) {
-        Map<String, dynamic> decodedResponse = jsonDecode(response.body);
-        var refreshResponse =
-        LoginResponse.fromJson(decodedResponse, response.statusCode);
+        var decodedResponse = await jsonDecode(response.body.trim());
+        decodedResponse['statusCode'] = response.statusCode;
+        LoginResponse refreshResponse = LoginResponse.fromJson(decodedResponse);
         _storeTokens(refreshResponse); // Store refreshed tokens
       }
       return response!.statusCode == 200;
@@ -117,4 +120,13 @@ class LoginService {
       return false;
     }
   }
+
+  static Future<void> flushStorage() async {
+    try {
+      await const FlutterSecureStorage().deleteAll();
+    } catch (e) {
+      Logger().e('Failed to flush secure storage: $e');
+    }
+  }
+
 }

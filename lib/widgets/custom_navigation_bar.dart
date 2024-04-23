@@ -24,11 +24,9 @@ class CustomNavigationBar extends StatelessWidget {
       },
       items: [
         buildNavBarItem(Paths.group),
-        buildNavBarItem(Paths.flame),
         buildNavBarItem(Paths.calendar),
         buildNavBarItem(Paths.profile),
         buildNavBarItem(Paths.more),
-
       ],
     );
   }
