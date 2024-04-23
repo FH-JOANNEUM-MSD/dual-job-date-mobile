@@ -39,16 +39,13 @@ class _HomeState extends State<Home> {
               index: currentIndex,
               children: tabs,
             ),
-            bottomNavigationBar: BlocProvider(
-              create: (context) => AuthenticationBloc(),
-              child: CustomNavigationBar(
-                currentIndex: currentIndex,
-                onTabTapped: (x) {
-                  setState(() {
-                    currentIndex = x;
-                  });
-                },
-              ),
+            bottomNavigationBar: CustomNavigationBar(
+              currentIndex: currentIndex,
+              onTabTapped: (x) {
+                setState(() {
+                  currentIndex = x;
+                });
+              },
             )));
   }
 }
