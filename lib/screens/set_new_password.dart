@@ -1,7 +1,6 @@
 import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
-import 'package:dual_job_date_mobile/services/new_password_service.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
@@ -9,6 +8,7 @@ import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+import '../services/newpassword/new_password_service.dart';
 import '../static_helpers/paths.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_form_padding.dart';

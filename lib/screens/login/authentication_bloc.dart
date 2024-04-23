@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_state.dart';
 import 'package:dual_job_date_mobile/services/login/login_service.dart';
-import 'package:dual_job_date_mobile/services/logout_service.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
@@ -40,7 +39,7 @@ class AuthenticationBloc
       });
 
       on<LogoutEvent>((event, emit) async {
-        await LogoutService.flushStorage();
+        await LoginService.flushStorage();
         emit(AuthenticationStateChanged(AuthenticationStatus.UNAUTHENTICATED));
       });
     }

@@ -120,4 +120,13 @@ class LoginService {
       return false;
     }
   }
+
+  static Future<void> flushStorage() async {
+    try {
+      await const FlutterSecureStorage().deleteAll();
+    } catch (e) {
+      Logger().e('Failed to flush secure storage: $e');
+    }
+  }
+
 }
