@@ -69,7 +69,7 @@ class PasswordValidator{
   /// 5.) New Password must be different from old password
   String? validateNewPassword(String? newPW){
     //Regex checking rules 1-4
-    RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{8,}$');
+    RegExp regex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$');
 
     if(newPW==null||newPW.isEmpty){
       return StaticStrings.passwordEmpty;

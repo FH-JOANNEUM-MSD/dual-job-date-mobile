@@ -34,8 +34,20 @@ void main(){
         'MyPassword1!',
         'Super*Safe_1234',
         r'Q$onkM3kC3$SFX',
-        'Student!1'
+        'Student!1',
+        '8J).>*gLJ{N4',
+        'Ex@mpl3s9',
+        'S@f3tyF1rst!',
+        r'Pa$$W0rd22',
+        'Gr8te*Ful4',
+        'Val!d8ionX',
+        'Secu#Rity20',
+        'UseR!2023',
+        'Pro*GraMm1',
+        'Aut0mat#on',
+        'D3v3l0p#5'
       ];
+
 
       for(String password in passwords){
         String? result = PasswordValidator().validateNewPassword(password);
