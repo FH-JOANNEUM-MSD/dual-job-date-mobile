@@ -47,10 +47,17 @@ dependencies:
   logger: ^2.2.0
   bloc: ^8.1.4
   flutter_bloc: ^8.1.5
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/splash_logo.png"
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
