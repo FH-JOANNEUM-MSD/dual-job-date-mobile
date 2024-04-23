@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AuthenticationBloc(),
               child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
-                    // FlutterSecureStorage().deleteAll();
+                   // FlutterSecureStorage().deleteAll();
                 if (state.status == AuthenticationStatus.UNKNOWN) {
                   BlocProvider.of<AuthenticationBloc>(context)
                       .add(RefreshBearerEvent());

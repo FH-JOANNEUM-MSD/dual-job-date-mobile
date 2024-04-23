@@ -31,10 +31,10 @@ class LoginService {
 
   // Method to handle successful login response
   static Future<LoginResponse> _handleSuccessfulLogin(Response response) async {
-    Map<String, dynamic> decodedResponse =  await jsonDecode(response.body.trim());
+    Map<String, dynamic> decodedResponse =
+        await jsonDecode(response.body.trim());
     decodedResponse['statusCode'] = response.statusCode;
-    LoginResponse loginResponse =
-        LoginResponse.fromJson(decodedResponse);
+    LoginResponse loginResponse = LoginResponse.fromJson(decodedResponse);
     _storeTokens(loginResponse); // Store tokens securely
 
     return loginResponse;
@@ -109,8 +109,9 @@ class LoginService {
       };
       final response = await HTTPHelper.postRefreshToken('User/Refresh', body);
       if (response != null && response.statusCode == 200) {
-        var refreshResponse =
-            LoginResponse('', '', 0, '', false, response.statusCode);
+        var decodedResponse = await jsonDecode(response.body.trim());
+        decodedResponse['statusCode'] = response.statusCode;
+        LoginResponse refreshResponse = LoginResponse.fromJson(decodedResponse);
         _storeTokens(refreshResponse); // Store refreshed tokens
       }
       return response!.statusCode == 200;
