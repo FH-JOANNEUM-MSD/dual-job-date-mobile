@@ -30,8 +30,8 @@ class LoginService {
   }
 
   // Method to handle successful login response
-  static LoginResponse _handleSuccessfulLogin(Response response) {
-    Map<String, dynamic> decodedResponse = jsonDecode(response.body.trim());
+  static Future<LoginResponse> _handleSuccessfulLogin(Response response) async {
+    Map<String, dynamic> decodedResponse =  await jsonDecode(response.body.trim());
     decodedResponse['statusCode'] = response.statusCode;
     LoginResponse loginResponse =
         LoginResponse.fromJson(decodedResponse);
