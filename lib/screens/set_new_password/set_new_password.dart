@@ -62,6 +62,7 @@ class _SetNewPasswordState extends State<SetNewPassword> {
         create: (context) => SetNewPasswordBloc(),
         child: BlocListener<SetNewPasswordBloc, SetNewPasswordState>(
           listener: (context, state) {
+            print(state.status);
             if (state.status == SetNewPasswordStatus.newPasswordSet) {
               navigateToHome(context);
             } else {
@@ -164,12 +165,38 @@ class _SetNewPasswordState extends State<SetNewPassword> {
                                               _newPasswordController.text));
                                         } else {
                                           //TODO: This doesn't look too good, review this.
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                              customSnackBarWidget(isValid)
-                                          );
+                                          Toast().showToast(context, isValid);
                                         }
                                       }));
+                              MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height
+                              ); //Please comment if necessary
+                              height: MediaQuery
+                                  .of(context)
+                              PasswordValidator().validateNewPassword,
+                              // Save Button
+                              text: StaticStrings.saveButtonText,
+                              onPressed: () async {
+                              String? isValid = PasswordValidator()
+                                  .validateChange(
+                              _repeatNewPasswordController
+                                  .text);
+                              if (isValid == null) {
+                              BlocProvider.of<SetNewPasswordBloc>(
+                                  .add(SetNewPasswordEvent(
+                              _currentPasswordController
+                                  .text,
+                              } else {
+                              //TODO: This doesn't look too good, review this.
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(
+                              customSnackBarWidget(isValid)
+                              );
+                              }
+                              })
+                              );
                             },
                           ),
                         ],

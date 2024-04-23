@@ -8,6 +8,7 @@ import 'package:dual_job_date_mobile/screens/set_new_password/set_new_password.d
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/paths.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:dual_job_date_mobile/widgets/custom_elevated_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_form_padding.dart';
 import 'package:dual_job_date_mobile/widgets/custom_loading_indicator.dart';
