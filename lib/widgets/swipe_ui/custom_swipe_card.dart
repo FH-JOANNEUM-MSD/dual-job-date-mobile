@@ -15,7 +15,7 @@ class CustomSwipeCard extends StatefulWidget {
       {super.key, required this.company, required this.reaction});
 
   final Company company;
-  final bool reaction;
+  final bool? reaction;
 
   @override
   State<CustomSwipeCard> createState() => _CustomSwipeCardState();
@@ -103,14 +103,14 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
                           padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
                           //TODO replace true and false with a switch: liked, disliked, neutral
                           child: Icon(
-                              widget.reaction
+                              widget.reaction!
                                   ? Icons.thumb_up
                                   : Icons.thumb_down_outlined,
-                              color: widget.reaction
+                              color: widget.reaction!
                                   ? StaticColors.primary
                                   : Colors.grey[500]),
                         )
-                      : const Placeholder(),
+                      : const SizedBox(),
                 ],
               )
             ],
@@ -121,7 +121,7 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
   }
 
   bool checkForOwnReaction(Company c) {
-    if (c.studentCompanies != null && c.studentCompanies!.isNotEmpty) {
+    if (widget.reaction != null) {
       return true;
     } else {
       return false;

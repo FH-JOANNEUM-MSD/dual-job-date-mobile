@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../services/companies/company.dart';
 
-//TODO check if studentCompanies is null in parent widget
-//TODO handle studentCompanies.like correctly
 
 class CustomAnimatedSwipeCard extends StatefulWidget {
   const CustomAnimatedSwipeCard({super.key, required this.company});
@@ -24,9 +22,16 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
 
   @override
   void initState() {
-    //TODO check if null
-    reaction = widget.company.studentCompanies!.first.like;
     super.initState();
+    initializeReaction();
+  }
+
+  void initializeReaction() {
+    if (widget.company.studentCompanies != null && widget.company.studentCompanies!.isNotEmpty) {
+      reaction = widget.company.studentCompanies!.first.like;
+    } else {
+      reaction = false;
+    }
   }
 
   @override
