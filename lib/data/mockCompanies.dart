@@ -6,40 +6,50 @@ final List<Company> mockCompanies = [
     name: 'AllForOne',
     field: 'Consulting',
     likes: 5,
-    description: 'A leading consulting firm specializing in business process optimization.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/castana.png',
     name: 'Castana',
     field: 'Softwareentwicklung',
     likes: 3,
-    description: 'Innovative tech company providing cutting-edge software solutions.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Kapfenberg, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/cities.png',
     name: 'Cities',
     field: 'Softwareentwicklung',
     likes: 2,
-    description: 'Real estate giant with a focus on sustainable urban development.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/energiesteiermark.png',
     name: 'Energie Steiermark',
     field: 'Energy',
     likes: 7,
-    description: 'Energy provider dedicated to renewable sources and innovative solutions.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/voestalpine.png',
     name: 'Voestalpine',
     field: 'Manufacturing',
     likes: 5,
-    description: 'Leading global technology group in steel engineering.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Kapfenberg, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
 ];
 final List<Company> mockLikeCompanies = [
@@ -48,32 +58,40 @@ final List<Company> mockLikeCompanies = [
     name: 'AllForOne',
     field: 'Consulting',
     likes: 5,
-    description: 'A leading consulting firm specializing in business process optimization.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/castana.png',
     name: 'Castana',
     field: 'Softwareentwicklung',
     likes: 3,
-    description: 'Innovative tech company providing cutting-edge software solutions.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Kapfenberg, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/cities.png',
     name: 'Cities',
     field: 'Softwareentwicklung',
     likes: 2,
-    description: 'Real estate giant with a focus on sustainable urban development.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/energiesteiermark.png',
     name: 'Energie Steiermark',
     field: 'Energy',
     likes: 7,
-    description: 'Energy provider dedicated to renewable sources and innovative solutions.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
 ];
 final List<Company> mockMatchCompanies = [
@@ -82,23 +100,29 @@ final List<Company> mockMatchCompanies = [
     name: 'AllForOne',
     field: 'Consulting',
     likes: 5,
-    description: 'A leading consulting firm specializing in business process optimization.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/castana.png',
     name: 'Castana',
     field: 'Softwareentwicklung',
     likes: 3,
-    description: 'Innovative tech company providing cutting-edge software solutions.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Kapfenberg, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
   Company(
     logo: 'assets/images/companies/cities.png',
     name: 'Cities',
     field: 'Softwareentwicklung',
     likes: 2,
-    description: 'Real estate giant with a focus on sustainable urban development.',
+    description:
+        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
     location: 'Graz, Steiermark',
+    titleImage: 'assets/images/companies/title_company.png',
   ),
 ];

@@ -9,8 +9,8 @@ import 'package:dual_job_date_mobile/widgets/student_profile_skill_chips.dart';
 import 'package:dual_job_date_mobile/widgets/divider.dart';
 import 'package:dual_job_date_mobile/widgets/student_profile_upload.dart';
 import 'package:flutter_svg/svg.dart';
-import '../static_helpers/values.dart';
-import '../static_helpers/strings.dart';
+import '../../static_helpers/values.dart';
+import '../../static_helpers/strings.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

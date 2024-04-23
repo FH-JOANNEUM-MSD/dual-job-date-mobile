@@ -1,12 +1,11 @@
-import 'package:dual_job_date_mobile/tabs/appointments.dart';
-import 'package:dual_job_date_mobile/tabs/companies.dart';
-import 'package:dual_job_date_mobile/tabs/profile.dart';
-import 'package:dual_job_date_mobile/tabs/more.dart';
-import 'package:dual_job_date_mobile/tabs/view_likes_and_matches.dart';
+import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
+import 'package:dual_job_date_mobile/tabs/appointments/appointments.dart';
+import 'package:dual_job_date_mobile/tabs/companies/companies.dart';
+import 'package:dual_job_date_mobile/tabs/profile/profile.dart';
+import 'package:dual_job_date_mobile/tabs/more/more.dart';
 import 'package:dual_job_date_mobile/widgets/custom_navigation_bar.dart';
-import 'package:dual_job_date_mobile/widgets/swipe_ui/card_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,9 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late int currentIndex;
   List<Widget> tabs = [
-    ChangeNotifierProvider(
-        create: (context) => CardProvider(), child: const Companies()),
-    const LikesAndMatches(),
+    const Companies(),
     const Appointments(),
     const Profile(),
     const More()
@@ -38,7 +35,10 @@ class _HomeState extends State<Home> {
         length: tabs.length,
         child: Scaffold(
             backgroundColor: Colors.white,
-            body: tabs[currentIndex],
+            body: IndexedStack(
+              index: currentIndex,
+              children: tabs,
+            ),
             bottomNavigationBar: CustomNavigationBar(
               currentIndex: currentIndex,
               onTabTapped: (x) {

@@ -1,126 +1,134 @@
-import 'package:dual_job_date_mobile/models/company.dart';
+import 'dart:convert';
+
+import 'package:dual_job_date_mobile/screens/details_company.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomSwipeCard extends StatelessWidget {
-  const CustomSwipeCard({super.key, required this.company});
+import '../../services/companies/company.dart';
+
+//TODO check if reaction is null in parent widget
+// handle reaction correctly in this widget
+
+class CustomSwipeCard extends StatefulWidget {
+  const CustomSwipeCard(
+      {super.key, required this.company, required this.reaction});
 
   final Company company;
+  final bool? reaction;
+
+  @override
+  State<CustomSwipeCard> createState() => _CustomSwipeCardState();
+}
+
+class _CustomSwipeCardState extends State<CustomSwipeCard> {
+  final double borderRadiusCard = 12;
+
+  final double heightCard = 80;
+
+  final double marginImage = 4;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          border: Border.all(color: StaticColors.primary, width: 2),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _buildCompanyInfo(),
-            _buildDivider(),
-            _buildDescription(company.description),
-            _buildDivider(),
-            _buildSectionTitle("Tätigkeitsbereich"),
-            _buildFieldOfActivity("Backend"),
-            _buildFieldOfActivity("Frontend"),
-            _buildFieldOfActivity("Datenbanken")
-          ],
-        ),
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      color: Colors.white,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadiusCard),
       ),
-    );
-  }
-
-  Widget _buildCompanyInfo() {
-    return Column(
-      children: [
-        Image.asset(
-          company.logo,
-          width: 200,
-          height: 100,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(borderRadiusCard),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsCompany(company: widget.company),
+              ));
+        },
+        child: Container(
+          height: heightCard,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadiusCard),
+            border: Border.all(
+              color: StaticColors.primary,
+              width: 1,
+            ),
+          ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                company.name,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(
+                  vertical: marginImage,
+                  horizontal: marginImage,
+                ),
+                width: heightCard - 2 * marginImage,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    alignment: Alignment.center,
+                    fit: BoxFit.contain, // Adjust the fit property here
+                    image: MemoryImage(
+                      base64Decode(widget.company.logoBase64!),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(widget.company.name ?? '',
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w500)),
+                      Text(
+                        widget.company.industry ?? '',
+                        style: const TextStyle(fontSize: 14.0),
+                      ),
+                    ]),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  checkForOwnReaction(widget.company)
+                      ? Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
+                          //TODO replace true and false with a switch: liked, disliked, neutral
+                          child: Icon(
+                              widget.reaction!
+                                  ? Icons.thumb_up
+                                  : Icons.thumb_down_outlined,
+                              color: widget.reaction!
+                                  ? StaticColors.primary
+                                  : Colors.grey[500]),
+                        )
+                      : const SizedBox(),
+                ],
               )
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Icon(Icons.location_on),
-              ),
-              Text(company.location)
-            ],
-          ),
-        )
-      ],
-    );
-  }
-
-  Widget _buildFieldOfActivity(String activity) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(activity),
-          const Row(
-            children: [
-              Icon(Icons.star, color: Colors.orange),
-              Icon(Icons.star, color: Colors.orange),
-              Icon(Icons.star, color: Colors.orange),
-            ],
-          )
-        ],
       ),
     );
   }
 
-  Widget _buildTech(String tech) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Text(tech),
-    );
+  bool checkForOwnReaction(Company c) {
+    if (widget.reaction != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Widget _buildDescription(String description) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        description,
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-
-  Widget _buildDivider() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-      child: Divider(),
-    );
+  bool checkForReaction(Company c) {
+    var studentReaction = c.studentCompanies!.first;
+    return studentReaction.like;
   }
 }
