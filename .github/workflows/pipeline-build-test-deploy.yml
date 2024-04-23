@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - cicd/notification
   pull_request:
     branches:
-      - main
+      - cicd/notification
   release:
     types: [created]
 
@@ -88,3 +88,37 @@ jobs:
         with:
           name: release-aab-signed
           path: build/app/outputs/bundle/release/app-release-signed.aab
+
+  create_issue_on_failure:
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    permissions:
+      contents: read
+      issues: write
+    if: ${{ failure() }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Issue
+        id: create_issue
+        uses: imjohnbo/issue-bot@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Failure Detected in ${{ github.workflow }}"
+          body: |
+            **Failure Details:**
+            - **Workflow Name**: ${{ github.workflow }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Commit**: ${{ github.sha }}
+            - **Author**: ${{ github.actor }}
+            - **Failed Job Link**: [View Detailed Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          labels: |
+            bug
+
+      - name: Assign Issue
+        if: ${{ steps.create_issue.outputs.issue-number }}
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ steps.create_issue.outputs.issue-number }}/assignees
+          assignees: ${{ github.actor }}
+          token: ${{ secrets.GITHUB_TOKEN }}
