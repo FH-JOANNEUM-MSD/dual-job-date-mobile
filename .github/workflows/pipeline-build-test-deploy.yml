@@ -71,7 +71,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Create the Keystore
+      - name: Create the Android Keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
@@ -88,3 +88,22 @@ jobs:
         with:
           name: release-aab-signed
           path: build/app/outputs/bundle/release/app-release-signed.aab
+
+  release:
+    name: Release Android app to internal track
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get appbundle from artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release-aab-signed
+      - name: Release app to internal track
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
+          packageName: com.example.dual_job_date_mobile
+          releaseFiles: app-release-signed.aab
+          track: alpha
+          status: completed
