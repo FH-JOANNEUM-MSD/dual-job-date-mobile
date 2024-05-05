@@ -1,5 +1,7 @@
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
+import 'package:dual_job_date_mobile/services/login/login_response.dart';
+import 'package:dual_job_date_mobile/services/more/more_user_data_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +40,7 @@ class _MoreState extends State<More> {
       FocusScope.of(context).requestFocus(new FocusNode());
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +62,7 @@ class _MoreState extends State<More> {
                       onPressed: () => _toggleEditing(),
                     ),
                   )
-              ) :Text(_controller.text.isEmpty ? 'Tap the edit icon to start typing' : _controller.text),
+              ) :Text(_controller.text.isEmpty ? _controller.text = UserDataService.userID : _controller.text),
               trailing: IconButton(
                 icon: Icon(Icons.edit),
                 onPressed: () => _toggleEditing(),
@@ -68,7 +71,7 @@ class _MoreState extends State<More> {
           ),
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Text('Email'),
+            child: Text(UserDataService.email),
           ),
           Expanded(
             child: ListView.builder(

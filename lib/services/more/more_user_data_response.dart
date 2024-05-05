@@ -6,13 +6,9 @@ part 'more_user_data_response.g.dart';
 class UserDataResponse {
   final String tokenType;
   final String accessToken;
-  final int expiresIn;
-  final String refreshToken;
-  final bool isNew;
   final int statusCode;
 
-  UserDataResponse(this.tokenType, this.accessToken, this.expiresIn,
-      this.refreshToken, this.isNew,this.statusCode);
+  UserDataResponse(this.tokenType, this.accessToken, this.statusCode);
 
   factory UserDataResponse.fromJson(Map<String, dynamic> json) =>
       _$UserDataResponseFromJson(json);
