@@ -66,7 +66,10 @@ class _MoreState extends State<More> {
               ),
             ),
           ),
-          Text('Email'),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text('Email'),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: _menuItems.length,
