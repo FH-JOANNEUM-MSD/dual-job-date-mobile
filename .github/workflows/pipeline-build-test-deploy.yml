@@ -1,7 +1,6 @@
 name: CI/CD Pipeline
 
 on:
-  Error to halt, because of two cicd files
   push:
     branches:
       - main
