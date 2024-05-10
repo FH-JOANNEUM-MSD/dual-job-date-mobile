@@ -1,12 +1,14 @@
+import 'package:dual_job_date_mobile/components/customSnackbar.dart';
 import 'package:dual_job_date_mobile/screens/home.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:dual_job_date_mobile/static_helpers/validators.dart';
+import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button.dart';
 import 'package:dual_job_date_mobile/widgets/custom_text_form_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../services/newpassword/new_password_service.dart';
 import '../static_helpers/paths.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_form_padding.dart';
@@ -47,6 +49,8 @@ class _SetNewPasswordState extends State<SetNewPassword> {
   ///Actually build the widget
   @override
   Widget build(BuildContext context) {
+    Values.setScreenWidth(
+        MediaQuery.of(context).size.height); //Please comment if necessary
     return Scaffold(
       body: Stack(
         children: [
@@ -65,73 +69,94 @@ class _SetNewPasswordState extends State<SetNewPassword> {
               ),
             ),
             child: SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CustomFormPadding(
-                    topHeaderDistance: Values.paddingLogoTop,
-                    childWidget: Image.asset(
-                      //Logo Image
-                      Paths.logo,
-                      height: Values.getScaledLogoSize(),
-                    ),
-                  ),
-                  const CustomFormPadding(
-                    topHeaderDistance: Values.paddingTitleTop,
-                    childWidget: Text(
-                      //Title of the screen
-                      StaticStrings.changePassword,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: Values.screenTitleTextSize,
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomFormPadding(
+                        childWidget: Image.asset(
+                          //Logo Image
+                          Paths.logo,
+                          height: Values.getScaledLogoSize(),
+                        ),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                      child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      children: [
-                        //Form consisting of 3 Text inputs and one button
-                        CustomFormPadding(
-                          //Current Password Text Field
-                          childWidget: CustomTextFormField(
-                            controller: _currentPasswordController,
-                            hintText: StaticStrings.currentPasswordText,
-                            isHidden: true,
-                          ),
+                      const Text(
+                        //Title of the screen
+                        StaticStrings.changePassword,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: Values.screenTitleTextSize,
                         ),
-                        CustomFormPadding(
-                          //New Password Text Field
-                          childWidget: CustomTextFormField(
-                            controller: _newPasswordController,
-                            hintText: StaticStrings.newPasswordText,
-                            isHidden: true,
-                          ),
+                      ),
+                      //Form consisting of 3 Text inputs and one button
+                      CustomFormPadding(
+                        //Current Password Text Field
+                        childWidget: CustomTextFormField(
+                          controller: _currentPasswordController,
+                          hintText: StaticStrings.currentPasswordText,
+                          isHidden: true,
+                          validator: PasswordValidator().validatePassword,
                         ),
-                        CustomFormPadding(
-                          //Repeat new Password Text Field
-                          childWidget: CustomTextFormField(
-                            controller: _repeatNewPasswordController,
-                            hintText: StaticStrings.repeatNewPasswordText,
-                            isHidden: true,
-                          ),
+                      ),
+                      CustomFormPadding(
+                        //New Password Text Field
+                        childWidget: CustomTextFormField(
+                          controller: _newPasswordController,
+                          hintText: StaticStrings.newPasswordText,
+                          isHidden: true,
+                          validator: PasswordValidator().validateNewPassword,
                         ),
-                        CustomFormPadding(
-                          // Save Button
-                          childWidget: CustomElevatedButton(
-                            text: StaticStrings.saveButtonText,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                navigateToHome(context);
+                      ),
+                      CustomFormPadding(
+                        //Repeat new Password Text Field
+                        childWidget: CustomTextFormField(
+                          controller: _repeatNewPasswordController,
+                          hintText: StaticStrings.repeatNewPasswordText,
+                          isHidden: true,
+                          validator: PasswordValidator().validatePassword,
+                        ),
+                      ),
+                      CustomFormPadding(
+                        // Save Button
+                        childWidget: CustomElevatedButton(
+                          text: StaticStrings.saveButtonText,
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              //Extra Validation if passwords are different etc...
+                              String? isValid = PasswordValidator()
+                                  .validateChange(
+                                      _currentPasswordController.text,
+                                      _newPasswordController.text,
+                                      _repeatNewPasswordController.text);
+
+                              if (isValid == null) {
+                                final bool isSuccess =
+                                    await NewPasswordService.setNewPassword(
+                                        _currentPasswordController.text,
+                                        _newPasswordController.text);
+                                if (isSuccess) {
+                                  if (!context.mounted) return;
+                                  navigateToHome(context);
+                                } else {
+                                  if (!context.mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    customSnackBarWidget(
+                                        StaticStrings.passwordServerError),
+                                  );
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  customSnackBarWidget(isValid),
+                                );
                               }
-                            },
-                          ),
+                            }
+                          },
                         ),
-                      ],
-                    ),
-                  ))
-                ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

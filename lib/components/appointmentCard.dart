@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../models/appointment.dart';
 import '../static_helpers/colors.dart';
-import '../tabs/appointments.dart';
+import '../tabs/appointments/appointments.dart';
 
 class AppointmentCard extends StatelessWidget {
   const AppointmentCard({

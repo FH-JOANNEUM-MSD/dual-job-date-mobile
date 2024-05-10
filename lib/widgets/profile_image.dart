@@ -21,7 +21,7 @@ class ProfileImage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (updateable) {
-          print('Image clicked!'); // TODO implement Image upload
+          // TODO implement Image upload
           if (onUpdate != null) {
             onUpdate!();
           }

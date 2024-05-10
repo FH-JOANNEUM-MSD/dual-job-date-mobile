@@ -32,12 +32,12 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(Values.fullRoundedBox),
         ),
         backgroundColor: StaticColors.buttonColor,
-        textStyle: const TextStyle(color: Colors.white),
+        textStyle: const TextStyle(color: Colors.white,),
         minimumSize: const Size(double.infinity, _minimumSizeHeight),
       ),
       child:  Text(
         _text, //comes from constructor
-        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize),
+        style: const TextStyle(color: Colors.white, fontSize: Values.buttonTextSize,),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 ///contains static skill chips as well as selectable skill chips
 class StudentProfileSkillChips extends StatelessWidget {
   final List<Color> colors;
@@ -76,7 +77,7 @@ class _StudentProfileSkillChipsState extends State<StudentProfileSkillChipsUpdat
           .map((entry) {
         final isSelected = selectedIndices.contains(entry.key);
         return ChoiceChip(
-          label: Text(entry.value, style: const TextStyle(fontSize: 16.0)),
+          label: Text(entry.value, style: const TextStyle(fontSize: 16.0,)),
           backgroundColor: Colors.transparent,
           showCheckmark: false,
           selectedColor: widget.chipColor.withOpacity(0.13),
