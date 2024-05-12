@@ -1,8 +1,9 @@
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
-import 'package:dual_job_date_mobile/services/login/login_response.dart';
 import 'package:dual_job_date_mobile/services/more/more_user_data_service.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dual_job_date_mobile/tabs/more/more_bloc.dart';
+import 'package:dual_job_date_mobile/tabs/more/more_event.dart';
+import 'package:dual_job_date_mobile/tabs/more/more_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -14,11 +15,16 @@ import '../../widgets/custom_elevated_button.dart';
 class More extends StatefulWidget {
   const More({Key? key});
 
+
   @override
   State<More> createState() => _MoreState();
+
+
 }
 
 class _MoreState extends State<More> {
+
+  late MoreBloc _moreBloc;
   final List<Map<String, String>> _menuItems = [
     {
       'title': 'Impressum',
@@ -32,6 +38,25 @@ class _MoreState extends State<More> {
   TextEditingController _controller = TextEditingController();
   bool _isEditing = false;
 
+  @override
+  void initState(){
+    super.initState();
+    _moreBloc = MoreBloc();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getUserName();
+    });
+  }
+
+  @override
+  void dispose(){
+    _moreBloc.close();
+    super.dispose();
+
+  }
+
+  void getUserName(){
+    _moreBloc.add(MoreGetNameEvent());
+  }
   void _toggleEditing() {
     setState(() {
       _isEditing = !_isEditing;
@@ -47,7 +72,22 @@ class _MoreState extends State<More> {
       appBar: AppBar(
         title: Text('More'),
       ),
-      body: Column(
+      body:BlocProvider(
+        create: (context) => _moreBloc,
+        child: BlocListener<MoreBloc,MoreState>(
+          bloc: _moreBloc,
+          listener:(context,state){
+              //TODO: handle state changes
+            if(state == MoreStates.FAIL){
+             ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Fehler beim Laden des Usernames!'),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
@@ -59,10 +99,13 @@ class _MoreState extends State<More> {
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: Icon(Icons.done),
-                      onPressed: () => _toggleEditing(),
+                      onPressed: () {
+                        _toggleEditing();
+                        _moreBloc.add(MoreChangeNameEvent(_controller.text));
+                      },
                     ),
                   )
-              ) :Text(_controller.text.isEmpty ? _controller.text = UserDataService.userID : _controller.text),
+              ) :Text(_controller.text.isEmpty ? _controller.text = UserDataService.userName : _controller.text),
               trailing: IconButton(
                 icon: Icon(Icons.edit),
                 onPressed: () => _toggleEditing(),
@@ -106,7 +149,7 @@ class _MoreState extends State<More> {
             ),
           ),
         ],
-      ),
+      ),),)
     );
   }
 
