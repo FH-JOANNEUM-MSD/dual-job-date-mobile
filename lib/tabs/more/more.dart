@@ -92,6 +92,7 @@ class _MoreState extends State<More> {
         children: [
           SizedBox(
             height: 60,
+            //TODO: We need a first and a last name test field
             child: ListTile(
               title: _isEditing?
               TextField(autofocus: true,
@@ -101,7 +102,7 @@ class _MoreState extends State<More> {
                       icon: Icon(Icons.done),
                       onPressed: () {
                         _toggleEditing();
-                        _moreBloc.add(MoreChangeNameEvent(_controller.text));
+                        _moreBloc.add(MoreChangeNameEvent(_controller.text,""));
                       },
                     ),
                   )
