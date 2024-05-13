@@ -38,11 +38,12 @@ class _MoreState extends State<More> {
 
   @override
   void initState() {
-    super.initState();
     _moreBloc = MoreBloc();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getUserName();
     });
+
+    super.initState();
   }
 
   @override
@@ -81,8 +82,8 @@ class _MoreState extends State<More> {
             listener: (context, state) {
               //TODO: handle state changes
               MoreStates curState = state.state;
-              logger.i('Current state: $curState');
               logger.i("Previous State: $previousState");
+              logger.i('Current state: $curState');
               previousState = state.state;
               if (state.state == MoreStates.FAIL) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -91,14 +92,21 @@ class _MoreState extends State<More> {
                     backgroundColor: Colors.red,
                   ),
                 );
-              } else if (previousState == MoreStates.CHANGING &&
-                  state.state == MoreStates.SUCCESS) {
+              } else if (state.state == MoreStates.SUCCESS) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Erfolgreich!'),
                     backgroundColor: Colors.green,
                   ),
                 );
+              } else if (state.state == MoreStates.RETRIEVING){
+                if(state.userData != null){
+                  logger.i('Hit Update Block!');
+                  setState(() {
+                    _firstNameController.text = state.userData!.firstName;
+                    _lastNameController.text = state.userData!.lastName;
+                  });
+                }
               }
             },
             child: Column(

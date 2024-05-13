@@ -12,17 +12,13 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     ///Get the user data
     on<MoreGetNameEvent>((event, emit) async {
       //Get user name
-      emit(MoreStateChanged(MoreStates.RETRIEVING));
       UserDataResponse? username = await UserDataService().getUserName();
       if (username == null) {
         //if null is returned, that means something went wrong
         emit(MoreStateChanged(MoreStates.FAIL));
       } else {
         //Success - Yaaay <- some comments are really unnecessary ^^
-        emit(MoreStateChanged(MoreStates.SUCCESS));
-        UserDataService.firstName = username.firstName;
-        UserDataService.lastName = username.lastName;
-        UserDataService.email = username.email;
+        emit(MoreStateRetrieve(username));
       }
     });
 
