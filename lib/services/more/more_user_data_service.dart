@@ -8,10 +8,6 @@ import 'package:http/http.dart';
 /// User Data Service handles the get and post requests for retrieving and
 /// changing the users first and last name and email address
 class UserDataService {
-  static String email = "";
-  static String userID = "";
-  static String firstName = "";
-  static String lastName = "";
 
   static String _urlGet = 'User/GetName';
   static String _urlPost = 'User/ChangeName';
@@ -19,7 +15,6 @@ class UserDataService {
   ///Retrieves the current users firstname, lastname and email
   ///returns a UserDataResponse on success and null on failure
   Future<UserDataResponse?> getUserName() async {
-    //TODO Error handling
     try {
       final response = await HTTPHelper.get(_urlGet);
       if (response == null) {
@@ -31,7 +26,7 @@ class UserDataService {
         //check the HTTP status codes
         case 200: //OK
           return _handleSuccess(response);
-        default: //TODO: Maybe add more?
+        default:
           return null;
       }
     } catch (e) {
@@ -50,7 +45,6 @@ class UserDataService {
   ///Change the user name, gets the new values from the ChangeEvent
   ///Returns true upon success, false upon failure
   Future<bool> postUserName(MoreChangeNameEvent event) async {
-    //TODO Error handling
     String newUserFirstName = event.newUserFirstName;
     String newUserLastName = event.newUserLastName;
     Map<String, String> body = {

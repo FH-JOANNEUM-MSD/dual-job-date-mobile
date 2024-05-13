@@ -18,7 +18,7 @@ class MoreStateInitial extends MoreState{
 }
 
 class MoreStateRetrieve extends MoreState{
-  MoreStateRetrieve(this.resp) ;
+  MoreStateRetrieve(this.resp);
 
   final UserDataResponse resp;
   get state => MoreStates.RETRIEVING;

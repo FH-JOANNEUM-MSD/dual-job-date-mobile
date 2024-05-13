@@ -1,12 +1,11 @@
 import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/screens/login/authentication_event.dart';
-import 'package:dual_job_date_mobile/services/more/more_user_data_service.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_bloc.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_event.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../components/web_view_container.dart';
@@ -34,6 +33,7 @@ class _MoreState extends State<More> {
   ];
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
+  String _email = "";
   bool _isEditing = false;
 
   @override
@@ -69,42 +69,35 @@ class _MoreState extends State<More> {
 
   @override
   Widget build(BuildContext context) {
-    Logger logger = Logger();
-    MoreStates previousState = MoreStates.INITIAL;
     return Scaffold(
         appBar: AppBar(
-          title: Text('More'),
+          title: Text(MoreScreenString.title),
         ),
         body: BlocProvider(
           create: (context) => _moreBloc,
           child: BlocListener<MoreBloc, MoreState>(
             bloc: _moreBloc,
             listener: (context, state) {
-              //TODO: handle state changes
-              MoreStates curState = state.state;
-              logger.i("Previous State: $previousState");
-              logger.i('Current state: $curState');
-              previousState = state.state;
               if (state.state == MoreStates.FAIL) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Fehler beim Laden!'),
+                    content: Text(MoreScreenString.loadErr),
                     backgroundColor: Colors.red,
                   ),
                 );
               } else if (state.state == MoreStates.SUCCESS) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Erfolgreich!'),
+                    content: Text(MoreScreenString.success),
                     backgroundColor: Colors.green,
                   ),
                 );
               } else if (state.state == MoreStates.RETRIEVING){
                 if(state.userData != null){
-                  logger.i('Hit Update Block!');
                   setState(() {
                     _firstNameController.text = state.userData!.firstName;
                     _lastNameController.text = state.userData!.lastName;
+                    _email = state.userData!.email;
                   });
                 }
               }
@@ -116,12 +109,16 @@ class _MoreState extends State<More> {
                   TextField(
                     autofocus: true,
                     controller: _firstNameController,
-                    decoration: InputDecoration(labelText: 'Vorname'),
+                    decoration: InputDecoration(
+                        labelText: MoreScreenString.firstName
+                    ),
                   ),
                   TextField(
                     autofocus: true,
                     controller: _lastNameController,
-                    decoration: InputDecoration(labelText: 'Nachname'),
+                    decoration: InputDecoration(
+                        labelText: MoreScreenString.lastName
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -134,20 +131,20 @@ class _MoreState extends State<More> {
                           ));
                           _toggleEditing();
                         },
-                        child: Text('Save Changes'),
+                        child: Text(MoreScreenString.save),
                       ),
                       ElevatedButton(
                         onPressed: () {
                           _toggleEditing();
                         },
-                        child: Text('Cancel'),
+                        child: Text(MoreScreenString.cancel),
                       ),
                     ],
                   )
                 ] else ...[
                   ListTile(
                     title: Text(
-                        'Name: ${_firstNameController.text} ${_lastNameController.text}'),
+                        '${MoreScreenString.name}: ${_firstNameController.text} ${_lastNameController.text}'),
                     trailing: IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: _toggleEditing,
@@ -156,7 +153,7 @@ class _MoreState extends State<More> {
                 ],
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Text(UserDataService.email),
+                  child: Text(_email),
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -183,7 +180,7 @@ class _MoreState extends State<More> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: CustomElevatedButton(
-                    text: 'Log out',
+                    text: MoreScreenString.logout,
                     onPressed: () {
                       BlocProvider.of<AuthenticationBloc>(context)
                           .add(LogoutEvent());
