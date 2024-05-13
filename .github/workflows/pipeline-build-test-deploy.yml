@@ -40,7 +40,7 @@ jobs:
         run: flutter test
       
   deploy:
-    if: github.event_name == 'release' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
 
