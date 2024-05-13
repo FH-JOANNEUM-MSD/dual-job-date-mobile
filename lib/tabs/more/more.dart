@@ -6,6 +6,7 @@ import 'package:dual_job_date_mobile/tabs/more/more_event.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../components/web_view_container.dart';
@@ -68,6 +69,8 @@ class _MoreState extends State<More> {
 
   @override
   Widget build(BuildContext context) {
+    Logger logger = Logger();
+    MoreStates previousState = MoreStates.INITIAL;
     return Scaffold(
       appBar: AppBar(
         title: Text('More'),
@@ -78,12 +81,23 @@ class _MoreState extends State<More> {
           bloc: _moreBloc,
           listener:(context,state){
               //TODO: handle state changes
-            if(state == MoreStates.FAIL){
+            MoreStates curState = state.state;
+            logger.i('Current state: $curState');
+            logger.i("Previous State: $previousState");
+            previousState = state.state;
+            if(state.state == MoreStates.FAIL){
              ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Fehler beim Laden des Usernames!'),
+                  content: Text('Fehler beim Laden!'),
                   backgroundColor: Colors.red,
                 ),
+              );
+            } else if(previousState == MoreStates.CHANGING && state.state == MoreStates.SUCCESS){
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Erfolgreich!'),
+                    backgroundColor: Colors.green,
+                  ),
               );
             }
           },
@@ -103,6 +117,7 @@ class _MoreState extends State<More> {
                       onPressed: () {
                         _toggleEditing();
                         _moreBloc.add(MoreChangeNameEvent(_controller.text,""));
+
                       },
                     ),
                   )
