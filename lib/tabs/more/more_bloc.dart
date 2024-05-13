@@ -7,34 +7,36 @@ import '../../services/more/more_user_data_service.dart';
 
 ///BLOC class for the More Screen. Handles retrieving and changing
 /// the User names and email
-class MoreBloc extends Bloc<MoreEvent,MoreState>{
-  MoreBloc(): super(MoreStateInitial()){
+class MoreBloc extends Bloc<MoreEvent, MoreState> {
+  MoreBloc() : super(MoreStateInitial()) {
     ///Get the user data
-    on<MoreGetNameEvent>((event,emit)async {
+    on<MoreGetNameEvent>((event, emit) async {
       //Get user name
-      emit (MoreStateChanged(MoreStates.RETRIEVING));
+      emit(MoreStateChanged(MoreStates.RETRIEVING));
       UserDataResponse? username = await UserDataService().getUserName();
-      if(username == null){ //if null is returned, that means something went wrong
+      if (username == null) {
+        //if null is returned, that means something went wrong
         emit(MoreStateChanged(MoreStates.FAIL));
-      } else { //Success - Yaaay
+      } else {
+        //Success - Yaaay <- some comments are really unnecessary ^^
         emit(MoreStateChanged(MoreStates.SUCCESS));
-        UserDataService.userName = username.firstName;
+        UserDataService.firstName = username.firstName;
+        UserDataService.lastName = username.lastName;
         UserDataService.email = username.email;
       }
     });
 
     ///change the user data (first and last name)
-    on<MoreChangeNameEvent>((event,emit)async{
+    on<MoreChangeNameEvent>((event, emit) async {
       //change user name
       emit(MoreStateChanged(MoreStates.CHANGING));
       bool success = await UserDataService().postUserName(event);
 
-      if(success){
+      if (success) {
         emit(MoreStateChanged(MoreStates.SUCCESS));
-      }else{
+      } else {
         emit(MoreStateChanged(MoreStates.FAIL));
       }
     });
   }
-
 }
