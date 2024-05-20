@@ -4,12 +4,15 @@ import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_bloc.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_event.dart';
 import 'package:dual_job_date_mobile/tabs/more/more_state.dart';
+import 'package:dual_job_date_mobile/widgets/MoreInputField.dart';
+import 'package:dual_job_date_mobile/widgets/MoreOutlinedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../components/web_view_container.dart';
 import '../../screens/login/login.dart';
+import '../../widgets/MoreElavatedButton.dart';
 import '../../widgets/custom_elevated_button.dart';
 
 class More extends StatefulWidget {
@@ -92,8 +95,8 @@ class _MoreState extends State<More> {
                     backgroundColor: Colors.green,
                   ),
                 );
-              } else if (state.state == MoreStates.RETRIEVING){
-                if(state.userData != null){
+              } else if (state.state == MoreStates.RETRIEVING) {
+                if (state.userData != null) {
                   setState(() {
                     _firstNameController.text = state.userData!.firstName;
                     _lastNameController.text = state.userData!.lastName;
@@ -106,39 +109,23 @@ class _MoreState extends State<More> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (_isEditing) ...[
-                  TextField(
-                    autofocus: true,
+                  MoreInputField(
                     controller: _firstNameController,
-                    decoration: InputDecoration(
-                        labelText: MoreScreenString.firstName
-                    ),
+                    placeHolder: "Vorname",
                   ),
-                  TextField(
-                    autofocus: true,
+                  MoreInputField(
                     controller: _lastNameController,
-                    decoration: InputDecoration(
-                        labelText: MoreScreenString.lastName
-                    ),
+                    placeHolder: "Nachname",
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          _moreBloc.add(MoreChangeNameEvent(
-                            _firstNameController.text,
-                            _lastNameController.text,
-                          ));
-                          _toggleEditing();
-                        },
-                        child: Text(MoreScreenString.save),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          _toggleEditing();
-                        },
-                        child: Text(MoreScreenString.cancel),
-                      ),
+                      MoreElevatedButton(
+                          onPressed: () => dispatchChangeNameEvent,
+                          text: MoreScreenString.save),
+                      MoreOutlinedButton(
+                          onPressed: () => _toggleEditing,
+                          text: MoreScreenString.cancel),
                     ],
                   )
                 ] else ...[
@@ -151,9 +138,8 @@ class _MoreState extends State<More> {
                     ),
                   ),
                 ],
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(_email),
+                ListTile(
+                  title: Text("Email: " + _email),
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -192,6 +178,14 @@ class _MoreState extends State<More> {
             ),
           ),
         ));
+  }
+
+  void dispatchChangeNameEvent() {
+    _moreBloc.add(MoreChangeNameEvent(
+      _firstNameController.text,
+      _lastNameController.text,
+    ));
+    _toggleEditing();
   }
 
   void navigateToLogin(BuildContext context) {
