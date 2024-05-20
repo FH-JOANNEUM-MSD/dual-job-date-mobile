@@ -77,3 +77,7 @@ class AuthenticationTokens {
   static const String expiration_key = "bearer-token-expiration";
   static const String email_key = "email";
 }
+
+class AppointmentsStrings {
+  static const String title = 'Vereinbarte Termine';
+}

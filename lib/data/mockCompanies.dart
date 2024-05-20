@@ -1,128 +1,92 @@
-import '../models/company.dart';
+import '../services/companies/company.dart';
 
 final List<Company> mockCompanies = [
   Company(
-    logo: 'assets/images/companies/allforone.png',
+    id: 1,
     name: 'AllForOne',
-    field: 'Consulting',
-    likes: 5,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
+    industry: 'Consulting',
+    logoBase64: 'base64EncodedStringForAllForOneLogo',
+    website: 'https://www.allforone.com',
+    isActive: true,
+    companyDetails: CompanyDetails(
+      shortDescription: 'AllForOne is a leading consulting firm.',
+      teamPictureBase64: 'base64EncodedStringForTeamPicture',
+      jobDescription: 'Consulting services for various industries.',
+      contactPersonInCompany: 'John Doe',
+      contactPersonHRM: 'Jane Doe',
+      trainer: 'Jack Trainer',
+      trainerTraining: 'MBA',
+      trainerProfessionalExperience: '10 years in consulting',
+      trainerPosition: 'Senior Consultant',
+    ),
+    activities: [
+      Activity(id: 1, name: 'Consulting', value: 100),
+    ],
+    addresses: [
+      Address(
+        street: 'Main Street',
+        buildingNumber: '1',
+        apartmentNumber: null,
+        city: 'Graz',
+        postalCode: '8010',
+        country: 'Austria',
+        floor: 1,
+      ),
+    ],
+    studentCompanies: [
+      StudentCompany(id: 1, studentId: '12345', companyId: 1, like: true),
+    ],
+    academicProgram: AcademicProgram(
+      id: 1,
+      name: 'Consulting Program',
+      keyName: 'CONSULT',
+      academicDegreeEnum: 1,
+    ),
+    user: User(id: 'user1', email: 'user1@allforone.com'),
+    institution: Institution(id: 1, name: 'AllForOne University', keyName: 'AFOU', website: 'https://www.allforoneuniversity.com'),
   ),
   Company(
-    logo: 'assets/images/companies/castana.png',
+    id: 2,
     name: 'Castana',
-    field: 'Softwareentwicklung',
-    likes: 3,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Kapfenberg, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/cities.png',
-    name: 'Cities',
-    field: 'Softwareentwicklung',
-    likes: 2,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/energiesteiermark.png',
-    name: 'Energie Steiermark',
-    field: 'Energy',
-    likes: 7,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/voestalpine.png',
-    name: 'Voestalpine',
-    field: 'Manufacturing',
-    likes: 5,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Kapfenberg, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-];
-final List<Company> mockLikeCompanies = [
-  Company(
-    logo: 'assets/images/companies/allforone.png',
-    name: 'AllForOne',
-    field: 'Consulting',
-    likes: 5,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/castana.png',
-    name: 'Castana',
-    field: 'Softwareentwicklung',
-    likes: 3,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Kapfenberg, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/cities.png',
-    name: 'Cities',
-    field: 'Softwareentwicklung',
-    likes: 2,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/energiesteiermark.png',
-    name: 'Energie Steiermark',
-    field: 'Energy',
-    likes: 7,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-];
-final List<Company> mockMatchCompanies = [
-  Company(
-    logo: 'assets/images/companies/allforone.png',
-    name: 'AllForOne',
-    field: 'Consulting',
-    likes: 5,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/castana.png',
-    name: 'Castana',
-    field: 'Softwareentwicklung',
-    likes: 3,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Kapfenberg, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
-  ),
-  Company(
-    logo: 'assets/images/companies/cities.png',
-    name: 'Cities',
-    field: 'Softwareentwicklung',
-    likes: 2,
-    description:
-        'Beschreibung: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-    location: 'Graz, Steiermark',
-    titleImage: 'assets/images/companies/title_company.png',
+    industry: 'Softwareentwicklung',
+    logoBase64: 'base64EncodedStringForCastanaLogo',
+    website: 'https://www.castana.com',
+    isActive: true,
+    companyDetails: CompanyDetails(
+      shortDescription: 'Castana specializes in software development.',
+      teamPictureBase64: 'base64EncodedStringForTeamPicture',
+      jobDescription: 'Developing cutting-edge software solutions.',
+      contactPersonInCompany: 'Alice Doe',
+      contactPersonHRM: 'Bob Doe',
+      trainer: 'Charlie Trainer',
+      trainerTraining: 'BSc Computer Science',
+      trainerProfessionalExperience: '8 years in software development',
+      trainerPosition: 'Lead Developer',
+    ),
+    activities: [
+      Activity(id: 2, name: 'Development', value: 80),
+    ],
+    addresses: [
+      Address(
+        street: 'Tech Street',
+        buildingNumber: '2',
+        apartmentNumber: null,
+        city: 'Kapfenberg',
+        postalCode: '8605',
+        country: 'Austria',
+        floor: 2,
+      ),
+    ],
+    studentCompanies: [
+      StudentCompany(id: 2, studentId: '67890', companyId: 2, like: true),
+    ],
+    academicProgram: AcademicProgram(
+      id: 2,
+      name: 'Software Engineering Program',
+      keyName: 'SOFTWARE',
+      academicDegreeEnum: 2,
+    ),
+    user: User(id: 'user2', email: 'user2@castana.com'),
+    institution: Institution(id: 2, name: 'Castana Institute', keyName: 'CASTANA', website: 'https://www.castanainstitute.com'),
   ),
 ];
