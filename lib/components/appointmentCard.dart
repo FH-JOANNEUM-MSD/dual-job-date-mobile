@@ -1,24 +1,39 @@
-import 'dart:convert';
-
-import 'package:dual_job_date_mobile/screens/details_company.dart';
+import 'package:dual_job_date_mobile/models/appointment.dart';
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
-import '../models/appointment.dart';
-import '../static_helpers/colors.dart';
+import 'package:intl/intl.dart';
 
-class CompanyCardWidget extends StatelessWidget {
-  const CompanyCardWidget({
-    super.key,
-    required this.appointment,
-  });
+import '../../services/companies/company.dart';
+
+//TODO check if reaction is null in parent widget
+// handle reaction correctly in this widget
+
+class AppointmentCard extends StatefulWidget {
+  const AppointmentCard({super.key, required this.appointment});
 
   final Appointment appointment;
 
+  @override
+  State<AppointmentCard> createState() => _CustomAppointmentCardState();
+}
+
+class _CustomAppointmentCardState extends State<AppointmentCard> {
   final double borderRadiusCard = 12;
+
   final double heightCard = 80;
+
   final double marginImage = 4;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.date);
+    String date_time = DateFormat('HH:mm').format(widget.appointment.date);
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       color: Colors.white,
@@ -28,13 +43,6 @@ class CompanyCardWidget extends StatelessWidget {
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(borderRadiusCard),
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailsCompany(company: appointment.company),
-              ));
-        },
         child: Container(
           height: heightCard,
           decoration: BoxDecoration(
@@ -47,43 +55,47 @@ class CompanyCardWidget extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.symmetric(
-                          vertical: marginImage, horizontal: marginImage),
-                      width: heightCard - 2 * marginImage,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          alignment: Alignment.center,
-                          fit: BoxFit.fill,
-                          image: Image.memory(
-                            base64Decode(appointment.company.logoBase64!),
-                          ).image,
-                        ),
-                      ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  vertical: marginImage,
+                  horizontal: marginImage,
+                ),
+                width: heightCard - 2 * marginImage,
+                child: Center(
+                  child: Text(
+                    widget.appointment.company.name.toString(),
+                    style: const TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                ],
+                ),
+
+                /* decoration: BoxDecoration(
+                  image: DecorationImage(
+                    alignment: Alignment.center,
+                    fit: BoxFit.contain, // Adjust the fit property here
+                    image: MemoryImage(
+                      base64Decode(widget.appointment.company.logoBase64!),
+                    ),
+                  )
+                ),*/
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 0, bottom: 0),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(appointment.company.name ?? '',
-                            style: const TextStyle(
-                                fontSize: 16.0, fontWeight: FontWeight.w500)),
-                        Text(
-                          appointment.company.industry ?? '',
-                          style: const TextStyle(fontSize: 14.0),
-                        ),
-                      ]),
-                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(date_day.toString() ?? '',
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w800)),
+                      Text(date_time.toString() ?? '',
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w800)),
+                    ]),
               ),
             ],
           ),

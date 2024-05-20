@@ -1,9 +1,6 @@
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../components/appointmentCard.dart';
-import '../../widgets/swipe_ui/custom_animated_swipe_card.dart';
 import 'appointments_bloc.dart';
 import 'appointments_event.dart';
 import 'appointments_state.dart';
@@ -19,15 +16,27 @@ class _AppointmentsState extends State<Appointments> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AppointmentsBloc>(context).add(AppointmentsFetchEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(AppointmentsStrings.title),
-      ),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          scrolledUnderElevation: 0,
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Termine',
+                    style: TextStyle(fontSize: 30.0),
+                  ),
+                ]),
+          ),
+        ),
         body: BlocProvider(
           create: (context) => AppointmentsBloc(),
           child: BlocBuilder<AppointmentsBloc, AppointmentsState>(
@@ -41,8 +50,8 @@ class _AppointmentsState extends State<Appointments> {
                 return ListView.builder(
                   itemCount: state.appointments.length,
                   itemBuilder: (context, index) {
-                    return CustomAnimatedSwipeCard(
-                      company: state.appointments[index].company,
+                    return AppointmentCard(
+                      appointment: state.appointments[index],
                     );
                   },
                 );
@@ -55,11 +64,7 @@ class _AppointmentsState extends State<Appointments> {
                 );
               } else {
                 return const Center(
-                  child: Text('Error loading companies'),
-                  // todo: reload button, triggern.
-                  // onclick ->
-                  //   BlocProvider.of<CompaniesBloc>(context)
-                  //       .add(CompaniesFetchEvent());
+                  child: Text('Error loading appointments'),
                 );
               }
             },
