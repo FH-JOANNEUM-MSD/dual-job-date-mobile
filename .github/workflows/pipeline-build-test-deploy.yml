@@ -95,12 +95,24 @@ jobs:
     needs: [build, deploy]
     if: failure()
     steps:
+      - name: Get Committer Username
+        id: commit_info
+        run: echo "::set-output name=COMMITTER::$(git log -1 --pretty=format:'%an')"
       - name: Send Discord Notification on Failure
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WORKFLOW: ${{ github.workflow }}
+          BRANCH: ${{ github.ref_name }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          SERVER_URL: ${{ github.server_url }}
+          COMMITTER: ${{ steps.commit_info.outputs.COMMITTER }}
         run: |
+          set -e
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"**Workflow Failed:** ${{ github.workflow }}\n**Branch:** ${{ github.ref_name }}\n**Repository:** ${{ github.repository }}\n**Link:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
-          ${{ secrets.WEBHOOK_URL }}
+          -d "{\"content\": \"**Workflow Failed:** $WORKFLOW\n**Branch:** $BRANCH\n**Repository:** $REPOSITORY\n**Link:** $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID\n**Committer:** $COMMITTER\"}" \
+          $WEBHOOK_URL || exit 1
     
   notify_success:
     name: Benachrichtigung bei Build-Success
@@ -108,6 +120,9 @@ jobs:
     needs: [build, deploy]
     if: always()
     steps:
+      - name: Get Committer Username
+        id: commit_info
+        run: echo "::set-output name=COMMITTER::$(git log -1 --pretty=format:'%an')"
       - name: Check if Build and Deploy are Successful
         id: check_success
         run: |
@@ -116,11 +131,20 @@ jobs:
           else
             echo "success=false" >> $GITHUB_ENV
           fi
-
+  
       - name: Send Discord Notification on Success
         if: env.success == 'true'
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WORKFLOW: ${{ github.workflow }}
+          BRANCH: ${{ github.ref_name }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          SERVER_URL: ${{ github.server_url }}
+          COMMITTER: ${{ steps.commit_info.outputs.COMMITTER }}
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"✅ **Workflow succeeded:** ${{ github.workflow }}\n**Branch:** ${{ github.ref_name }}\n**Repository:** ${{ github.repository }}\n**Link:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
-          ${{ secrets.WEBHOOK_URL }}
+          -d "{\"content\": \"✅ **Workflow succeeded:** $WORKFLOW\n**Branch:** $BRANCH\n**Repository:** $REPOSITORY\n**Link:** $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID\n**Committer:** $COMMITTER\"}" \
+          $WEBHOOK_URL
+          
