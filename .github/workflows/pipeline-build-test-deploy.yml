@@ -115,6 +115,7 @@ jobs:
             echo "success=true" >> $GITHUB_ENV
           else
             echo "success=false" >> $GITHUB_ENV
+          fi
 
       - name: Send Discord Notification on Success
         if: env.success == 'true'
