@@ -15,6 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # This step intentionally fails to simulate a build failure
+      - name: Simulate build failure
+        run: exit 1
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -111,7 +116,7 @@ jobs:
           set -e
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \"**Workflow Failed:** $WORKFLOW\n**Branch:** $BRANCH\n**Repository:** $REPOSITORY\n**Link:** $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID\n**Committer:** $AUTHOR\"}" \
+          -d "{\"content\": \"**Workflow Failed:** $WORKFLOW\n**Branch:** $BRANCH\n**Repository:** $REPOSITORY\n**Link:** $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID\n**Committer:** @$AUTHOR\"}" \
           $WEBHOOK_URL || exit 1
     
   notify_success:
