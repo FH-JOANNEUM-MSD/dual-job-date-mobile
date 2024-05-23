@@ -90,7 +90,7 @@ jobs:
           path: build/app/outputs/bundle/release/app-release-signed.aab
 
   notify_failure:
-    name: Benachrichtigung bei Build-Fehler
+    name: Notify on Build or Deploy Failure
     runs-on: ubuntu-latest
     needs: [build, deploy]
     if: failure()
@@ -99,16 +99,25 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
-          -d "{\"content\": \" **Workflow Failed:** ${{ github.workflow }}\n**Branch:** ${{ github.ref_name }}\n**Repository:** ${{ github.repository }}\n**Link:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+          -d "{\"content\": \"**Workflow Failed:** ${{ github.workflow }}\n**Branch:** ${{ github.ref_name }}\n**Repository:** ${{ github.repository }}\n**Link:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
           ${{ secrets.WEBHOOK_URL }}
     
   notify_success:
     name: Benachrichtigung bei Build-Success
     runs-on: ubuntu-latest
-    needs: [build, deploy]
-    if: success()
+    needs: build
+    if: always()
     steps:
+      - name: Check if Build and Deploy are Successful
+        id: check_success
+        run: |
+          if [[ "${{ needs.build.result }}" == "success" && ("${{ github.event_name }}" != "release" || "${{ needs.deploy.result }}" == "success" || "${{ needs.deploy.result }}" == "skipped") ]]; then
+            echo "success=true" >> $GITHUB_ENV
+          else
+            echo "success=false" >> $GITHUB_ENV
+
       - name: Send Discord Notification on Success
+        if: env.success == 'true'
         run: |
           curl -H "Content-Type: application/json" \
           -X POST \
