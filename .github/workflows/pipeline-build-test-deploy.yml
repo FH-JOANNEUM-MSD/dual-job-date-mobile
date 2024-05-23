@@ -16,10 +16,6 @@ jobs:
 
     steps:
 
-      # This step intentionally fails to simulate a build failure
-      - name: Simulate build failure
-        run: exit 1
-
       - name: Checkout code
         uses: actions/checkout@v2
 
