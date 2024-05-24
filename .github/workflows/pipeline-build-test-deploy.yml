@@ -11,10 +11,11 @@ on:
     types: [created]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -39,9 +40,9 @@ jobs:
       - name: Run tests
         run: flutter test
       
-  deploy:
-    if: github.event_name == 'release' && github.ref == 'refs/heads/main'
-    needs: build
+  build:
+    if: github.event_name == 'release'
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -71,7 +72,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Create the Keystore
+      - name: Create the Android Keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
@@ -88,3 +89,82 @@ jobs:
         with:
           name: release-aab-signed
           path: build/app/outputs/bundle/release/app-release-signed.aab
+
+  release:
+    name: Release Android app to internal track
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get appbundle from artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release-aab-signed
+      - name: Release app to internal track
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
+          packageName: at.fhj.dual_job_date_mobile
+          releaseFiles: ${{ github.workspace }}/app-release-signed.aab
+          track: alpha
+          status: completed
+
+  notify_failure:
+    name: Notify on Build or Deploy Failure
+    runs-on: ubuntu-latest
+    needs: [build, release]
+    if: failure()
+    steps:
+      - name: Get Committer Username
+        id: commit_info
+        run: echo "::set-output name=COMMITTER::$(git log -1 --pretty=format:'%an')"
+      - name: Send Discord Notification on Failure
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WORKFLOW: ${{ github.workflow }}
+          BRANCH: ${{ github.ref_name }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          SERVER_URL: ${{ github.server_url }}
+          AUTHOR: ${{ github.event.head_commit.author.name }}
+        run: |
+          set -e
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{\"content\": \"❌❌ **Workflow Failed:** $WORKFLOW\n**Branch:** $BRANCH\n**Repository:** $REPOSITORY\n**Link:** $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID\n**Committer:** @$AUTHOR\"}" \
+          $WEBHOOK_URL || exit 1
+    
+  notify_success:
+    name: Benachrichtigung bei Build-Success
+    runs-on: ubuntu-latest
+    needs: [build, release]
+    if: always()
+    steps:
+      - name: Get Committer Username
+        id: commit_info
+        run: echo "::set-output name=COMMITTER::$(git log -1 --pretty=format:'%an')"
+      - name: Check if Build and Deploy are Successful
+        id: check_success
+        run: |
+          if [[ "${{ needs.build.result }}" == "success" && ("${{ github.event_name }}" != "release" || "${{ needs.deploy.result }}" == "success" || "${{ needs.deploy.result }}" == "skipped") ]]; then
+            echo "success=true" >> $GITHUB_ENV
+          else
+            echo "success=false" >> $GITHUB_ENV
+          fi
+  
+      - name: Send Discord Notification on Success
+        if: env.success == 'true'
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WORKFLOW: ${{ github.workflow }}
+          BRANCH: ${{ github.ref_name }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          SERVER_URL: ${{ github.server_url }}
+          AUTHOR: ${{ github.event.head_commit.author.name }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{\"content\": \"✅ **Workflow succeeded:** $WORKFLOW\n**Branch:** $BRANCH\n**Repository:** $REPOSITORY\n**Link:** $SERVER_URL/$REPOSITORY/actions/runs/$RUN_ID\n**Committer:** $AUTHOR\"}" \
+          $WEBHOOK_URL
+          
