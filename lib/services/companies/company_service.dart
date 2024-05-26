@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:dual_job_date_mobile/services/HttpHelper.dart';
 import 'package:dual_job_date_mobile/services/companies/company.dart';
-import 'package:dual_job_date_mobile/static_helpers/strings.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CompanyService {
   static String getActiveCompaniesEndpoint = "Company/ActiveCompanies";
