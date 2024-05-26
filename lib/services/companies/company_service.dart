@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'package:dual_job_date_mobile/services/HttpHelper.dart';
 import 'package:dual_job_date_mobile/services/companies/company.dart';
+import 'package:dual_job_date_mobile/static_helpers/strings.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CompanyService {
   static String getActiveCompaniesEndpoint = "Company/ActiveCompanies";
   static String postReactionToCompanyEndPoint =
       "StudentCompany/AddLikeOrDislike";
+  static String removeReactionEndPoint =
+      "StudentCompany/RemoveLikeOrDislike";
 
   static Future<List<Company>?> getActiveCompanies() async {
     try {
@@ -28,6 +32,20 @@ class CompanyService {
       var query =
           '$postReactionToCompanyEndPoint?like=$reaction&companyId=$companyId';
       var response = await HTTPHelper.post(query, "");
+
+      if (response!.statusCode == 200)
+        return true;
+      else
+        return false;
+    } catch (e) {
+      return false;
+    }
+  }
+  static Future<bool> removeReactionFromCompany(int reactionId) async {
+    try {
+      var query =
+          '$removeReactionEndPoint?id=$reactionId';
+      var response = await HTTPHelper.delete(query, "");
 
       if (response!.statusCode == 200)
         return true;
