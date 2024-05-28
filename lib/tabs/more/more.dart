@@ -120,12 +120,13 @@ class _MoreState extends State<More> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      MoreElevatedButton(
-                          onPressed: () => dispatchChangeNameEvent,
-                          text: MoreScreenString.save),
                       MoreOutlinedButton(
                           onPressed: () => _toggleEditing,
                           text: MoreScreenString.cancel),
+                      MoreElevatedButton(
+                          onPressed: () => dispatchChangeNameEvent,
+                          text: MoreScreenString.save),
+
                     ],
                   )
                 ] else ...[
