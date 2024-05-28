@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 
 import '../../services/companies/company.dart';
 
-//TODO check if reaction is null in parent widget
-// handle reaction correctly in this widget
 
 class CustomSwipeCard extends StatefulWidget {
   const CustomSwipeCard(

@@ -1,5 +1,4 @@
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackButton extends StatelessWidget {

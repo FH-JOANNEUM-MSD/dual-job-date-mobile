@@ -18,7 +18,11 @@ class CompaniesBloc extends Bloc<CompaniesEvent, CompaniesState> {
     });
 
     on<CompaniesReactionEvent>((event, emit) async {
-      await CompanyService.reactToCompany(event.companyId, event.reation);
+      await CompanyService.reactToCompany(event.companyId, event.reaction);
+    });
+
+    on<CompaniesRemoveReactionEvent>((event, emit) async {
+      await CompanyService.removeReactionFromCompany(event.reactionId);
     });
   }
 }
