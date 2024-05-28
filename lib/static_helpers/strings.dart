@@ -78,6 +78,9 @@ class AuthenticationTokens {
   static const String email_key = "email";
 }
 
+class AppointmentsStrings {
+  static const String title = 'Vereinbarte Termine';
+}
 class MoreScreenString{
   static const String title = 'Mehr';
   static const String loadErr = 'Fehler beim Laden!';

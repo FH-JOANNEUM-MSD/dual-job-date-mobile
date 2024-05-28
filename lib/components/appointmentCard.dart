@@ -1,47 +1,95 @@
-import 'package:flutter/cupertino.dart';
+import 'package:dual_job_date_mobile/models/appointment.dart';
+import 'package:dual_job_date_mobile/static_helpers/colors.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../models/appointment.dart';
-import '../static_helpers/colors.dart';
-import '../tabs/appointments/appointments.dart';
+import '../../services/companies/company.dart';
 
-class AppointmentCard extends StatelessWidget {
-  const AppointmentCard({
-    super.key,
-    required this.appointment,
-  });
+//TODO check if reaction is null in parent widget
+// handle reaction correctly in this widget
+
+class AppointmentCard extends StatefulWidget {
+  const AppointmentCard({super.key, required this.appointment});
 
   final Appointment appointment;
 
+  @override
+  State<AppointmentCard> createState() => _CustomAppointmentCardState();
+}
 
-  // TODO widget should react to user interaction
+class _CustomAppointmentCardState extends State<AppointmentCard> {
+  final double borderRadiusCard = 12;
+
+  final double heightCard = 80;
+
+  final double marginImage = 4;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final formattedDate = DateFormat('dd.MM.yyyy').format(appointment.date); // Format date
-    final formattedTime = DateFormat('HH:mm').format(appointment.date); // Format time
+    String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.date);
+    String date_time = DateFormat('HH:mm').format(widget.appointment.date);
 
-    return Container(
-      height: 10,
-      decoration: BoxDecoration(
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      color: Colors.white,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadiusCard),
-        border: Border.all(
-          color: StaticColors.primary,
-          width: 1,
-        ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            formattedDate, // Use formatted date
-            style: const TextStyle(fontSize: 20),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(borderRadiusCard),
+        child: Container(
+          height: heightCard,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadiusCard),
+            border: Border.all(
+              color: StaticColors.primary,
+              width: 1,
+            ),
           ),
-          Text(
-            formattedTime, // Use formatted time
-            style: const TextStyle(fontSize: 20),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(
+                  vertical: marginImage,
+                  horizontal: marginImage,
+                ),
+                width: (heightCard - 2 * marginImage)+50,
+                child: Center(
+                  child: Text(
+                    widget.appointment.company.name.toString(),
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(date_day.toString() ?? '',
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w800)),
+                      Text(date_time.toString() ?? '',
+                          style: const TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.w800)),
+                    ]),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
