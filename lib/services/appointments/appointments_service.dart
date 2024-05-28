@@ -16,7 +16,7 @@ class AppointmentsService {
         jsonList.map((json) => Appointment.fromJson(json)).toList();
         return companies;
       } else {
-        return null;
+        return [];
       }
     } catch (e) {
       return null;
