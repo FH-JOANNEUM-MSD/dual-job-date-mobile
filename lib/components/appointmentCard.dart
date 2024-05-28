@@ -31,8 +31,8 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
 
   @override
   Widget build(BuildContext context) {
-    String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.date);
-    String date_time = DateFormat('HH:mm').format(widget.appointment.date);
+    String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.appointmentDate);
+    String date_time = DateFormat('HH:mm').format(widget.appointment.appointmentDate);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
