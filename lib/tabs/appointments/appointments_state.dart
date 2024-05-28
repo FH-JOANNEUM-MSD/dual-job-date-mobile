@@ -1,4 +1,5 @@
-import '../../models/appointment.dart';
+
+import 'package:dual_job_date_mobile/services/appointments/appointment.dart';
 
 enum AppointmentsStatus {
   INITIAL,

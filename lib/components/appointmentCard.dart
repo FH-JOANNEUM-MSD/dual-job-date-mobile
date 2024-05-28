@@ -1,4 +1,4 @@
-import 'package:dual_job_date_mobile/models/appointment.dart';
+import 'package:dual_job_date_mobile/services/appointments/appointment.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -65,7 +65,7 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
                 width: (heightCard - 2 * marginImage)+50,
                 child: Center(
                   child: Text(
-                    widget.appointment.company.name.toString(),
+                    widget.appointment.company,
                     style: const TextStyle(
                       fontSize: 20.0,
                       color: Colors.black,
