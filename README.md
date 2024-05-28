@@ -40,7 +40,7 @@ Important: .g File must have the same naming as the main File (e.g. company.dart
 
 For the login, the user just has to fill in the data thats required in the boxes.
 
-![<src="/images/Login.png" style="width: 50px; height: 50px;">](/images/Login.png)
+![Login Image](/images/Login.png)
 
 
 
