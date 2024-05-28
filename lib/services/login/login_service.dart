@@ -42,12 +42,12 @@ class LoginService {
 
   // Method to handle error login response
   static LoginResponse _handleErrorLogin(Response response) {
-    return LoginResponse("null", "null", 0, "null", false, response.statusCode);
+    return LoginResponse("null", "null", 0, "null", false,"null","null", response.statusCode);
   }
 
   // Method to handle exceptions during login
   static LoginResponse _handleExceptionLogin() {
-    return LoginResponse("null", "null", 0, "null", false, -1);
+    return LoginResponse("null", "null", 0, "null", false,"null","null", -1);
   }
 
   // Method to store tokens securely

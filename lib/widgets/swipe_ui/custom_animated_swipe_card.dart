@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../services/companies/company.dart';
 
-
 class CustomAnimatedSwipeCard extends StatefulWidget {
   const CustomAnimatedSwipeCard({super.key, required this.company});
 
@@ -18,7 +17,7 @@ class CustomAnimatedSwipeCard extends StatefulWidget {
 }
 
 class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
-  late bool reaction;
+  late bool? reaction;
 
   @override
   void initState() {
@@ -27,7 +26,8 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
   }
 
   void initializeReaction() {
-    if (widget.company.studentCompanies != null && widget.company.studentCompanies!.isNotEmpty) {
+    if (widget.company.studentCompanies != null &&
+        widget.company.studentCompanies!.isNotEmpty) {
       reaction = widget.company.studentCompanies!.first.like;
     } else {
       reaction = false;
@@ -39,29 +39,19 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
     return Dismissible(
       background: Container(
         color: Colors.green,
-        child: const Center(child: Icon(Icons.add)),
+        child: const Center(child: Icon(Icons.thumb_up)),
       ),
       secondaryBackground: Container(
         color: Colors.red,
-        child: const Center(child: Icon(Icons.cancel)),
+        child: const Center(child: Icon(Icons.thumb_down)),
       ),
       // Assuming `name` is a unique identifier for each company
       key: ValueKey(widget.company.name),
       confirmDismiss: (direction) {
-        // TODO: send a like/dislike to the backend
-        // TODO: Update UI
         if (direction == DismissDirection.startToEnd) {
-          BlocProvider.of<CompaniesBloc>(context)
-              .add(CompaniesReactionEvent(widget.company.id, true));
-          setState(() {
-            reaction = true;
-          });
+          swipeStartToEnd(context);
         } else if (direction == DismissDirection.endToStart) {
-          BlocProvider.of<CompaniesBloc>(context)
-              .add(CompaniesReactionEvent(widget.company.id, false));
-          setState(() {
-            reaction = false;
-          });
+          swipeEndToStart(context);
         }
         return Future(() => false);
       },
@@ -70,5 +60,49 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
         reaction: reaction,
       ),
     );
+  }
+
+  void swipeStartToEnd(BuildContext context) {
+    if (reaction == null) {
+      BlocProvider.of<CompaniesBloc>(context)
+          .add(CompaniesReactionEvent(widget.company.id, true));
+      setState(() {
+        reaction = true;
+      });
+    } else if (!reaction!) {
+      BlocProvider.of<CompaniesBloc>(context)
+          .add(CompaniesReactionEvent(widget.company.id, true));
+      setState(() {
+        reaction = true;
+      });
+    } else {
+      BlocProvider.of<CompaniesBloc>(context).add(CompaniesRemoveReactionEvent(
+          widget.company.studentCompanies!.first.id));
+      setState(() {
+        reaction = null;
+      });
+    }
+  }
+
+  void swipeEndToStart(BuildContext context) {
+    if (reaction == null) {
+      BlocProvider.of<CompaniesBloc>(context)
+          .add(CompaniesReactionEvent(widget.company.id, false));
+      setState(() {
+        reaction = false;
+      });
+    } else if (reaction!) {
+      BlocProvider.of<CompaniesBloc>(context)
+          .add(CompaniesReactionEvent(widget.company.id, false));
+      setState(() {
+        reaction = false;
+      });
+    } else {
+      BlocProvider.of<CompaniesBloc>(context).add(CompaniesRemoveReactionEvent(
+          widget.company.studentCompanies!.first.id));
+      setState(() {
+        reaction = null;
+      });
+    }
   }
 }

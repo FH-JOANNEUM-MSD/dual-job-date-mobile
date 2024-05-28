@@ -9,10 +9,12 @@ class LoginResponse {
   final int expiresIn;
   final String refreshToken;
   final bool isNew;
+  final String userId;
+  final String email;
   final int statusCode;
 
   LoginResponse(this.tokenType, this.accessToken, this.expiresIn,
-      this.refreshToken, this.isNew,this.statusCode);
+      this.refreshToken, this.isNew,this.userId,this.email,this.statusCode);
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
