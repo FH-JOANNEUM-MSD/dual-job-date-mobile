@@ -3,7 +3,6 @@ import 'package:dual_job_date_mobile/tabs/companies/companies_event.dart';
 import 'package:dual_job_date_mobile/widgets/swipe_ui/custom_animated_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'companies_bloc.dart';
@@ -31,40 +30,6 @@ class _CompaniesState extends State<Companies> {
     super.initState();
   }
 
-  void _openFilterCompaniesModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return Stack(
-          children: [
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const Text('Filter Companies'),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Close'),
-                  )
-                ],
-              ),
-            ),
-            Positioned(
-                top: 50,
-                right: 20,
-                child: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.pop(context),
-                ))
-          ],
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,15 +46,6 @@ class _CompaniesState extends State<Companies> {
                   const Text(
                     CompaniesScreenStrings.title,
                     style: TextStyle(fontSize: 30.0),
-                  ),
-                  InkWell(
-                    onTap: () => _openFilterCompaniesModal(context),
-                    borderRadius: BorderRadius.circular(12),
-                    child: SvgPicture.asset(
-                      CompaniesScreenStrings.filterIconPath,
-                      width: 30,
-                      height: 30,
-                    ),
                   ),
                 ]),
           ),

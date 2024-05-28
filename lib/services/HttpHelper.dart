@@ -18,7 +18,8 @@ class HTTPHelper {
         Uri.parse(baseUrl + url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${await storage.read(key: AuthenticationTokens.bearer_key)}',
+          'Authorization':
+              'Bearer ${await storage.read(key: AuthenticationTokens.bearer_key)}',
         },
       ).timeout(const Duration(seconds: 2));
 
@@ -31,12 +32,12 @@ class HTTPHelper {
 
   static Future<http.Response?> post(String url, dynamic body) async {
     try {
+      var token = await storage.read(key: AuthenticationTokens.bearer_key);
       final response = await http
           .post(Uri.parse(baseUrl + url),
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization':
-                    'Bearer ${await storage.read(key: AuthenticationTokens.bearer_key)}',
+                'Authorization': 'Bearer $token',
               },
               body: jsonEncode(body))
           .timeout(const Duration(seconds: 2));
@@ -48,14 +49,34 @@ class HTTPHelper {
     }
   }
 
-  static Future<http.Response?> postRefreshToken(String url, dynamic body) async {
+  static Future<http.Response?> postRefreshToken(
+      String url, dynamic body) async {
     try {
       final response = await http
           .post(Uri.parse(baseUrl + url),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: jsonEncode(body))
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode(body))
+          .timeout(const Duration(seconds: 2));
+
+      return response;
+    } catch (e) {
+      logger.e('http POST failed: $e');
+      return null;
+    }
+  }
+
+  static Future<http.Response?> delete(String url, String body) async {
+    try {
+      var token = await storage.read(key: AuthenticationTokens.bearer_key);
+      final response = await http
+          .delete(Uri.parse(baseUrl + url),
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer $token',
+              },
+              body: jsonEncode(body))
           .timeout(const Duration(seconds: 2));
 
       return response;
