@@ -47,14 +47,20 @@ class _AppointmentsState extends State<Appointments> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state.status == AppointmentsStatus.LOADED) {
-                return ListView.builder(
-                  itemCount: state.appointments.length,
-                  itemBuilder: (context, index) {
-                    return AppointmentCard(
-                      appointment: state.appointments[index],
-                    );
-                  },
-                );
+                if (state.appointments.length > 0) {
+                  return ListView.builder(
+                    itemCount: state.appointments.length,
+                    itemBuilder: (context, index) {
+                      return AppointmentCard(
+                        appointment: state.appointments[index],
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: Text("Keine Termine vorhanden"),
+                  );
+                }
               } else if (state.status == AppointmentsStatus.INITIAL) {
                 BlocProvider.of<AppointmentsBloc>(context)
                     .add(AppointmentsFetchEvent());

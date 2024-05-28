@@ -3,7 +3,6 @@ import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../services/companies/company.dart';
 
 //TODO check if reaction is null in parent widget
 // handle reaction correctly in this widget
@@ -31,8 +30,8 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
 
   @override
   Widget build(BuildContext context) {
-    String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.date);
-    String date_time = DateFormat('HH:mm').format(widget.appointment.date);
+    String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.appointmentDate);
+    String date_time = DateFormat('HH:mm').format(widget.appointment.appointmentDate);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),

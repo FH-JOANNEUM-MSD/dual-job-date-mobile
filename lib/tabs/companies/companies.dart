@@ -3,7 +3,6 @@ import 'package:dual_job_date_mobile/tabs/companies/companies_event.dart';
 import 'package:dual_job_date_mobile/widgets/swipe_ui/custom_animated_swipe_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'companies_bloc.dart';
 import 'companies_state.dart';

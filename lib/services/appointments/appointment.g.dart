@@ -8,15 +8,17 @@ part of 'appointment.dart';
 
 Appointment _$AppointmentFromJson(Map<String, dynamic> json) => Appointment(
       id: json['id'] as int,
+      appointmentDate: DateTime.parse(json['appointmentDate'] as String),
       userId: json['userId'] as String,
-      date: DateTime.parse(json['date'] as String),
+      companyId: json['companyId'] as String,
       company: json['company'] as String,
     );
 
 Map<String, dynamic> _$AppointmentToJson(Appointment instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'appointmentDate': instance.appointmentDate.toIso8601String(),
       'userId': instance.userId,
-      'date': instance.date.toIso8601String(),
+      'companyId': instance.companyId,
       'company': instance.company,
     };
