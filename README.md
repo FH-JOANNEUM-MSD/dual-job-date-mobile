@@ -40,8 +40,7 @@ Important: .g File must have the same naming as the main File (e.g. company.dart
 
 For the login, the user just has to fill in the data thats required in the boxes.
 
-![Login Image](/images/Login.png)
-
+![Login Image](/assets/images/documentation/Login.png)
 
 
 ### Forgot Password
