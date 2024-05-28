@@ -62,27 +62,17 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
                   vertical: marginImage,
                   horizontal: marginImage,
                 ),
-                width: heightCard - 2 * marginImage,
+                width: (heightCard - 2 * marginImage)+50,
                 child: Center(
                   child: Text(
                     widget.appointment.company.name.toString(),
                     style: const TextStyle(
-                      fontSize: 14.0,
+                      fontSize: 20.0,
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-
-                /* decoration: BoxDecoration(
-                  image: DecorationImage(
-                    alignment: Alignment.center,
-                    fit: BoxFit.contain, // Adjust the fit property here
-                    image: MemoryImage(
-                      base64Decode(widget.appointment.company.logoBase64!),
-                    ),
-                  )
-                ),*/
               ),
               Expanded(
                 child: Column(
