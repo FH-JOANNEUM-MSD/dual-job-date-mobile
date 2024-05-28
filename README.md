@@ -42,6 +42,7 @@ For the login, the user just has to fill in the data thats required in the boxes
 
 ![Login Image](/assets/images/documentation/Login.png)
 
+<img src="/assets/images/documentation/Login.png" width="100" height="100">
 
 ### Forgot Password
 
