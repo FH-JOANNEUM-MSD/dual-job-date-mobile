@@ -3,7 +3,6 @@ import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../services/companies/company.dart';
 
 //TODO check if reaction is null in parent widget
 // handle reaction correctly in this widget
