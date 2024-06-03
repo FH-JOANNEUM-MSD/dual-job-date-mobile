@@ -21,7 +21,7 @@ class HTTPHelper {
           'Authorization':
               'Bearer ${await storage.read(key: AuthenticationTokens.bearer_key)}',
         },
-      ).timeout(const Duration(seconds: 2));
+      ).timeout(const Duration(seconds: 10));
 
       return response;
     } catch (e) {
