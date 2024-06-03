@@ -1,11 +1,8 @@
-import 'package:dual_job_date_mobile/screens/login/authentication_bloc.dart';
 import 'package:dual_job_date_mobile/tabs/appointments/appointments.dart';
 import 'package:dual_job_date_mobile/tabs/companies/companies.dart';
-import 'package:dual_job_date_mobile/tabs/profile/profile.dart';
 import 'package:dual_job_date_mobile/tabs/more/more.dart';
 import 'package:dual_job_date_mobile/widgets/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,7 +16,6 @@ class _HomeState extends State<Home> {
   List<Widget> tabs = [
     const Companies(),
     const Appointments(),
-    const Profile(),
     const More()
   ];
 

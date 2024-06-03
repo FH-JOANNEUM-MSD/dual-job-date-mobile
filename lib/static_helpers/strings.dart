@@ -77,3 +77,18 @@ class AuthenticationTokens {
   static const String expiration_key = "bearer-token-expiration";
   static const String email_key = "email";
 }
+
+class AppointmentsStrings {
+  static const String title = 'Vereinbarte Termine';
+}
+class MoreScreenString{
+  static const String title = 'Mehr';
+  static const String loadErr = 'Fehler beim Laden!';
+  static const String success = 'Erfolgreich';
+  static const String firstName = 'Vorname';
+  static const String lastName = 'Nachname';
+  static const String save = 'Änderungen Speichern';
+  static const String cancel = 'Abbrechen';
+  static const String name = 'Name';
+  static const String logout = 'Ausloggen';
+}
