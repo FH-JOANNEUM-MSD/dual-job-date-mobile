@@ -53,10 +53,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/splash_logo.png"
+  remove_alpha_ios: true
+  image_path: "assets/images/app_logo.png"
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
