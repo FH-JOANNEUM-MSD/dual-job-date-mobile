@@ -107,6 +107,7 @@ CompanyDetails _$CompanyDetailsFromJson(Map<String, dynamic> json) =>
       trainerProfessionalExperience:
           json['trainerProfessionalExperience'] as String?,
       trainerPosition: json['trainerPosition'] as String?,
+      addresses: json['addresses'] as String?,
     );
 
 Map<String, dynamic> _$CompanyDetailsToJson(CompanyDetails instance) =>
@@ -120,6 +121,7 @@ Map<String, dynamic> _$CompanyDetailsToJson(CompanyDetails instance) =>
       'trainerTraining': instance.trainerTraining,
       'trainerProfessionalExperience': instance.trainerProfessionalExperience,
       'trainerPosition': instance.trainerPosition,
+      'addresses': instance.addresses,
     };
 
 Activity _$ActivityFromJson(Map<String, dynamic> json) => Activity(

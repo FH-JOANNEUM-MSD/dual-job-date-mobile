@@ -32,7 +32,16 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
   Widget build(BuildContext context) {
     String date_day = DateFormat('yyyy-MM-dd').format(widget.appointment.startTime);
     String date_time = DateFormat('HH:mm').format(widget.appointment.startTime);
+    String end_time = DateFormat('HH:mm').format(widget.appointment.endTime);
 
+    String showAppointmentTimes(Appointment appointment) {
+      String times = date_time;
+      if (end_time.isNotEmpty) {
+        times += " - $end_time";
+      }
+      return times;
+    }
+    
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       color: Colors.white,
@@ -81,9 +90,7 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
                       Text(date_day.toString() ?? '',
                           style: const TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.w800)),
-                      Text(date_time.toString() ?? '',
-                          style: const TextStyle(
-                              fontSize: 16.0, fontWeight: FontWeight.w800)),
+                      Text(showAppointmentTimes(widget.appointment)),
                     ]),
               ),
             ],

@@ -1,12 +1,9 @@
 import 'dart:convert';
-
 import 'package:dual_job_date_mobile/static_helpers/appstyles.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
 import 'package:dual_job_date_mobile/widgets/custom_back_button_circle.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '../services/companies/company.dart';
 import '../static_helpers/strings.dart';
 
@@ -30,12 +27,12 @@ class DetailsCompany extends StatelessWidget {
                   width: Values.screenWidth,
                   child: company.companyDetails?.teamPictureBase64 != null
                       ? Image.memory(
-                    base64Decode(
-                        company.companyDetails!.teamPictureBase64!),
-                    fit: BoxFit.fitWidth,
-                  )
+                          base64Decode(
+                              company.companyDetails!.teamPictureBase64!),
+                          fit: BoxFit.fitWidth,
+                        )
                       : Image.asset(
-                      "assets/images/companies/placeholder-image.jpg"),
+                          "assets/images/companies/placeholder-image.jpg"),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -51,36 +48,38 @@ class DetailsCompany extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            showInfoHeading("Unternehmen"),
+                            showInfo(company.name ?? 'Keine Angaben'),
+                            showInfoHeading("Branche"),
+                            showInfo(company.industry ?? 'Keine Angaben'),
                             Row(
                               children: [
-                                showInfo("Unternehmen: "),
-                                showInfo(company.name ?? 'Keine Angaben'),
+                                showInfoHeading("Tätigkeiten "),
+                                Text(
+                                  "(1 - 5 nach Relevanz bewertet)",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w100,
+                                      color: Colors.grey),
+                                )
                               ],
                             ),
+                            showInfo(showActivites(company)),
+                            showInfoHeading("Ansprechpartner"),
+                            showInfo(showContactPerson()),
+                            showInfoHeading("Webseite"),
                             Row(
                               children: [
-                                showInfo("Branche: "),
-                                showInfo(company.industry ?? 'Keine Angaben'),
+                                Flexible(
+                                  child: showInfo(
+                                      company.website ?? 'Keine Angaben'),
+                                ),
                               ],
                             ),
+                            showInfoHeading("Adresse"),
                             Row(
                               children: [
-                                showInfo("Webseite: "),
-                                showInfo(company.website ?? 'Keine Angaben'),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                showInfo("Webseite: "),
-                                company.addresses != null ? showInfo(
-                                    company.addresses!.first.street!) :
-                                showInfo("Keine Angaben")
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                showInfo("Adresse: "),
-                                showInfo(getAddress(company))
+                                showAddress(),
                               ],
                             ),
                           ],
@@ -115,26 +114,39 @@ class DetailsCompany extends StatelessWidget {
     );
   }
 
+  String showContactPerson() {
+    if (company.companyDetails != null)
+      return company.companyDetails!.contactPersonHRM ?? "Keine Angaben";
+    return "Keine Angaben";
+  }
+
+  Widget showAddress() {
+    if (company.companyDetails != null)
+      return Flexible(child: showInfo(company.companyDetails!.addresses ?? ''));
+    else
+      return showInfo("Keine Angaben");
+  }
+
   showInfo(String info) {
+    return Text(info, style: AppTextStyles.description);
+  }
+
+  showInfoHeading(String info) {
     return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Text(info, style: AppTextStyles.title),
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
+      child: Text(info, style: AppTextStyles.heading),
     );
   }
 
-  String getAddress(Company company) {
-    if (company.addresses != null && company.addresses!.length > 0) {
-      var address = company.addresses!.first;
-      String? street;
-      String? buildingNumber;
-      address.street != null ?
-      street = address.street : street = null;
-      address.buildingNumber != null ?
-      buildingNumber = address.buildingNumber : buildingNumber = null;
-
-     if (street != null && buildingNumber != null)
-        return street + " " + buildingNumber;
+  String showActivites(Company company) {
+    String activites = "";
+    if (company.activities != null) {
+      company.activities!.sort((b, a) => a.value.compareTo(b.value));
+      company.activities!.forEach((element) {
+        activites += '${element.value} ${element.name}\n';
+      });
+      return activites;
     }
-    return "Keine Angaben";
+    return "Keine Angabe";
   }
 }

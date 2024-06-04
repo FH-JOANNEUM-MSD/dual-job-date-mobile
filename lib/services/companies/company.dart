@@ -100,6 +100,7 @@ class CompanyDetails {
   final String? trainerTraining;
   final String? trainerProfessionalExperience;
   final String? trainerPosition;
+  final String? addresses;
 
   CompanyDetails({
     this.shortDescription,
@@ -111,6 +112,7 @@ class CompanyDetails {
     this.trainerTraining,
     this.trainerProfessionalExperience,
     this.trainerPosition,
+    this.addresses
   });
 
   factory CompanyDetails.fromJson(Map<String, dynamic> json) =>
