@@ -73,7 +73,7 @@ class _CustomAppointmentCardState extends State<AppointmentCard> {
                 width: (heightCard - 2 * marginImage)+50,
                 child: Center(
                   child: Text(
-                    widget.appointment.company,
+                    widget.appointment.company!.name!,
                     style: const TextStyle(
                       fontSize: 20.0,
                       color: Colors.black,

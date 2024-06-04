@@ -71,13 +71,34 @@ Map<String, dynamic> _$AcademicProgramToJson(AcademicProgram instance) =>
     };
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      id: json['id'] as String?,
-      email: json['email'] as String?,
+      json['id'] as String?,
+      json['firstName'] as String?,
+      json['lastName'] as String?,
+      json['institution'] == null
+          ? null
+          : Institution.fromJson(json['institution'] as Map<String, dynamic>),
+      json['academicProgram'] == null
+          ? null
+          : AcademicProgram.fromJson(
+              json['academicProgram'] as Map<String, dynamic>),
+      json['userType'] as int?,
+      json['isNew'] as bool?,
+      json['email'] as String?,
+      json['company'] == null
+          ? null
+          : Company.fromJson(json['company'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'id': instance.id,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'institution': instance.institution,
+      'academicProgram': instance.academicProgram,
+      'userType': instance.userType,
+      'isNew': instance.isNew,
       'email': instance.email,
+      'company': instance.company,
     };
 
 Institution _$InstitutionFromJson(Map<String, dynamic> json) => Institution(

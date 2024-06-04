@@ -61,12 +61,25 @@ class AcademicProgram {
 @JsonSerializable()
 class User {
   final String? id;
+  final String? firstName;
+  final String? lastName;
+  final Institution? institution;
+  final AcademicProgram? academicProgram;
+  final int? userType;
+  final bool? isNew;
   final String? email;
+  final Company? company;
 
-  User({
-    this.id,
-    this.email,
-  });
+  User(
+      this.id,
+      this.firstName,
+      this.lastName,
+      this.institution,
+      this.academicProgram,
+      this.userType,
+      this.isNew,
+      this.email,
+      this.company);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
@@ -102,18 +115,17 @@ class CompanyDetails {
   final String? trainerPosition;
   final String? addresses;
 
-  CompanyDetails({
-    this.shortDescription,
-    this.teamPictureBase64,
-    this.jobDescription,
-    this.contactPersonInCompany,
-    this.contactPersonHRM,
-    this.trainer,
-    this.trainerTraining,
-    this.trainerProfessionalExperience,
-    this.trainerPosition,
-    this.addresses
-  });
+  CompanyDetails(
+      {this.shortDescription,
+      this.teamPictureBase64,
+      this.jobDescription,
+      this.contactPersonInCompany,
+      this.contactPersonHRM,
+      this.trainer,
+      this.trainerTraining,
+      this.trainerProfessionalExperience,
+      this.trainerPosition,
+      this.addresses});
 
   factory CompanyDetails.fromJson(Map<String, dynamic> json) =>
       _$CompanyDetailsFromJson(json);
