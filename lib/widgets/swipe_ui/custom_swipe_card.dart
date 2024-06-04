@@ -1,11 +1,11 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:dual_job_date_mobile/screens/details_company.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/companies/company.dart';
-
 
 class CustomSwipeCard extends StatefulWidget {
   const CustomSwipeCard(
@@ -72,9 +72,11 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
                   image: DecorationImage(
                     alignment: Alignment.center,
                     fit: BoxFit.contain, // Adjust the fit property here
-                    image: MemoryImage(
-                      base64Decode(widget.company.logoBase64!),
-                    ),
+                    image: widget.company.logoBase64 == null
+                        ? Image.asset("assets/images/companies/placeholder-image.jpg").image
+                        : MemoryImage(
+                            base64Decode(widget.company.logoBase64!),
+                          ),
                   ),
                 ),
               ),
