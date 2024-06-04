@@ -30,7 +30,7 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
         widget.company.studentCompanies!.isNotEmpty) {
       reaction = widget.company.studentCompanies!.first.like;
     } else {
-      reaction = false;
+      reaction = null;
     }
   }
 
@@ -77,7 +77,7 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
       });
     } else {
       BlocProvider.of<CompaniesBloc>(context).add(CompaniesRemoveReactionEvent(
-          widget.company.studentCompanies!.first.id));
+          widget.company.id));
       setState(() {
         reaction = null;
       });
@@ -99,7 +99,7 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
       });
     } else {
       BlocProvider.of<CompaniesBloc>(context).add(CompaniesRemoveReactionEvent(
-          widget.company.studentCompanies!.first.id));
+          widget.company.id));
       setState(() {
         reaction = null;
       });
