@@ -1,3 +1,4 @@
+import 'package:dual_job_date_mobile/services/companies/company.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'appointment.g.dart';
@@ -8,20 +9,15 @@ class Appointment {
   final DateTime startTime;
   final DateTime endTime;
   final String userId;
-  final String student;
+  final User user;
   final String companyId;
-  final String company;
+  final Company company;
 
-  Appointment({
-    required this.id,
-    required this.startTime,
-    required this.endTime,
-    required this.userId,
-    required this.student,
-    required this.companyId,
-    required this.company,
-  });
+  Appointment(this.id, this.startTime, this.endTime, this.userId, this.user,
+      this.companyId, this.company);
 
-  factory Appointment.fromJson(Map<String, dynamic> json) => _$AppointmentFromJson(json);
+  factory Appointment.fromJson(Map<String, dynamic> json) =>
+      _$AppointmentFromJson(json);
+
   Map<String, dynamic> toJson() => _$AppointmentToJson(this);
 }
