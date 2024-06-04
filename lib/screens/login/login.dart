@@ -70,6 +70,11 @@ class _LoginState extends State<Login> {
                 customSnackBarWidget(StaticStrings.passwordWrong),
               );
               break;
+            case AuthenticationStatus.SERVERNOTREACHABLE:
+              ScaffoldMessenger.of(context).showSnackBar(
+                customSnackBarWidget(StaticStrings.serverNotReachable),
+              );
+              break;
             default:
               break;
           }

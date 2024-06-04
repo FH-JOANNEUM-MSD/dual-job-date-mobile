@@ -3,7 +3,7 @@ class StaticStrings {
   static const changePassword = 'Passwort ändern';
   static const resetPassword = 'Passwort zurücksetzen';
   static const login = 'Login';
-  static const forgotPassword = 'Passwort Vergessen?';
+  static const forgotPassword = 'Passwort vergessen?';
 
 //fonts
   static const font = 'Parka';
@@ -11,14 +11,14 @@ class StaticStrings {
   //UI Elements Text
   //Buttons
   static const loginButtonText = 'LOGIN';
-  static const forgotLoginButtonText = 'Passwort Vergessen?';
+  static const forgotLoginButtonText = 'Passwort vergessen?';
   static const saveButtonText = 'SPEICHERN';
   static const sendButtonText = 'ABSCHICKEN';
   static const cancelButtonText = 'ABBRECHEN';
 
 //Text Input Fields
   static const String newPasswordText = 'Neues Passwort';
-  static const String repeatNewPasswordText = 'Passwort Wiederholen';
+  static const String repeatNewPasswordText = 'Passwort wiederholen';
   static const String currentPasswordText = 'Aktuelles Passwort';
   static const String emailText = 'E-Mail-Adresse';
   static const String requiredPassword = 'Passwort';
@@ -29,7 +29,8 @@ class StaticStrings {
       'Bitte gib dein altes und ein neues Passwort ein.';
   static const String passwordEmpty = 'Bitte gib dein Passwort ein.';
   static const String passwordInvalid = 'Passwort zu schwach.';
-  static const String passwordWrong = 'Das eingegebene Passwort ist falsch.';
+  static const String passwordWrong = 'Passwort oder Benutzername falsch.';
+  static const String serverNotReachable = 'Ein Fehler ist aufgetreten.';
   static const String samePasswords =
       'Das neue Passwort muss vom Alten abweichen.';
   static const String passwordsNotMatching =
