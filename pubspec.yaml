@@ -50,6 +50,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
 
   json_annotation: any
+  url_launcher: ^6.3.0
 dev_dependencies:
   build_runner: ^2.4.9
   flutter_test:
