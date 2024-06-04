@@ -5,15 +5,19 @@ part 'appointment.g.dart';
 @JsonSerializable()
 class Appointment {
   final int id;
-  final DateTime appointmentDate;
+  final DateTime startTime;
+  final DateTime endTime;
   final String userId;
+  final String student;
   final String companyId;
   final String company;
 
   Appointment({
     required this.id,
-    required this.appointmentDate,
+    required this.startTime,
+    required this.endTime,
     required this.userId,
+    required this.student,
     required this.companyId,
     required this.company,
   });

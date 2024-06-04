@@ -18,6 +18,10 @@ class _AppointmentsState extends State<Appointments> {
     super.initState();
   }
 
+  Future<void> refresh() async {
+    BlocProvider.of<AppointmentsBloc>(context).add(AppointmentsFetchEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,44 +41,55 @@ class _AppointmentsState extends State<Appointments> {
                 ]),
           ),
         ),
-        body: BlocProvider(
-          create: (context) => AppointmentsBloc(),
-          child: BlocBuilder<AppointmentsBloc, AppointmentsState>(
-            builder: (context, state) {
-              if (state.status == AppointmentsStatus.LOADING) {
-                return const Center(
-                  // todo: change loading indicator
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.status == AppointmentsStatus.LOADED) {
-                if (state.appointments.length > 0) {
-                  return ListView.builder(
+        body: BlocBuilder<AppointmentsBloc, AppointmentsState>(
+          builder: (context, state) {
+            if (state.status == AppointmentsStatus.LOADING) {
+              return const Center(
+                // todo: change loading indicator
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.status == AppointmentsStatus.LOADED) {
+              if (state.appointments.length > 0) {
+                return RefreshIndicator(
+                  onRefresh: refresh,
+                  child: ListView.builder(
                     itemCount: state.appointments.length,
                     itemBuilder: (context, index) {
                       return AppointmentCard(
                         appointment: state.appointments[index],
                       );
                     },
-                  );
-                } else {
-                  return Center(
-                    child: Text("Keine Termine vorhanden"),
-                  );
-                }
-              } else if (state.status == AppointmentsStatus.INITIAL) {
-                BlocProvider.of<AppointmentsBloc>(context)
-                    .add(AppointmentsFetchEvent());
-                return const Center(
-                  // todo: change loading indicator
-                  child: CircularProgressIndicator(),
+                  ),
                 );
               } else {
-                return const Center(
-                  child: Text('Error loading appointments'),
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Keine Termine vorhanden"),
+                      IconButton(onPressed: refresh, icon: Icon(Icons.refresh))
+                    ],
+                  ),
                 );
               }
-            },
-          ),
+            } else if (state.status == AppointmentsStatus.INITIAL) {
+              BlocProvider.of<AppointmentsBloc>(context)
+                  .add(AppointmentsFetchEvent());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Error loading appointments'),
+                    IconButton(onPressed: refresh, icon: Icon(Icons.refresh))
+                  ],
+                ),
+              );
+            }
+          },
         ));
   }
 }
