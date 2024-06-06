@@ -8,6 +8,8 @@ import 'package:dual_job_date_mobile/screens/splash.dart';
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:dual_job_date_mobile/static_helpers/strings.dart';
 import 'package:dual_job_date_mobile/static_helpers/values.dart';
+import 'package:dual_job_date_mobile/tabs/appointments/appointments_bloc.dart';
+import 'package:dual_job_date_mobile/tabs/companies/companies_bloc.dart';
 import 'package:dual_job_date_mobile/widgets/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +25,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
     Values.setScreenWidth(MediaQuery.of(context).size.width);
-    return BlocProvider(
-      create: (context) => AuthenticationBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationBloc>(create: (context)=> AuthenticationBloc()),
+        BlocProvider<CompaniesBloc>(create: (context)=> CompaniesBloc()),
+        BlocProvider<AppointmentsBloc>(create: (context)=> AppointmentsBloc()),
+      ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

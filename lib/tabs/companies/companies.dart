@@ -14,21 +14,15 @@ class Companies extends StatefulWidget {
   State<Companies> createState() => _CompaniesState();
 }
 
-fetchCompanies() async {
-  // List<Company> r = await CompanyService.getActiveCompanies();
-
-  // r.forEach((element) {
-  //   print(element.name);
-  // });
-}
-
 class _CompaniesState extends State<Companies> {
   @override
   void initState() {
-    fetchCompanies();
     super.initState();
   }
 
+  Future<void> refresh() async {
+    BlocProvider.of<CompaniesBloc>(context).add(CompaniesFetchEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,42 +43,49 @@ class _CompaniesState extends State<Companies> {
                 ]),
           ),
         ),
-        body: BlocProvider(
-          create: (context) => CompaniesBloc(),
-          child: BlocBuilder<CompaniesBloc, CompaniesState>(
-            builder: (context, state) {
-              if (state.status == CompaniesStatus.LOADING) {
-                return const Center(
-                  // todo: change loading indicator
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.status == CompaniesStatus.LOADED) {
-                return ListView.builder(
+        body: BlocBuilder<CompaniesBloc, CompaniesState>(
+          builder: (context, state) {
+            if (state.status == CompaniesStatus.LOADING) {
+              return const Center(
+                // todo: change loading indicator
+                child: CircularProgressIndicator(),
+              );
+            } else if (state.status == CompaniesStatus.LOADED) {
+              return RefreshIndicator(
+                onRefresh: refresh,
+                child: ListView.builder(
                   itemCount: state.companies.length,
                   itemBuilder: (context, index) {
                     return CustomAnimatedSwipeCard(
                       company: state.companies[index],
                     );
                   },
-                );
-              } else if (state.status == CompaniesStatus.INITIAL) {
-                BlocProvider.of<CompaniesBloc>(context)
-                    .add(CompaniesFetchEvent());
-                return const Center(
-                  // todo: change loading indicator
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return const Center(
-                  child: Text('Error loading companies'),
-                  // todo: reload button, triggern.
-                  // onclick ->
-                  //   BlocProvider.of<CompaniesBloc>(context)
-                  //       .add(CompaniesFetchEvent());
-                );
-              }
-            },
-          ),
+                ),
+              );
+            } else if (state.status == CompaniesStatus.INITIAL) {
+              BlocProvider.of<CompaniesBloc>(context)
+                  .add(CompaniesFetchEvent());
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Keine Unternehmen vorhanden"),
+                    IconButton(onPressed: refresh, icon: Icon(Icons.refresh))
+                  ],
+                ),
+              );
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Error loading companies'),
+                    IconButton(onPressed: refresh, icon: Icon(Icons.refresh))
+                  ],
+                ),
+              );
+            }
+          },
         ));
   }
 }
