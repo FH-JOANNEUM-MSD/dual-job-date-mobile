@@ -39,6 +39,7 @@ class StaticStrings {
       'Passwort konnte nicht geändert werden';
   static const String loginPasswordWrong = 'Login war nicht erfolgreich.';
   static const String somethingWentWrong = 'Etwas ist schief gegangen';
+  static const String forgotPasswordSent = 'Ein Link zum Zurücksetzen des Passworts wurde gesendet, falls ein Konto mit dieser E-Mail existiert.';
 }
 
 class CompaniesScreenStrings {
