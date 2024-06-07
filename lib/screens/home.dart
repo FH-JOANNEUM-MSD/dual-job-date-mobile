@@ -13,11 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late int currentIndex;
-  List<Widget> tabs = [
-    const Companies(),
-    const Appointments(),
-    const More()
-  ];
+  List<Widget> tabs = [const Companies(), const Appointments(), const More()];
 
   @override
   void initState() {
@@ -27,21 +23,24 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: tabs.length,
-        child: Scaffold(
-            backgroundColor: Colors.white,
-            body: IndexedStack(
-              index: currentIndex,
-              children: tabs,
-            ),
-            bottomNavigationBar: CustomNavigationBar(
-              currentIndex: currentIndex,
-              onTabTapped: (x) {
-                setState(() {
-                  currentIndex = x;
-                });
-              },
-            )));
+    return PopScope(
+      child: DefaultTabController(
+          length: tabs.length,
+          child: Scaffold(
+              backgroundColor: Colors.white,
+              body: IndexedStack(
+                index: currentIndex,
+                children: tabs,
+              ),
+              bottomNavigationBar: CustomNavigationBar(
+                currentIndex: currentIndex,
+                onTabTapped: (x) {
+                  setState(() {
+                    currentIndex = x;
+                  });
+                },
+              ))),
+      canPop: false,
+    );
   }
 }

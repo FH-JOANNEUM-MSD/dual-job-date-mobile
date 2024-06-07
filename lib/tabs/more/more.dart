@@ -190,7 +190,7 @@ class _MoreState extends State<More> {
   }
 
   void navigateToLogin(BuildContext context) {
-    Navigator.push(context,
+    Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => const Login()));
   }
 
