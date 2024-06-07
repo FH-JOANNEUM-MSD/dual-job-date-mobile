@@ -3,7 +3,7 @@ class StaticStrings {
   static const changePassword = 'Passwort ändern';
   static const resetPassword = 'Passwort zurücksetzen';
   static const login = 'Login';
-  static const forgotPassword = 'Passwort Vergessen?';
+  static const forgotPassword = 'Passwort zurücksetzen';
 
 //fonts
   static const font = 'Parka';
@@ -11,7 +11,6 @@ class StaticStrings {
   //UI Elements Text
   //Buttons
   static const loginButtonText = 'LOGIN';
-  static const forgotLoginButtonText = 'Passwort Vergessen?';
   static const saveButtonText = 'SPEICHERN';
   static const sendButtonText = 'ABSCHICKEN';
   static const cancelButtonText = 'ABBRECHEN';
