@@ -148,16 +148,17 @@ class _LoginState extends State<Login> {
                                   ),
                           );
                         }),
-                        CustomFormPadding(
-                            childWidget: TextButton(
-                          child: Text(
-                            StaticStrings.forgotPassword,
-                            style: TextStyle(color: Colors.grey.shade700),
-                          ),
-                          onPressed: () {
-                            navigateToForgotPassword(context);
-                          },
-                        ))
+                        // todo: enable again, if password forgot is implemented by backend
+                        // CustomFormPadding(
+                        //     childWidget: TextButton(
+                        //   child: Text(
+                        //     StaticStrings.forgotPassword,
+                        //     style: TextStyle(color: Colors.grey.shade700),
+                        //   ),
+                        //   onPressed: () {
+                        //     navigateToForgotPassword(context);
+                        //   },
+                        // ))
                       ],
                     ),
                   ),
