@@ -21,9 +21,13 @@ class AuthenticationBloc
                   AuthenticationStatus.AUTHENTICATED));
             }
             break;
-          default:
+          case 401:
             emit(AuthenticationStateChanged(
                 AuthenticationStatus.UNAUTHENTICATED));
+            break;
+          default:
+            emit(AuthenticationStateChanged(
+                AuthenticationStatus.SERVERNOTREACHABLE));
             break;
         }
       });
