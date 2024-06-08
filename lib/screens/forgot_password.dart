@@ -1,6 +1,7 @@
 import 'package:dual_job_date_mobile/static_helpers/validators.dart';
 import 'package:flutter/material.dart';
 
+import '../components/customSnackbar.dart';
 import '../widgets/custom_text_form_field.dart';
 
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
@@ -95,7 +96,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               text: StaticStrings.sendButtonText,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  //TODO: Navigation
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    customSnackBarWidget(StaticStrings.forgotPasswordSent, isSuccess: true, durationInSeconds: 7),
+                                  );
+                                  Navigator.of(context).pop();
                                 }
                               },
                             ),

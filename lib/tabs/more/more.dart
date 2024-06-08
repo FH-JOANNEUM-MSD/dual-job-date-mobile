@@ -74,7 +74,18 @@ class _MoreState extends State<More> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(MoreScreenString.title),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    MoreScreenString.title,
+                    style: TextStyle(fontSize: 30.0),
+                  ),
+                ]),
+          ),
         ),
         body: BlocProvider(
           create: (context) => _moreBloc,
@@ -126,7 +137,6 @@ class _MoreState extends State<More> {
                       MoreElevatedButton(
                           onPressed: () => dispatchChangeNameEvent,
                           text: MoreScreenString.save),
-
                     ],
                   )
                 ] else ...[
@@ -190,7 +200,7 @@ class _MoreState extends State<More> {
   }
 
   void navigateToLogin(BuildContext context) {
-    Navigator.push(context,
+    Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (BuildContext context) => const Login()));
   }
 
