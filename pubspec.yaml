@@ -93,6 +93,8 @@ flutter:
      - assets/images/placeholder.png
      - assets/images/logo.png
      - assets/images/svg/arrow_down_icon.svg
+     - assets/images/svg/more.svg
+     - assets/images/svg/group.svg
      - assets/images/svg/trash_light_icon.svg
      - assets/images/svg/archive_icon.svg
      - assets/images/svg/close_icon.svg

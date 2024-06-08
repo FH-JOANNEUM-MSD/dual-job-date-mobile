@@ -3,7 +3,8 @@ enum AuthenticationStatus {
   PENDING,
   FIRSTLOGIN,
   AUTHENTICATED,
-  UNAUTHENTICATED
+  UNAUTHENTICATED,
+  SERVERNOTREACHABLE
 }
 
 abstract class AuthenticationState {

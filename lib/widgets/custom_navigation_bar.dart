@@ -1,5 +1,6 @@
 import 'package:dual_job_date_mobile/static_helpers/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../static_helpers/paths.dart';
 
@@ -11,7 +12,6 @@ class CustomNavigationBar extends StatelessWidget {
   final Function(int) onTabTapped;
   final iconSizeInactive = 40.0;
   final iconSizeActive = 40.0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +32,22 @@ class CustomNavigationBar extends StatelessWidget {
 
   BottomNavigationBarItem buildNavBarItem(String asset) {
     return BottomNavigationBarItem(
-        icon: Image.asset(
-          asset,
-          color: StaticColors.primary,
-          width: iconSizeInactive,
-          height: iconSizeInactive
-        ),
+        icon: SvgPicture.asset(asset,
+            colorFilter:
+                ColorFilter.mode(StaticColors.primary, BlendMode.srcIn),
+            width: iconSizeInactive,
+            height: iconSizeInactive),
         activeIcon: Container(
           decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(50))),
           child: Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Image.asset(
+            child: SvgPicture.asset(
               asset,
               width: iconSizeActive,
               height: iconSizeActive,
-              color: Colors.black,
+              colorFilter: ColorFilter.mode(Colors.black, BlendMode.srcIn),
             ),
           ),
         ),
