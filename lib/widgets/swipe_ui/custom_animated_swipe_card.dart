@@ -76,11 +76,15 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
         reaction = true;
       });
     } else {
-      BlocProvider.of<CompaniesBloc>(context).add(CompaniesRemoveReactionEvent(
-          widget.company.id));
-      setState(() {
-        reaction = null;
-      });
+      if (widget.company.studentCompanies != null &&
+          widget.company.studentCompanies!.length > 0) {
+        BlocProvider.of<CompaniesBloc>(context).add(
+            CompaniesRemoveReactionEvent(
+                widget.company.studentCompanies!.first.id));
+        setState(() {
+          reaction = null;
+        });
+      }
     }
   }
 
@@ -98,11 +102,15 @@ class _CustomAnimatedSwipeCardState extends State<CustomAnimatedSwipeCard> {
         reaction = false;
       });
     } else {
-      BlocProvider.of<CompaniesBloc>(context).add(CompaniesRemoveReactionEvent(
-          widget.company.id));
-      setState(() {
-        reaction = null;
-      });
+      if (widget.company.studentCompanies != null &&
+          widget.company.studentCompanies!.length > 0) {
+        BlocProvider.of<CompaniesBloc>(context).add(
+            CompaniesRemoveReactionEvent(
+                widget.company.studentCompanies!.first.id));
+        setState(() {
+          reaction = null;
+        });
+      }
     }
   }
 }
