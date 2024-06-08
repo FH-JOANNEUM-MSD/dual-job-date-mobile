@@ -11,18 +11,17 @@ on:
     types: [created]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.2' 
+          flutter-version: '3.19.2'
+          cache: true 
 
       - name: Cache Flutter dependencies
         uses: actions/cache@v2
@@ -40,9 +39,9 @@ jobs:
       - name: Run tests
         run: flutter test
       
-  deploy:
-    if: github.event_name == 'release' && github.ref == 'refs/heads/main'
-    needs: build
+  build-android:
+    if: github.event_name == 'release'
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -58,6 +57,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.2'
+          cache: true
       
       - name: Cache Flutter dependencies
         uses: actions/cache@v2
@@ -72,7 +72,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Create the Keystore
+      - name: Create the Android Keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
@@ -89,11 +89,30 @@ jobs:
         with:
           name: release-aab-signed
           path: build/app/outputs/bundle/release/app-release-signed.aab
+  
+  release-android:
+    name: Release Android app to internal track
+    needs: [build-android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get appbundle from artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: release-aab-signed
+      - name: Release app to internal track
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
+          packageName: at.fhj.dual_job_date_mobile
+          releaseFiles: ${{ github.workspace }}/app-release-signed.aab
+          track: alpha
+          status: completed
 
   notify_failure:
     name: Notify on Build or Deploy Failure
     runs-on: ubuntu-latest
-    needs: [build, deploy]
+    needs: [test,build-android,release-android]
     if: failure()
     steps:
       - name: Get Committer Username
@@ -118,7 +137,7 @@ jobs:
   notify_success:
     name: Benachrichtigung bei Build-Success
     runs-on: ubuntu-latest
-    needs: [build, deploy]
+    needs: [test,build-android,release-android]
     if: always()
     steps:
       - name: Get Committer Username
