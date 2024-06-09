@@ -8,7 +8,7 @@ class HTTPHelper {
   // static const String baseUrl = 'http://localhost:8000/';
   //static const String baseUrl = 'http://10.0.2.2:8000/'; // 10.0.2.2 is the IP of the host machine a.k.a. localhost
   static const String baseUrl =
-      'https://dual-dating-backend.msd-moss-prod.fh-joanneum.at/'; // live DB
+      'https://dual-job-dating-backend.msd-moss-prod.fh-joanneum.at/'; // live DB
   static const storage = FlutterSecureStorage();
   static final Logger logger = Logger();
 
