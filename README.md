@@ -54,10 +54,15 @@ In the forgot password screen, the user has to put the required email, linked to
 ### First Login
 
 At the first login the user has to change the generated password to a new password that the user either has to generate or think up by himself/herself.
-The password must be at least 8 characters long
-The password must contain at least 1 upper case and 1 lowercase character
-The password must contain at least 1 number
+
+The password must be at least 8 characters long. 
+
+The password must contain at least 1 upper case and 1 lowercase character. 
+
+The password must contain at least 1 number. 
+
 The password must contain at least 1 special character from the following set of characters @$!%*?&_
+
 
 <img src="/assets/images/documentation/FirstLogin.png" width="250" height="500">
 
