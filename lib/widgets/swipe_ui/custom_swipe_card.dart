@@ -73,7 +73,9 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
                     alignment: Alignment.center,
                     fit: BoxFit.contain, // Adjust the fit property here
                     image: widget.company.logoBase64 == null
-                        ? Image.asset("assets/images/companies/placeholder-image.jpg").image
+                        ? Image.asset(
+                                "assets/images/companies/placeholder-image.jpg")
+                            .image
                         : MemoryImage(
                             base64Decode(widget.company.logoBase64!),
                           ),
@@ -102,12 +104,13 @@ class _CustomSwipeCardState extends State<CustomSwipeCard> {
                           padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
                           //TODO replace true and false with a switch: liked, disliked, neutral
                           child: Icon(
-                              widget.reaction!
-                                  ? Icons.thumb_up
-                                  : Icons.thumb_down_outlined,
-                              color: widget.reaction!
-                                  ? StaticColors.primary
-                                  : Colors.grey[500]),
+                            widget.reaction!
+                                ? Icons.thumb_up
+                                : Icons.thumb_down_outlined,
+                            color: widget.reaction!
+                                ? StaticColors.primary
+                                : Colors.redAccent,
+                          ),
                         )
                       : const SizedBox(),
                 ],

@@ -16,100 +16,90 @@ class DetailsCompany extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  width: Values.screenWidth,
-                  child: company.companyDetails?.teamPictureBase64 != null
-                      ? Image.memory(
-                          base64Decode(
-                              company.companyDetails!.teamPictureBase64!),
-                          fit: BoxFit.fitWidth,
-                        )
-                      : Image.asset(
-                          "assets/images/companies/placeholder-image.jpg"),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Values.paddingHorizontalScreen,
-                      vertical: Values.paddingVerticalScreen),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            showInfoHeading("Unternehmen"),
-                            showInfo(company.name ?? 'Keine Angaben'),
-                            showInfoHeading("Branche"),
-                            showInfo(company.industry ?? 'Keine Angaben'),
-                            Row(
-                              children: [
-                                showInfoHeading("Tätigkeiten "),
-                                Text(
-                                  "(1 - 5 nach Relevanz bewertet)",
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w100,
-                                      color: Colors.grey),
-                                )
-                              ],
-                            ),
-                            showInfo(showActivites(company)),
-                            showInfoHeading("Ansprechpartner"),
-                            showInfo(showContactPerson()),
-                            showInfoHeading("Webseite"),
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: showInfo(
-                                      company.website ?? 'Keine Angaben'),
-                                ),
-                              ],
-                            ),
-                            showInfoHeading("Adresse"),
-                            Row(
-                              children: [
-                                showAddress(),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Divider(
-                        color: StaticColors.primary,
-                        thickness: 2,
-                        height: 24,
-                      ),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            const Text('${DetailsCompanyStrings.description}:',
-                                style: AppTextStyles.heading),
-                            SizedBox(
-                              height: gapText - 6,
-                            ),
-                            Text(company.companyDetails?.shortDescription ?? '',
-                                style: AppTextStyles.description),
-                          ]),
-                    ],
+      body: SafeArea(
+        top: false,
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    width: Values.screenWidth,
+                    child: company.companyDetails?.teamPictureBase64 != null
+                        ? Image.memory(
+                            base64Decode(
+                                company.companyDetails!.teamPictureBase64!),
+                            fit: BoxFit.fitWidth,
+                          )
+                        : Image.asset(
+                            "assets/images/companies/placeholder-image.jpg"),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Values.paddingHorizontalScreen,
+                        vertical: Values.paddingVerticalScreen),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              showInfoHeading("Unternehmen"),
+                              showInfo(company.name ?? 'Keine Angaben'),
+                              showInfoHeading("Branche"),
+                              showInfo(company.industry ?? 'Keine Angaben'),
+                              showInfoHeading("Ansprechpartner"),
+                              showInfo(showContactPerson()),
+                              showInfoHeading("Webseite"),
+                              Row(
+                                children: [
+                                  Flexible(
+                                    child: showInfo(
+                                        company.website ?? 'Keine Angaben'),
+                                  ),
+                                ],
+                              ),
+                              showInfoHeading("Adresse"),
+                              Row(
+                                children: [
+                                  showAddress(),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(
+                          color: StaticColors.primary,
+                          thickness: 2,
+                          height: 24,
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const Text('${DetailsCompanyStrings.description}:',
+                                  style: AppTextStyles.heading),
+                              SizedBox(
+                                height: gapText - 6,
+                              ),
+                              Text(company.companyDetails?.shortDescription ?? '',
+                                  style: AppTextStyles.description),
+                            ]),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          const CustomBackButtonCircle(),
-        ],
+            const CustomBackButtonCircle(),
+          ],
+        ),
       ),
     );
   }
